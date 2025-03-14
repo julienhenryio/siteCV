@@ -1,1 +1,80 @@
+/* 1️⃣ Importer la police Lato */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+/* 2️⃣ Définition des variables globales */
+:root {
+    --primary-color: #0629FF; /* Bleu électrique */
+    --text-color: #000000; /* Noir */
+    --background-color: #FFFFFF; /* Blanc */
+    --font-primary: 'Lato', sans-serif;
+}
+
+/* 3️⃣ Style global */
+body {
+    font-family: var(--font-primary);
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* 4️⃣ Style des titres */
+h1, h2 {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 2.2rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+}
+
+/* 5️⃣ Conteneur principal */
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* 6️⃣ Style des boutons */
+.button {
+    display: block;
+    width: 250px;
+    margin: 10px auto;
+    padding: 15px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 8px;
+    color: white;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button:hover {
+    background-color: #041BB5;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* 7️⃣ Style des images */
+img.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+img.app-icon {
+    width: 100px;
+    height: auto;
+    margin: 10px 0;
+}
 
