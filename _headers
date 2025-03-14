@@ -1,3 +1,6 @@
 /assets/favicon/*
-  Content-Type: image/x-icon
+  Content-Type: image/png
   Cache-Control: public, max-age=31536000, immutable
+
+/assets/favicon/favicon.ico
+  Content-Type: image/vnd.microsoft.icon
