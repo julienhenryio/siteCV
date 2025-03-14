@@ -1,6 +1,22 @@
 /* 1️⃣ Importer la police Lato */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 
+/* 🔹 HEADER */
+header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+}
+
 /* 2️⃣ Définition des variables globales */
 :root {
     --primary-color: #0629FF; /* Bleu électrique */
