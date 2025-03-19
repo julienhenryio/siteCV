@@ -1,31 +1,18 @@
-/* 1️⃣ Importer la police Lato */
+/* Import Lato font */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 
-/* 🔹 HEADER */
-header {
-    text-align: center;
-    padding: 20px 0;
-}
-
-.logo {
-    width: 80px;
-    height: auto;
-    transition: transform 0.3s ease-in-out;
-}
-
-.logo:hover {
-    transform: scale(1.1);
-}
-
-/* 2️⃣ Définition des variables globales */
+/* Global Variables */
 :root {
-    --primary-color: #0629FF; /* Bleu électrique */
-    --text-color: #000000; /* Noir */
-    --background-color: #FFFFFF; /* Blanc */
+    --primary-color: #0629FF; /* Electric blue */
+    --text-color: #000000; /* Black */
+    --background-color: #F8F9FA; /* Light gray for softer contrast */
+    --deeply-button-color: #0B5E74; /* Dark teal for Deeply buttons */
+    --secondary-button-bg: #EDEDED; /* Light gray for other buttons */
+    --secondary-button-text: #0629FF; /* Blue text */
     --font-primary: 'Lato', sans-serif;
 }
 
-/* 3️⃣ Style global */
+/* General Styles */
 body {
     font-family: var(--font-primary);
     color: var(--text-color);
@@ -35,62 +22,104 @@ body {
     text-align: center;
 }
 
-/* 4️⃣ Style des titres */
-h1, h2 {
-    font-weight: 700;
-    margin-bottom: 10px;
-}
-
-h1 {
-    font-size: 2.2rem;
-}
-
-h2 {
-    font-size: 1.8rem;
-}
-
-/* 5️⃣ Conteneur principal */
-.container {
-    max-width: 600px;
-    margin: auto;
+/* Header (Logo & Name) */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
 }
 
-/* 6️⃣ Style des boutons */
-.button {
+.header img.logo {
+    width: 50px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Profile Picture */
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 10px 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Subtitle */
+.subtitle {
+    font-size: 1rem;
+    color: #6C757D;
+    margin-bottom: 15px;
+}
+
+/* Section Divider */
+.divider {
+    width: 50%;
+    height: 2px;
+    background-color: var(--primary-color);
+    margin: 20px auto;
+}
+
+/* Deeply Logo */
+.deeply-logo {
+    width: 100px;
+    margin: 10px 0;
+}
+
+/* Primary Buttons (Deeply) */
+.button-primary {
     display: block;
     width: 250px;
     margin: 10px auto;
     padding: 15px;
-    text-align: center;
     font-size: 1rem;
     font-weight: 700;
     text-decoration: none;
-    border-radius: 8px;
+    text-transform: uppercase;
     color: white;
-    background-color: var(--primary-color);
+    background-color: var(--deeply-button-color);
+    border-radius: 8px;
     transition: all 0.3s ease-in-out;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.button:hover {
-    background-color: #041BB5;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+.button-primary:hover {
+    background-color: #004F6D; /* Slightly darker on hover */
+    transform: scale(1.03);
 }
 
-/* 7️⃣ Style des images */
-img.profile-pic {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    margin: 20px 0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Secondary Buttons (Other Links) */
+.button-secondary {
+    display: block;
+    width: 250px;
+    margin: 10px auto;
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--secondary-button-text);
+    background-color: var(--secondary-button-bg);
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-img.app-icon {
-    width: 100px;
-    height: auto;
-    margin: 10px 0;
+.button-secondary:hover {
+    background-color: #E0E0E0;
+    transform: scale(1.03);
 }
 
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .button-primary,
+    .button-secondary {
+        width: 90%;
+    }
+}
