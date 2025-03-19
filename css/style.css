@@ -7,7 +7,7 @@
     --text-color: #000000; /* Black */
     --background-color: #F8F9FA; /* Light gray for softer contrast */
     --deeply-button-color: #0B5E74; /* Dark teal for Deeply buttons */
-    --secondary-button-bg: #EDEDED; /* Light gray for other buttons */
+    --secondary-button-bg: #D0D0D0; /* Stronger gray */
     --secondary-button-text: #0629FF; /* Blue text */
     --font-primary: 'Lato', sans-serif;
 }
@@ -22,18 +22,26 @@ body {
     text-align: center;
 }
 
-/* Header (Logo & Name) */
+/* Header (Profile & Name on Same Line) */
 .header {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: start;
     padding: 20px;
+    gap: 15px;
+    max-width: 600px;
+    margin: auto;
 }
 
-.header img.logo {
-    width: 50px;
-    height: auto;
-    margin-bottom: 10px;
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.header-text {
+    text-align: left;
 }
 
 .header h1 {
@@ -42,20 +50,10 @@ body {
     margin: 0;
 }
 
-/* Profile Picture */
-.profile-pic {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    margin: 10px 0;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-/* Subtitle */
-.subtitle {
+.freelance {
     font-size: 1rem;
     color: #6C757D;
-    margin-bottom: 15px;
+    margin: 5px 0 0;
 }
 
 /* Section Divider */
@@ -66,39 +64,16 @@ body {
     margin: 20px auto;
 }
 
-/* Deeply Logo */
-.deeply-logo {
-    width: 100px;
-    margin: 10px 0;
-}
-
-/* Primary Buttons (Deeply) */
-.button-primary {
-    display: block;
-    width: 250px;
-    margin: 10px auto;
-    padding: 15px;
-    font-size: 1rem;
-    font-weight: 700;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: white;
-    background-color: var(--deeply-button-color);
-    border-radius: 8px;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.button-primary:hover {
-    background-color: #004F6D; /* Slightly darker on hover */
-    transform: scale(1.03);
+/* Buttons Section */
+.links-section {
+    padding: 20px;
 }
 
 /* Secondary Buttons (Other Links) */
 .button-secondary {
     display: block;
     width: 250px;
-    margin: 10px auto;
+    margin: 15px auto; /* More space around buttons */
     padding: 15px;
     font-size: 1rem;
     font-weight: 700;
@@ -108,11 +83,49 @@ body {
     background-color: var(--secondary-button-bg);
     border-radius: 8px;
     transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* More shadow */
 }
 
 .button-secondary:hover {
-    background-color: #E0E0E0;
+    background-color: #C0C0C0;
+    transform: scale(1.03);
+}
+
+/* Deeply Section */
+.deeply-section {
+    text-align: center;
+    padding: 20px;
+}
+
+.deeply-logo {
+    width: 140px; /* Bigger logo */
+    margin-bottom: 15px;
+}
+
+/* Deeply Buttons in One Row */
+.deeply-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.button-primary {
+    display: inline-block;
+    width: 200px;
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+    background-color: var(--deeply-button-color);
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.button-primary:hover {
+    background-color: #004F6D;
     transform: scale(1.03);
 }
 
@@ -121,5 +134,9 @@ body {
     .button-primary,
     .button-secondary {
         width: 90%;
+    }
+
+    .deeply-buttons {
+        flex-direction: column; /* Stack on small screens */
     }
 }
