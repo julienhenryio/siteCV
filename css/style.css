@@ -7,8 +7,8 @@
     --text-color: #000000; /* Black */
     --background-color: #F8F9FA; /* Light gray */
     --deeply-button-color: #0B5E74; /* Dark teal */
-    --secondary-button-bg: #D0D0D0; /* Stronger gray */
-    --secondary-button-text: #0629FF; /* Blue text */
+    --secondary-button-bg: #0A3D91; /* Darker blue */
+    --secondary-button-text: #FFFFFF; /* White text */
     --font-primary: 'Lato', sans-serif;
 }
 
@@ -18,7 +18,7 @@ body {
     color: var(--text-color);
     background-color: var(--background-color);
     margin: 0;
-    padding: 0;
+    padding: 10px; /* Reduce padding for tighter layout */
     text-align: center;
 }
 
@@ -31,6 +31,7 @@ header {
 .logo {
     width: 50px;
     height: auto;
+    margin-bottom: 20px; /* More space below the logo */
 }
 
 /* 🔹 PROFILE SECTION */
@@ -40,13 +41,13 @@ header {
     justify-content: center;
     max-width: 600px;
     margin: auto;
-    padding: 20px;
+    padding: 15px;
     gap: 15px;
 }
 
 .profile-pic {
-    width: 80px;
-    height: 80px;
+    width: 90px; /* Slightly bigger */
+    height: 90px;
     border-radius: 50%;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 }
@@ -62,17 +63,17 @@ header {
 }
 
 .freelance {
-    font-size: 1rem;
-    color: #6C757D;
-    margin: 5px 0 0;
+    font-size: 0.9rem;
+    color: #A0A0A0; /* Lighter gray */
+    margin: 0; /* Remove unnecessary spacing */
 }
 
 /* 🔹 SECTION DIVIDER */
 .divider {
-    width: 50%;
+    width: 40%; /* Reduce width */
     height: 2px;
     background-color: var(--primary-color);
-    margin: 20px auto;
+    margin: 25px auto; /* More space around */
 }
 
 /* 🔹 BUTTONS SECTION */
@@ -83,10 +84,10 @@ header {
 /* 🔹 BUTTONS STYLE */
 .button-secondary {
     display: block;
-    width: 250px;
-    margin: 15px auto; /* More space around buttons */
+    width: 230px; /* Narrower buttons */
+    margin: 18px auto; /* More space between buttons */
     padding: 15px;
-    font-size: 1rem;
+    font-size: 1.1rem; /* Slightly larger text */
     font-weight: 700;
     text-decoration: none;
     text-transform: uppercase;
@@ -94,11 +95,11 @@ header {
     background-color: var(--secondary-button-bg);
     border-radius: 8px;
     transition: all 0.3s ease-in-out;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow */
 }
 
 .button-secondary:hover {
-    background-color: #C0C0C0;
+    background-color: #082C74; /* Slightly darker on hover */
     transform: scale(1.03);
 }
 
@@ -109,21 +110,21 @@ header {
 }
 
 .deeply-logo {
-    width: 140px; /* Bigger logo */
-    margin-bottom: 15px;
+    width: 160px; /* Bigger logo */
+    margin-bottom: 10px; /* Reduce spacing */
 }
 
 /* 🔹 DEEPLY BUTTONS */
 .deeply-buttons {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    flex-wrap: nowrap; /* Ensure buttons stay in one line */
+    gap: 10px; /* Reduce space between buttons */
+    flex-wrap: nowrap; /* Prevent stacking */
 }
 
 .button-primary {
     display: inline-block;
-    width: 200px;
+    width: 220px; /* Wider buttons */
     padding: 15px;
     font-size: 1rem;
     font-weight: 700;
@@ -133,7 +134,7 @@ header {
     background-color: var(--deeply-button-color);
     border-radius: 8px;
     transition: all 0.3s ease-in-out;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Stronger shadow */
 }
 
 .button-primary:hover {
@@ -149,7 +150,7 @@ header {
     }
 
     .deeply-buttons {
-        flex-wrap: wrap; /* Prevent buttons from stacking */
-        justify-content: space-between;
+        flex-wrap: nowrap; /* Ensure buttons stay side-by-side */
+        justify-content: center;
     }
 }
