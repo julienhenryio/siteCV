@@ -5,8 +5,8 @@
 :root {
     --primary-color: #0629FF; /* Electric blue */
     --text-color: #000000; /* Black */
-    --background-color: #F8F9FA; /* Light gray for softer contrast */
-    --deeply-button-color: #0B5E74; /* Dark teal for Deeply buttons */
+    --background-color: #F8F9FA; /* Light gray */
+    --deeply-button-color: #0B5E74; /* Dark teal */
     --secondary-button-bg: #D0D0D0; /* Stronger gray */
     --secondary-button-text: #0629FF; /* Blue text */
     --font-primary: 'Lato', sans-serif;
@@ -22,15 +22,26 @@ body {
     text-align: center;
 }
 
-/* Header (Profile & Name on Same Line) */
-.header {
+/* 🔹 HEADER */
+header {
+    text-align: center;
+    padding: 15px;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+}
+
+/* 🔹 PROFILE SECTION */
+.profile-section {
     display: flex;
     align-items: center;
-    justify-content: start;
-    padding: 20px;
-    gap: 15px;
+    justify-content: center;
     max-width: 600px;
     margin: auto;
+    padding: 20px;
+    gap: 15px;
 }
 
 .profile-pic {
@@ -40,11 +51,11 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-.header-text {
+.profile-text {
     text-align: left;
 }
 
-.header h1 {
+.profile-text h1 {
     font-size: 1.8rem;
     font-weight: 700;
     margin: 0;
@@ -56,7 +67,7 @@ body {
     margin: 5px 0 0;
 }
 
-/* Section Divider */
+/* 🔹 SECTION DIVIDER */
 .divider {
     width: 50%;
     height: 2px;
@@ -64,12 +75,12 @@ body {
     margin: 20px auto;
 }
 
-/* Buttons Section */
+/* 🔹 BUTTONS SECTION */
 .links-section {
     padding: 20px;
 }
 
-/* Secondary Buttons (Other Links) */
+/* 🔹 BUTTONS STYLE */
 .button-secondary {
     display: block;
     width: 250px;
@@ -83,7 +94,7 @@ body {
     background-color: var(--secondary-button-bg);
     border-radius: 8px;
     transition: all 0.3s ease-in-out;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* More shadow */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .button-secondary:hover {
@@ -91,22 +102,23 @@ body {
     transform: scale(1.03);
 }
 
-/* Deeply Section */
+/* 🔹 DEEPLY SECTION */
 .deeply-section {
     text-align: center;
     padding: 20px;
 }
 
 .deeply-logo {
-    width: 180px; /* Bigger logo */
+    width: 140px; /* Bigger logo */
     margin-bottom: 15px;
 }
 
-/* Deeply Buttons in One Row */
+/* 🔹 DEEPLY BUTTONS */
 .deeply-buttons {
     display: flex;
     justify-content: center;
     gap: 15px;
+    flex-wrap: nowrap; /* Ensure buttons stay in one line */
 }
 
 .button-primary {
@@ -129,7 +141,7 @@ body {
     transform: scale(1.03);
 }
 
-/* Mobile Responsiveness */
+/* 🔹 MOBILE RESPONSIVENESS */
 @media (max-width: 768px) {
     .button-primary,
     .button-secondary {
@@ -137,6 +149,7 @@ body {
     }
 
     .deeply-buttons {
-        flex-direction: column; /* Stack on small screens */
+        flex-wrap: wrap; /* Prevent buttons from stacking */
+        justify-content: space-between;
     }
 }
