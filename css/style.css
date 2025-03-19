@@ -6,7 +6,7 @@
     --primary-color: #0629FF; /* Electric blue */
     --text-color: #000000; /* Black */
     --background-color: #F8F9FA; /* Light gray */
-    --deeply-button-color: #0B5E74; /* Dark teal */
+    --deeply-button-color: #0A3D91; /* Dark teal */
     --secondary-button-bg: #0A3D91; /* Darker blue */
     --secondary-button-text: #FFFFFF; /* White text */
     --font-primary: 'Lato', sans-serif;
@@ -46,8 +46,8 @@ header {
 }
 
 .profile-pic {
-    width: 90px; /* Slightly bigger */
-    height: 90px;
+    width: 120px; /* Slightly bigger */
+    height: 120px;
     border-radius: 50%;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 }
