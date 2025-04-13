@@ -70,11 +70,12 @@ header {
 
 /* 🔹 SECTION DIVIDER */
 .divider {
-    width: 40%; /* Reduce width */
+    width: 60%; /* Plus large pour mieux sentir le dégradé */
     height: 2px;
-    background-color: var(--primary-color);
-    margin: 25px auto; /* More space around */
+    margin: 25px auto;
+    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
 }
+
 
 /* 🔹 BUTTONS SECTION */
 .links-section {
