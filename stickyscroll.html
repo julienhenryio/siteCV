@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcours Scolaire - Effet de Scroll</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f7f7f7;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .timeline-section {
+            position: relative;
+            padding: 0;
+            height: 400vh; /* Espace suffisant pour le scroll */
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #3498db;
+            transform: translateX(-50%);
+        }
+
+        .sticky-container {
+            position: sticky;
+            top: 50px;
+            height: 80vh;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            padding-left: 80px;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50px;
+            top: 1.5rem;
+            width: 16px;
+            height: 16px;
+            background-color: #3498db;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 0 2rem;
+        }
+
+        .intro p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mon Parcours Scolaire</h1>
+        
+        <div class="intro">
+            <p>Découvrez mon parcours académique à travers cette timeline interactive. Faites défiler pour voir comment mon éducation a évolué au fil des années.</p>
+        </div>
+        
+        <div class="timeline-section" id="timeline-section">
+            <div class="timeline-line"></div>
+            
+            <div class="sticky-container">
+                <div class="timeline-item" id="item-0" data-index="0">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">2020-2023 · École Supérieure d'Ingénierie Numérique</h3>
+                        <div class="timeline-description">
+                            <p>Diplôme d'Ingénieur en Développement Web et Applications Mobiles avec spécialisation en UX/UI Design. J'ai pu acquérir une solide base en programmation front-end et back-end, tout en développant des compétences avancées en conception d'interfaces utilisateur. Mon projet de fin d'études portait sur la création d'une application de gestion de projets collaboratifs basée sur des méthodologies agiles.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" id="item-1" data-index="1">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">2017-2020 · Institut des Arts Numériques</h3>
+                        <div class="timeline-description">
+                            <p>Licence en Design Numérique et Multimédia où j'ai exploré les fondamentaux du design graphique, de l'animation et de l'interaction utilisateur. Cette formation m'a permis de développer ma créativité tout en apprenant les outils essentiels de la suite Adobe et les principes fondamentaux du développement web. J'ai participé à plusieurs projets collaboratifs avec des entreprises locales.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" id="item-2" data-index="2">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">2015-2017 · Lycée International Victor Hugo</h3>
+                        <div class="timeline-description">
+                            <p>Baccalauréat Scientifique option Sciences de l'Ingénieur, mention Très Bien. J'ai développé une passion pour l'informatique et la programmation à travers des projets pratiques, notamment la création d'un petit jeu vidéo en équipe. J'ai également participé à un concours national d'innovation numérique où notre équipe a atteint la finale régionale avec un projet de système domotique simplifié.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" id="item-3" data-index="3">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">2011-2015 · Collège Marie Curie</h3>
+                        <div class="timeline-description">
+                            <p>Brevet des Collèges avec mention Très Bien. C'est durant cette période que j'ai découvert ma passion pour la technologie et le design. J'ai participé activement au club d'informatique où nous avons créé le site web de l'établissement, ce qui m'a permis d'acquérir mes premières notions de HTML et CSS. Cette expérience a été déterminante dans mon choix d'orientation vers les métiers du numérique.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Récupération des éléments
+            const timelineSection = document.getElementById('timeline-section');
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const stickyContainer = document.querySelector('.sticky-container');
+            
+            // Configuration
+            const initialItemSpacing = 350; // Modifié de 180px à 350px comme demandé
+            const stackedHeight = 65; // Hauteur d'un élément empilé (réduit)
+            const sectionHeight = timelineSection.offsetHeight;
+            const viewportHeight = window.innerHeight;
+            
+            // Positionnement initial des blocs avec un espacement adéquat
+            function positionItemsInitially() {
+                timelineItems.forEach((item, index) => {
+                    // Position initiale avec un espacement suffisant entre les blocs
+                    item.style.top = (index * initialItemSpacing) + 'px';
+                });
+            }
+            
+            // Fonction principale d'animation au scroll
+            function updateTimeline() {
+                const scrollTop = window.pageYOffset;
+                const sectionTop = timelineSection.offsetTop;
+                const scrollPosition = scrollTop - sectionTop;
+                
+                // Ne démarrer l'animation que lorsque le scroll commence dans la section
+                if (scrollPosition < 0) {
+                    // État initial - tous les blocs sont espacés
+                    positionItemsInitially();
+                    return;
+                }
+                
+                // Calculer la progression du scroll dans la section (0 à 1)
+                const scrollProgress = Math.max(0, Math.min(1, scrollPosition / (sectionHeight - viewportHeight)));
+                
+                // Pour chaque élément de la timeline
+                timelineItems.forEach((item, index) => {
+                    const itemDescription = item.querySelector('.timeline-description');
+                    const totalItems = timelineItems.length;
+                    
+                    // Définir à quel moment cet élément commence à être affecté
+                    // Les éléments sont affectés séquentiellement à mesure du scroll
+                    const startThreshold = index / totalItems;
+                    const endThreshold = (index + 1) / totalItems;
+                    
+                    // Calculer la progression spécifique à cet élément
+                    let itemProgress = (scrollProgress - startThreshold) / (endThreshold - startThreshold);
+                    itemProgress = Math.max(0, Math.min(1, itemProgress * 1.5)); // Ajustement pour rendre l'effet plus rapide
+                    
+                    // Appliquer les transformations
+                    if (itemProgress > 0) {
+                        // Effet de disparition de la description
+                        const opacity = 1 - itemProgress;
+                        const translateY = -30 * itemProgress; // Déplacement vers le haut
+                        
+                        itemDescription.style.opacity = opacity;
+                        itemDescription.style.transform = `translateY(${translateY}px)`;
+                        
+                        // Calcul de la position empilée pour cet élément
+                        let newTop = index * initialItemSpacing; // Position initiale
+                        
+                        // Calculer la compression (réduction de l'espace entre les éléments)
+                        const compression = (initialItemSpacing - stackedHeight) * itemProgress;
+                        newTop -= compression * index;
+                        
+                        // Appliquer la nouvelle position
+                        item.style.top = newTop + 'px';
+                    } else {
+                        // État initial
+                        itemDescription.style.opacity = 1;
+                        itemDescription.style.transform = 'translateY(0)';
+                        item.style.top = (index * initialItemSpacing) + 'px';
+                    }
+                });
+            }
+            
+            // Positionnement initial
+            positionItemsInitially();
+            
+            // Ajouter l'écouteur d'événement pour le scroll
+            window.addEventListener('scroll', function() {
+                window.requestAnimationFrame(updateTimeline);
+            });
+            
+            // Initialisation
+            updateTimeline();
+            
+            // Ajustement en cas de redimensionnement
+            window.addEventListener('resize', function() {
+                positionItemsInitially();
+                updateTimeline();
+            });
+        });
+    </script>
+</body>
+</html>

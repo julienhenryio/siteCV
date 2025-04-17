@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julien Henry - Links</title>
+    <style>
+        /* Variables pour faciliter les modifications futures */
+        :root {
+            --primary-color: #0066ff; /* Bleu électrique */
+            --background-color: #f8f9fa;
+            --text-color: #212529;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --transition-speed: 0.3s;
+        }
+
+        /* Styles généraux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif; /* Police moderne et lisible */
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Container principal */
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Section profil */
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        .profile h1 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        .profile h2 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+
+        .profile p {
+            font-size: 1rem;
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+
+        /* Links */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .link {
+            background-color: white;
+            padding: 16px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            box-shadow: 0 2px 5px var(--shadow-color);
+        }
+
+        .link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+
+        .link i {
+            margin-right: 12px;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            width: 24px;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        /* Ajout d'un effet de surlignage pour le titre */
+        .highlight {
+            position: relative;
+            display: inline-block;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 2px;
+            height: 10px;
+            width: 100%;
+            background-color: rgba(0, 102, 255, 0.2); /* Version transparente du bleu */
+            z-index: -1;
+        }
+
+        /* Media queries pour responsive */
+        @media (max-width: 480px) {
+            .profile h1 {
+                font-size: 1.7rem;
+            }
+
+            .profile h2 {
+                font-size: 1rem;
+            }
+
+            .profile-img {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+    <!-- Importation des polices et icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Section profil -->
+        <div class="profile">
+            <!-- Image de profil - à remplacer par votre propre image -->
+            <img src="/Users/julienhenry/Documents/1-Projets/4 - henry.io/CODE SITE/siteCV/assets/images/photo.png" alt="Julien Henry" class="profile-img">
+            
+            <h1>Julien <span class="highlight">Henry</span></h1>
+            <h2>Freelance</h2>
+            <p>Support Client - IA & Automatisation</p>
+        </div>
+
+        <!-- Section liens -->
+        <div class="links">
+            <!-- Lien vers site principal -->
+            <a href="https://example.com" target="_blank" class="link">
+                <i class="fas fa-globe"></i>
+                Site principal
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://linkedin.com/in/username" target="_blank" class="link">
+                <i class="fab fa-linkedin"></i>
+                LinkedIn
+            </a>
+
+            <!-- WhatsApp -->
+            <a href="https://wa.me/1234567890" target="_blank" class="link">
+                <i class="fab fa-whatsapp"></i>
+                Contact WhatsApp
+            </a>
+
+            <!-- Calendly -->
+            <a href="https://calendly.com/username" target="_blank" class="link">
+                <i class="far fa-calendar-alt"></i>
+                Prendre rendez-vous
+            </a>
+
+            <!-- Application iOS -->
+            <a href="https://apps.apple.com/app/idXXXXXXXXXX" target="_blank" class="link">
+                <i class="fab fa-apple"></i>
+                Télécharger l'app iOS
+            </a>
+
+            <!-- Application Android -->
+            <a href="https://play.google.com/store/apps/details?id=com.example.app" target="_blank" class="link">
+                <i class="fab fa-android"></i>
+                Télécharger l'app Android
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 Julien Henry - Tous droits réservés</p>
+        </footer>
+    </div>
+</body>
+</html>
