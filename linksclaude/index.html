@@ -12,6 +12,7 @@
             --text-color: #212529;
             --shadow-color: rgba(0, 0, 0, 0.1);
             --transition-speed: 0.3s;
+            --separator-color: #e9ecef;
         }
 
         /* Styles généraux */
@@ -120,22 +121,73 @@
             font-size: 0.8rem;
             color: #6c757d;
         }
-
-        /* Ajout d'un effet de surlignage pour le titre */
-        .highlight {
-            position: relative;
-            display: inline-block;
+        
+        /* Styles pour la section app */
+        .app-section {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 15px;
+            gap: 20px;
         }
-
-        .highlight::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 2px;
-            height: 10px;
+        
+        .app-image {
+            max-width: 50%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        .app-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex: 1;
+        }
+        
+        .app-link {
+            background-color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            box-shadow: 0 2px 5px var(--shadow-color);
             width: 100%;
-            background-color: rgba(0, 102, 255, 0.2); /* Version transparente du bleu */
-            z-index: -1;
+        }
+        
+        .app-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+        
+        .app-link i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+        
+        /* Séparateur élégant */
+        .separator {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin: 30px 0 15px;
+        }
+        
+        .separator span {
+            flex: 1;
+            height: 1px;
+            background-color: var(--separator-color);
+        }
+        
+        .separator p {
+            margin: 0 15px;
+            font-size: 0.9rem;
+            color: #6c757d;
+            font-weight: 500;
         }
 
         /* Media queries pour responsive */
@@ -152,6 +204,25 @@
                 width: 100px;
                 height: 100px;
             }
+            
+            .app-section {
+                flex-direction: column;
+            }
+            
+            .app-image {
+                max-width: 80%;
+                margin-bottom: 15px;
+            }
+            
+            .app-buttons {
+                gap: 10px;
+                width: 100%;
+            }
+            
+            .app-link {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
         }
     </style>
     <!-- Importation des polices et icons -->
@@ -165,7 +236,7 @@
             <!-- Image de profil - à remplacer par votre propre image -->
             <img src="/assets/images/photo.png" alt="Julien Henry" class="profile-img">
             
-            <h1>Julien Henry <span</h1>
+            <h1>Julien Henry</h1>
             <h2>Freelance</h2>
             <p>Support Client - IA & Automatisation</p>
         </div>
@@ -195,18 +266,34 @@
                 <i class="far fa-calendar-alt"></i>
                 Prendre rendez-vous
             </a>
-
-            <!-- Application iOS -->
-            <a href="https://apps.apple.com/app/idXXXXXXXXXX" target="_blank" class="link">
-                <i class="fab fa-apple"></i>
-                Télécharger l'app iOS
-            </a>
-
-            <!-- Application Android -->
-            <a href="https://play.google.com/store/apps/details?id=com.example.app" target="_blank" class="link">
-                <i class="fab fa-android"></i>
-                Télécharger l'app Android
-            </a>
+            
+            <!-- Séparateur -->
+            <div class="separator">
+                <span></span>
+                <p>Mon application</p>
+                <span></span>
+            </div>
+            
+            <!-- Section app -->
+            <div class="app-section">
+                <!-- Image de l'application -->
+                <img src="/assets/images/icontitle.png" alt="Application" class="app-image">
+                
+                <!-- Boutons de téléchargement côte à côte -->
+                <div class="app-buttons">
+                    <!-- Application iOS -->
+                    <a href="https://apps.apple.com/app/idXXXXXXXXXX" target="_blank" class="app-link">
+                        <i class="fab fa-apple"></i>
+                        iOS
+                    </a>
+                    
+                    <!-- Application Android -->
+                    <a href="https://play.google.com/store/apps/details?id=com.example.app" target="_blank" class="app-link">
+                        <i class="fab fa-android"></i>
+                        Android
+                    </a>
+                </div>
+            </div>
         </div>
 
         <!-- Footer -->
