@@ -128,7 +128,6 @@
             flex-direction: column;
             align-items: center;
             margin-top: 15px;
-            width: 100%;
         }
         
         .app-image {
@@ -141,7 +140,7 @@
         .app-buttons {
             display: flex;
             gap: 15px;
-            width: 80%; /* Même largeur que l'image au-dessus */
+            width: 100%;
             justify-content: center;
         }
         
@@ -157,8 +156,8 @@
             justify-content: center;
             transition: transform var(--transition-speed), box-shadow var(--transition-speed);
             box-shadow: 0 2px 5px var(--shadow-color);
-            flex: 1; /* Les boutons prennent la même largeur */
-            /* Suppression de max-width pour permettre l'expansion */
+            flex: 1;
+            max-width: 150px;
         }
         
         .app-link:hover {
@@ -281,13 +280,13 @@
                 <!-- Boutons de téléchargement côte à côte -->
                 <div class="app-buttons">
                     <!-- Application iOS -->
-                    <a href="https://apps.apple.com/id/app/deeply-app/id6504491197" target="_blank" class="app-link">
+                    <a href="https://apps.apple.com/app/idXXXXXXXXXX" target="_blank" class="app-link">
                         <i class="fab fa-apple"></i>
                         iOS
                     </a>
                     
                     <!-- Application Android -->
-                    <a href="https://play.google.com/store/apps/details?id=com.deeply.app" target="_blank" class="app-link">
+                    <a href="https://play.google.com/store/apps/details?id=com.example.app" target="_blank" class="app-link">
                         <i class="fab fa-android"></i>
                         Android
                     </a>

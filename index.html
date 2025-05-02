@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Julien Henry - Links</title>
+    <title>Julien Henry - Site en construction</title>
     <style>
         /* Variables pour faciliter les modifications futures */
         :root {
@@ -23,15 +23,17 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif; /* Police moderne et lisible */
+            font-family: 'Poppins', sans-serif;
             background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             min-height: 100vh;
             padding: 20px;
+            text-align: center;
         }
 
         /* Container principal */
@@ -40,6 +42,11 @@
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
         }
 
         /* Section profil */
@@ -47,7 +54,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 30px;
             text-align: center;
         }
 
@@ -74,44 +80,57 @@
             margin-bottom: 10px;
         }
 
-        .profile p {
-            font-size: 1rem;
-            max-width: 400px;
-            margin-bottom: 20px;
-        }
-
-        /* Links */
-        .links {
+        /* Loader */
+        .loader-container {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            width: 100%;
-        }
-
-        .link {
-            background-color: white;
-            padding: 16px 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            display: flex;
             align-items: center;
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            gap: 30px;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 5px solid rgba(0, 102, 255, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1.5s linear infinite;
+        }
+
+        .message {
+            background-color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
             box-shadow: 0 2px 5px var(--shadow-color);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            width: 100%;
+            max-width: 400px;
         }
 
-        .link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px var(--shadow-color);
-        }
-
-        .link i {
-            margin-right: 12px;
-            font-size: 1.2rem;
+        .message h2 {
+            margin-bottom: 10px;
             color: var(--primary-color);
-            width: 24px;
-            text-align: center;
+        }
+
+        .message p {
+            margin-bottom: 15px;
+        }
+
+        .links-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
+            margin-top: 10px;
+        }
+
+        .links-button:hover {
+            background-color: #0055dd;
+            transform: translateY(-3px);
         }
 
         /* Footer */
@@ -121,74 +140,11 @@
             font-size: 0.8rem;
             color: #6c757d;
         }
-        
-        /* Styles pour la section app */
-        .app-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 15px;
-        }
-        
-        .app-image {
-            max-width: 80%;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-        
-        .app-buttons {
-            display: flex;
-            gap: 15px;
-            width: 100%;
-            justify-content: center;
-        }
-        
-        .app-link {
-            background-color: white;
-            padding: 12px 24px;
-            border-radius: 10px;
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-            box-shadow: 0 2px 5px var(--shadow-color);
-            flex: 1;
-            max-width: 150px;
-        }
-        
-        .app-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px var(--shadow-color);
-        }
-        
-        .app-link i {
-            margin-right: 8px;
-            color: var(--primary-color);
-        }
-        
-        /* Séparateur élégant */
-        .separator {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            margin: 30px 0 15px;
-        }
-        
-        .separator span {
-            flex: 1;
-            height: 1px;
-            background-color: var(--separator-color);
-        }
-        
-        .separator p {
-            margin: 0 15px;
-            font-size: 0.9rem;
-            color: #6c757d;
-            font-weight: 500;
+
+        /* Animation du loader */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Media queries pour responsive */
@@ -206,13 +162,8 @@
                 height: 100px;
             }
             
-            .app-buttons {
-                gap: 10px;
-            }
-            
-            .app-link {
-                padding: 10px 15px;
-                font-size: 0.9rem;
+            .message {
+                padding: 15px 20px;
             }
         }
     </style>
@@ -224,66 +175,20 @@
     <div class="container">
         <!-- Section profil -->
         <div class="profile">
-            <!-- Image de profil - à remplacer par votre propre image -->
+            <!-- Image de profil -->
             <img src="/assets/images/photo.png" alt="Julien Henry" class="profile-img">
-            
             <h1>Julien Henry</h1>
-            <h2>Freelance</h2>
-            <p>Support Client - IA & Automatisation</p>
         </div>
 
-        <!-- Section liens -->
-        <div class="links">
-            <!-- Lien vers site principal -->
-            <a href="https://example.com" target="_blank" class="link">
-                <i class="fas fa-globe"></i>
-                Site principal
-            </a>
-
-            <!-- LinkedIn -->
-            <a href="https://linkedin.com/in/username" target="_blank" class="link">
-                <i class="fab fa-linkedin"></i>
-                LinkedIn
-            </a>
-
-            <!-- WhatsApp -->
-            <a href="https://wa.me/1234567890" target="_blank" class="link">
-                <i class="fab fa-whatsapp"></i>
-                Contact WhatsApp
-            </a>
-
-            <!-- Calendly -->
-            <a href="https://calendly.com/username" target="_blank" class="link">
-                <i class="far fa-calendar-alt"></i>
-                Prendre rendez-vous
-            </a>
+        <!-- Loader et message -->
+        <div class="loader-container">
+            <div class="loader"></div>
             
-            <!-- Séparateur -->
-            <div class="separator">
-                <span></span>
-                <p>Mon application</p>
-                <span></span>
-            </div>
-            
-            <!-- Section app -->
-            <div class="app-section">
-                <!-- Image de l'application -->
-                <img src="/assets/images/icontitle.png" alt="Application" class="app-image">
-                
-                <!-- Boutons de téléchargement côte à côte -->
-                <div class="app-buttons">
-                    <!-- Application iOS -->
-                    <a href="https://apps.apple.com/app/idXXXXXXXXXX" target="_blank" class="app-link">
-                        <i class="fab fa-apple"></i>
-                        iOS
-                    </a>
-                    
-                    <!-- Application Android -->
-                    <a href="https://play.google.com/store/apps/details?id=com.example.app" target="_blank" class="app-link">
-                        <i class="fab fa-android"></i>
-                        Android
-                    </a>
-                </div>
+            <div class="message">
+                <h2>Site en construction</h2>
+                <p>Merci de votre visite ! Cette page pincipale est actuellement en cours de développement.</p>
+                <p>Vous pouvez consulter mes liens professionnels en attendant :</p>
+                <a href="/links" class="links-button">Voir mes liens</a>
             </div>
         </div>
 
