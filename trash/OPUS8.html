@@ -16,7 +16,6 @@
             --separator-color: #e9ecef;
             --timeline-color: #ddd;
             --timeline-active: #0066ff;
-            --highlight-color: rgba(0, 102, 255, 0.15);
         }
 
         /* Reset et styles généraux */
@@ -190,37 +189,7 @@
             font-size: 1.1rem;
             text-align: center;
             line-height: 1.8;
-            color: var(--text-color);
-        }
-
-        /* Styles pour les mots-clés avec highlight */
-        .keyword {
-            position: relative;
-            display: inline-block;
-            padding: 0 4px;
-            z-index: 1;
-        }
-
-        .keyword::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 100%;
-            background: var(--highlight-color);
-            border-radius: 4px;
-            z-index: -1;
-            transition: width 0.6s ease;
-        }
-
-        .keyword.highlight::before {
-            width: 100%;
-        }
-
-        .keyword strong {
-            position: relative;
-            z-index: 2;
+            color: var(--text-secondary);
         }
 
         /* Compétences Section */
@@ -612,53 +581,53 @@
         <h2 class="section-title">Profil</h2>
         <div class="profile-section">
             <p class="profile-text">
-                Profil <span class="keyword"><strong>polyvalent</strong></span> au parcours atypique, j'ai en effet renoncé au parcours d'ingénieur après 2 ans pour me lancer à mon compte. Ce choix m'a permis de développer plus intensément ma <span class="keyword"><strong>curiosité</strong></span> naturelle et mon goût pour l'autodidaxie.
-<br><br>
-Cette approche m'a donné une compréhension globale des projets : je saisis suffisamment la tech pour discuter avec les développeurs, et suffisamment les enjeux métier pour comprendre les vrais défis. Cette polyvalence me donne une bonne vision d'ensemble. Spécialisé en <span class="keyword"><strong>support client et automatisations IA</strong></span>, j'analyse les situations avec un <span class="keyword"><strong>œil critique</strong></span> et suis en capacité de faire le pont entre les équipes.
-<br><br>
-Je ne suis pas un adepte de la langue de bois. Quand je repère un problème, je donne facilement mon avis de manière constructive et propose des <span class="keyword"><strong>solutions concrètes</strong></span>. Ma bonne <span class="keyword"><strong>communication orale</strong></span> me permet d'exprimer clairement mes idées et de créer du lien avec des profils très différents.
+                Travailleur indépendant au profil <strong>polyvalent</strong> spécialisé en automatisation IA et en support client. 
+                Passionné par la vulgarisation technologique et le développement d'outils innovants. 
+                Curieux et autodidacte, j'allie compétences techniques et communication claire pour résoudre 
+                efficacement des problèmes. Animé par une curiosité naturelle et un désir constant d'apprendre, 
+                je recherche des défis variés qui me poussent hors de ma zone de confort. Cette approche me permet de donner le meilleur de moi-même
+                dans chaque mission tout en continuant à développer mes compétences et à élargir mes horizons.
             </p>
         </div>
     </section>
 
-   <!-- Compétences Section -->
-<section id="competences">
-    <h2 class="section-title">Compétences</h2>
-    <div class="skills-grid">
-    <div class="skill-card">
-    <h3><i class="fas fa-code"></i> Techniques</h3>
-    <ul>
-    <li>Outils IA : <strong>n8n</strong>, Make, MCP servers, Ollama (déploiement sur Docker maîtrisé)</li>
-    <li>Automatisations IA : systèmes RAG, intégration WebHook (Mattermost ou autre), classification automatique de tickets ou de données</li>
-    <li>Développement : bases rudimentaires en JS, HTML/CSS et Dart (Flutter)</li>
-    </ul>
-    </div>
-    <div class="skill-card">
-    <h3><i class="fas fa-users"></i> Soft Skills</h3>
-    <ul>
-    <li><strong>Communication orale aisée et structurée</strong></li>
-    <li>Support client et relation utilisateur</li>
-    <li>Esprit de synthèse</li>
-    <li>Animation d'ateliers et formations</li>
-    </ul>
-    </div>
-    <div class="skill-card">
-    <h3><i class="fas fa-laptop"></i> Digitales</h3>
-    <ul>
-    <li>Crisp, gestion de tickets et création de bots</li>
-    <li>Notion, gestion de projet</li>
-    <li>Google Slides, présentations engageantes</li>
-    <li><strong>Adaptation rapide aux nouveaux outils</strong></li>
-    </ul>
-    </div>
-    <div class="skill-card">
-    <h3><i class="fas fa-language"></i> Langues</h3>
-    <ul>
-    <li><strong>Anglais: C1 (IELTS 7,5)</strong></li>
-    <li>Indonésien: B1</li>
-    </ul>
-    </div>
-    </div>
+    <!-- Compétences Section -->
+    <section id="competences">
+        <h2 class="section-title">Compétences</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3><i class="fas fa-code"></i> Techniques</h3>
+                <ul>
+                    <li>Automatisation: <strong>n8n</strong>, Make, systèmes RAG</li>
+                    <li>Développement: Flutter, Figma</li>
+                    <li>Support client: <strong>Crisp</strong>, gestion de tickets</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3><i class="fas fa-users"></i> Soft Skills</h3>
+                <ul>
+                    <li><strong>Communication orale aisée et structurée</strong></li>
+                    <li>Pédagogie et vulgarisation technique</li>
+                    <li>Animation d'ateliers et formations</li>
+                    <li>Gestion de projet via Notion</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3><i class="fas fa-laptop"></i> Digitales</h3>
+                <ul>
+                    <li>Animation de communautés en ligne</li>
+                    <li>Production de contenu technique engageant</li>
+                    <li>Adaptation rapide aux nouveaux outils</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3><i class="fas fa-language"></i> Langues</h3>
+                <ul>
+                    <li><strong>Anglais: C1 (IELTS 7,5)</strong></li>
+                    <li>Indonésien: B1</li>
+                </ul>
+            </div>
+        </div>
     </section>
 
     <!-- Expériences Section -->
@@ -770,9 +739,8 @@ Je ne suis pas un adepte de la langue de bois. Quand je repère un problème, je
                 <p>Création et optimisation de sites web - 7 jours</p>
             </div>
             <div class="formation-card">
-                <h4>Cycle préparatoire intégré (ingénieur)</h4>
-                <p>(2018-2020)</p>
-                <p>INSA Rennes</p>
+                <h4>Cycle préparatoire</h4>
+                <p>INSA Rennes (2018-2020)</p>
             </div>
             <div class="formation-card">
                 <h4>Baccalauréat Scientifique</h4>
@@ -898,33 +866,6 @@ Je ne suis pas un adepte de la langue de bois. Quand je repère un problème, je
         }
 
         window.addEventListener('scroll', setActiveNav);
-
-        // Animation des mots-clés avec highlight
-        const keywords = document.querySelectorAll('.keyword');
-        let hasAnimated = false;
-
-        function animateKeywords() {
-            keywords.forEach((keyword, index) => {
-                setTimeout(() => {
-                    keyword.classList.add('highlight');
-                }, 500 + (index * 400)); // Délai progressif entre chaque mot
-            });
-        }
-
-        // Observer pour déclencher l'animation des mots-clés
-        const profileObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !hasAnimated) {
-                    hasAnimated = true;
-                    animateKeywords();
-                }
-            });
-        }, { threshold: 0.5 });
-
-        const profileSection = document.querySelector('.profile-section');
-        if (profileSection) {
-            profileObserver.observe(profileSection);
-        }
     </script>
 </body>
 </html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julien Henry - Portfolio</title>
+    <style>
+        /* Variables pour faciliter les modifications */
+        :root {
+            --primary-color: #0066ff;
+            --background-color: #f8f9fa;
+            --text-color: #212529;
+            --text-secondary: #6c757d;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --transition-speed: 0.3s;
+        }
+
+        /* Reset et styles généraux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px var(--shadow-color);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color var(--transition-speed);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px 40px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px var(--shadow-color);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary-color), #0052cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all var(--transition-speed);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Sections générales */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        /* Profil Section */
+        .profile-section {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            margin: 40px auto;
+            max-width: 900px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .profile-text {
+            font-size: 1.1rem;
+            text-align: center;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        /* Typewriter effect */
+        .typewriter-text {
+            display: inline;
+            border-right: 3px solid var(--primary-color);
+            animation: blink-cursor 0.8s step-end infinite;
+        }
+
+        .typewriter-text.typing-complete {
+            border-right: none;
+        }
+
+        .fade-in-text {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .fade-in-text.visible {
+            opacity: 1;
+        }
+
+        @keyframes blink-cursor {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--primary-color); }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+                margin: 30px auto 0;
+            }
+
+            .profile-section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+    <!-- Font et icônes -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <strong>Julien Henry</strong>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#hero">Accueil</a></li>
+                <li><a href="#profil">Profil</a></li>
+                <li><a href="#competences">Compétences</a></li>
+                <li><a href="#experiences">Expériences</a></li>
+                <li><a href="#formations">Formations</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <img src="/assets/images/photo.png" alt="Julien Henry" class="profile-img">
+            <h1>Julien Henry</h1>
+            <h2>Freelance • Support Client • IA & Automatisation</h2>
+            <p>DossierFacile @ BetaGouv</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-calendar"></i> Prendre RDV
+                </a>
+                <a href="/cv-julien-henry.pdf" class="btn btn-secondary" download>
+                    <i class="fas fa-download"></i> Télécharger CV
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profil Section -->
+    <section id="profil">
+        <h2 class="section-title">Profil</h2>
+        <div class="profile-section">
+            <p class="profile-text">
+                <span class="typewriter-text"></span><span class="fade-in-text"> Passionné par la vulgarisation technologique et le développement d'outils innovants. 
+                Curieux et autodidacte, j'allie compétences techniques et communication claire pour résoudre 
+                efficacement des problèmes. Animé par une curiosité naturelle et un désir constant d'apprendre, 
+                je recherche des défis variés qui me poussent hors de ma zone de confort. Cette approche me permet de donner le meilleur de moi-même
+                dans chaque mission tout en continuant à développer mes compétences et à élargir mes horizons.</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- Container vide pour permettre le scroll -->
+    <div style="height: 100vh;"></div>
+
+    <!-- Script minimal pour les animations -->
+    <script>
+        // Animation au scroll pour les sections
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observer les éléments avec animation
+        document.querySelectorAll('.section-title').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Navigation active
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        function setActiveNav() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.style.color = 'var(--primary-color)';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', setActiveNav);
+
+        // Typewriter effect
+        const typewriterElement = document.querySelector('.typewriter-text');
+        const fadeInElement = document.querySelector('.fade-in-text');
+        const textToType = "Travailleur indépendant au profil polyvalent spécialisé en automatisation IA et en support client. ";
+        let charIndex = 0;
+        let hasTyped = false;
+
+        function typeWriter() {
+            if (charIndex < textToType.length) {
+                // Gérer le mot "polyvalent" en gras
+                if (textToType.substring(charIndex, charIndex + 10) === 'polyvalent') {
+                    typewriterElement.innerHTML += '<strong>polyvalent</strong>';
+                    charIndex += 10;
+                } else {
+                    typewriterElement.innerHTML += textToType.charAt(charIndex);
+                    charIndex++;
+                }
+                setTimeout(typeWriter, 50);
+            } else {
+                // Animation terminée
+                typewriterElement.classList.add('typing-complete');
+                // Déclencher le fade-in après un court délai
+                setTimeout(() => {
+                    fadeInElement.classList.add('visible');
+                }, 300);
+            }
+        }
+
+        // Démarrer l'effet typewriter quand la section est visible
+        const profileObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasTyped) {
+                    hasTyped = true;
+                    setTimeout(typeWriter, 500); // Petit délai avant de commencer
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const profileSection = document.querySelector('.profile-section');
+        if (profileSection) {
+            profileObserver.observe(profileSection);
+        }
+    </script>
+</body>
+</html>

@@ -16,7 +16,6 @@
             --separator-color: #e9ecef;
             --timeline-color: #ddd;
             --timeline-active: #0066ff;
-            --highlight-color: rgba(0, 102, 255, 0.15);
         }
 
         /* Reset et styles généraux */
@@ -190,37 +189,7 @@
             font-size: 1.1rem;
             text-align: center;
             line-height: 1.8;
-            color: var(--text-color);
-        }
-
-        /* Styles pour les mots-clés avec highlight */
-        .keyword {
-            position: relative;
-            display: inline-block;
-            padding: 0 4px;
-            z-index: 1;
-        }
-
-        .keyword::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 100%;
-            background: var(--highlight-color);
-            border-radius: 4px;
-            z-index: -1;
-            transition: width 0.6s ease;
-        }
-
-        .keyword.highlight::before {
-            width: 100%;
-        }
-
-        .keyword strong {
-            position: relative;
-            z-index: 2;
+            color: var(--text-secondary);
         }
 
         /* Compétences Section */
@@ -272,34 +241,33 @@
         /* Experiences Section avec Timeline */
         .experiences-section {
             position: relative;
-        }
-
-        .experiences-section .section-title {
-            padding-left: 0;
-            margin-left: 0;
-        }
-
-        .experiences-container {
-            position: relative;
-            padding-left: 0;
-            max-width: 800px;
-            margin: 0 auto;
+            padding-left: 100px;
         }
 
         .timeline {
             position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 40px;
             top: 0;
             bottom: 0;
             width: 2px;
-            background: linear-gradient(to bottom, 
-                transparent 0%, 
-                var(--timeline-color) 10%, 
-                var(--timeline-color) 90%, 
-                transparent 100%);
-            opacity: 0.3;
-            z-index: -1;
+            background: var(--timeline-color);
+        }
+
+        .timeline-point {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border: 3px solid var(--timeline-color);
+            border-radius: 50%;
+            left: -7px;
+            transition: all var(--transition-speed);
+        }
+
+        .timeline-point.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: scale(1.3);
         }
 
         .experience-item {
@@ -307,7 +275,6 @@
             opacity: 0;
             transform: translateY(50px);
             transition: all 0.6s ease;
-            position: relative;
         }
 
         .experience-item.visible {
@@ -362,7 +329,7 @@
         }
 
         .experience-item.visible .experience-content {
-            max-height: 600px;
+            max-height: 500px;
         }
 
         .experience-content ul {
@@ -390,57 +357,6 @@
         .experience-content li strong {
             color: var(--primary-color);
             font-weight: 500;
-        }
-
-        /* Styles spécifiques pour l'expérience avec app */
-        .experience-header.with-app {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 20px;
-        }
-
-        .experience-info {
-            flex: 1;
-        }
-
-        .app-section {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-        }
-
-        .app-logo {
-            width: 60px;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .app-btn {
-            background-color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all var(--transition-speed);
-            box-shadow: 0 2px 5px var(--shadow-color);
-            font-size: 0.9rem;
-            white-space: nowrap;
-        }
-
-        .app-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px var(--shadow-color);
-            background-color: var(--background-color);
-        }
-
-        .app-btn i {
-            color: var(--primary-color);
         }
 
         /* Formation Section */
@@ -530,14 +446,12 @@
                 display: none;
             }
 
-            .experiences-container {
-                padding-left: 20px;
-                padding-right: 20px;
+            .experiences-section {
+                padding-left: 60px;
             }
 
             .timeline {
-                left: 50%;
-                transform: translateX(-50%);
+                left: 20px;
             }
 
             .section-title {
@@ -553,17 +467,6 @@
 
             .profile-section {
                 padding: 40px 20px;
-            }
-
-            /* Adaptation pour l'expérience avec app sur mobile */
-            .experience-header.with-app {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .app-section {
-                width: 100%;
-                justify-content: flex-start;
             }
         }
     </style>
@@ -612,144 +515,133 @@
         <h2 class="section-title">Profil</h2>
         <div class="profile-section">
             <p class="profile-text">
-                Profil <span class="keyword"><strong>polyvalent</strong></span> au parcours atypique, j'ai en effet renoncé au parcours d'ingénieur après 2 ans pour me lancer à mon compte. Ce choix m'a permis de développer plus intensément ma <span class="keyword"><strong>curiosité</strong></span> naturelle et mon goût pour l'autodidaxie.
-<br><br>
-Cette approche m'a donné une compréhension globale des projets : je saisis suffisamment la tech pour discuter avec les développeurs, et suffisamment les enjeux métier pour comprendre les vrais défis. Cette polyvalence me donne une bonne vision d'ensemble. Spécialisé en <span class="keyword"><strong>support client et automatisations IA</strong></span>, j'analyse les situations avec un <span class="keyword"><strong>œil critique</strong></span> et suis en capacité de faire le pont entre les équipes.
-<br><br>
-Je ne suis pas un adepte de la langue de bois. Quand je repère un problème, je donne facilement mon avis de manière constructive et propose des <span class="keyword"><strong>solutions concrètes</strong></span>. Ma bonne <span class="keyword"><strong>communication orale</strong></span> me permet d'exprimer clairement mes idées et de créer du lien avec des profils très différents.
+                Travailleur indépendant au profil <strong>polyvalent</strong> spécialisé en automatisation IA et en support client. 
+                Passionné par la vulgarisation technologique et le développement d'outils innovants. 
+                Curieux et autodidacte, j'allie compétences techniques et communication claire pour résoudre 
+                efficacement des problèmes. Animé par une curiosité naturelle et un désir constant d'apprendre, 
+                je recherche des défis variés qui me poussent hors de ma zone de confort. Cette approche me permet de donner le meilleur de moi-même
+                dans chaque mission tout en continuant à développer mes compétences et à élargir mes horizons.
             </p>
         </div>
     </section>
 
-   <!-- Compétences Section -->
-<section id="competences">
-    <h2 class="section-title">Compétences</h2>
-    <div class="skills-grid">
-    <div class="skill-card">
-    <h3><i class="fas fa-code"></i> Techniques</h3>
-    <ul>
-    <li>Outils IA : <strong>n8n</strong>, Make, MCP servers, Ollama (déploiement sur Docker maîtrisé)</li>
-    <li>Automatisations IA : systèmes RAG, intégration WebHook (Mattermost ou autre), classification automatique de tickets ou de données</li>
-    <li>Développement : bases rudimentaires en JS, HTML/CSS et Dart (Flutter)</li>
-    </ul>
-    </div>
-    <div class="skill-card">
-    <h3><i class="fas fa-users"></i> Soft Skills</h3>
-    <ul>
-    <li><strong>Communication orale aisée et structurée</strong></li>
-    <li>Support client et relation utilisateur</li>
-    <li>Esprit de synthèse</li>
-    <li>Animation d'ateliers et formations</li>
-    </ul>
-    </div>
-    <div class="skill-card">
-    <h3><i class="fas fa-laptop"></i> Digitales</h3>
-    <ul>
-    <li>Crisp, gestion de tickets et création de bots</li>
-    <li>Notion, gestion de projet</li>
-    <li>Google Slides, présentations engageantes</li>
-    <li><strong>Adaptation rapide aux nouveaux outils</strong></li>
-    </ul>
-    </div>
-    <div class="skill-card">
-    <h3><i class="fas fa-language"></i> Langues</h3>
-    <ul>
-    <li><strong>Anglais: C1 (IELTS 7,5)</strong></li>
-    <li>Indonésien: B1</li>
-    </ul>
-    </div>
-    </div>
+    <!-- Compétences Section -->
+    <section id="competences">
+        <h2 class="section-title">Compétences</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3><i class="fas fa-code"></i> Techniques</h3>
+                <ul>
+                    <li>Automatisation: <strong>n8n</strong>, Make, systèmes RAG</li>
+                    <li>Développement: Flutter, Figma</li>
+                    <li>Support client: <strong>Crisp</strong>, gestion de tickets</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3><i class="fas fa-users"></i> Soft Skills</h3>
+                <ul>
+                    <li><strong>Communication orale aisée et structurée</strong></li>
+                    <li>Pédagogie et vulgarisation technique</li>
+                    <li>Animation d'ateliers et formations</li>
+                    <li>Gestion de projet via Notion</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3><i class="fas fa-laptop"></i> Digitales</h3>
+                <ul>
+                    <li>Animation de communautés en ligne</li>
+                    <li>Production de contenu technique engageant</li>
+                    <li>Adaptation rapide aux nouveaux outils</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3><i class="fas fa-language"></i> Langues</h3>
+                <ul>
+                    <li><strong>Anglais: C1 (IELTS 7,5)</strong></li>
+                    <li>Indonésien: B1</li>
+                </ul>
+            </div>
+        </div>
     </section>
 
     <!-- Expériences Section -->
     <section id="experiences" class="experiences-section">
         <h2 class="section-title">Expériences</h2>
-        <div class="experiences-container">
-            <div class="timeline"></div>
-            
-            <!-- Experience 1 -->
-            <div class="experience-item" data-index="0">
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <h3 class="experience-title">Support Utilisateur</h3>
-                        <p class="experience-company">Dossier Facile - Juin 2024 → présent</p>
-                    </div>
-                    <div class="experience-content">
-                        <ul>
-                            <li>Gestion du support client via Crisp avec résolution efficace des problèmes utilisateurs</li>
-                            <li>Animation d'ateliers spécialisés sur la détection de faux documents ayant permis d'augmenter de 30% nos chiffres globaux de détection de faux documents</li>
-                            <li>Développement d'un système RAG sur n8n pour assistant IA conversationnel visant à améliorer la formation initiale et continue des opérateurs<br>
-                                <strong>Architecture complète :</strong> pipeline d'ingestion documentaire automatisé, vectorisation (Mistral), base vectorielle (Supabase), agent IA (Mistral) et intégration Mattermost via webhooks<br>
-                                <strong>Impact :</strong> assistance disponible 24h/24, réduction de la charge tuteurs, identification des gaps documentaires</li>
-                        </ul>
-                    </div>
+        <div class="timeline"></div>
+        
+        <!-- Experience 1 -->
+        <div class="experience-item" data-index="0">
+            <div class="timeline-point" style="top: 0px;"></div>
+            <div class="experience-card">
+                <div class="experience-header">
+                    <h3 class="experience-title">Support Utilisateur</h3>
+                    <p class="experience-company">Dossier Facile - Juin 2024 → présent</p>
+                </div>
+                <div class="experience-content">
+                    <ul>
+                        <li>Gestion du support client via Crisp avec résolution efficace des problèmes utilisateurs</li>
+                        <li>Animation d'ateliers spécialisés sur la détection de faux documents ayant permis d'augmenter de 30% nos chiffres globaux de détection de faux documents</li>
+                        <li>Développement d'un système RAG sur n8n pour assistant IA conversationnel visant à améliorer la formation initiale et continue des opérateurs<br>
+                            <strong>Architecture complète :</strong> pipeline d'ingestion documentaire automatisé, vectorisation (Mistral), base vectorielle (Supabase), agent IA (Mistral) et intégration Mattermost via webhooks<br>
+                            <strong>Impact :</strong> assistance disponible 24h/24, réduction de la charge tuteurs, identification des gaps documentaires</li>
+                    </ul>
                 </div>
             </div>
+        </div>
 
-            <!-- Experience 2 -->
-            <div class="experience-item" data-index="1">
-                <div class="experience-card">
-                    <div class="experience-header with-app">
-                        <div class="experience-info">
-                            <h3 class="experience-title">Développement d'Application Mobile</h3>
-                            <p class="experience-company">Travailleur indépendant - Mars 2024 → Juillet 2024</p>
-                        </div>
-                        <div class="app-section">
-                            <img src="/assets/images/icontitle.png" alt="Deeply App" class="app-logo">
-                            <a href="https://apps.apple.com/id/app/deeply-app/id6504491197" target="_blank" class="app-btn">
-                                <i class="fab fa-apple"></i>
-                                iOS
-                            </a>
-                            <a href="https://play.google.com/store/apps/details?id=com.deeply.app" target="_blank" class="app-btn">
-                                <i class="fab fa-android"></i>
-                                Android
-                            </a>
-                        </div>
-                    </div>
-                    <div class="experience-content">
-                        <ul>
-                            <li>Conception et développement d'une application Flutter de conversations profondes favorisant l'introspection</li>
-                            <li>Utilisation de l'IA (ChatGPT et Claude) pour optimiser la génération de code</li>
-                            <li>Création de l'interface utilisateur avec Figma, de la maquette à la mise en production</li>
-                            <li>Publication réussie sur les stores iOS et Android avec gestion complète du cycle de développement réalisé sur Notion</li>
-                        </ul>
-                    </div>
+        <!-- Experience 2 -->
+        <div class="experience-item" data-index="1">
+            <div class="timeline-point" style="top: 300px;"></div>
+            <div class="experience-card">
+                <div class="experience-header">
+                    <h3 class="experience-title">Développement d'Application Mobile</h3>
+                    <p class="experience-company">Travailleur indépendant - Mars 2024 → Juillet 2024</p>
+                </div>
+                <div class="experience-content">
+                    <ul>
+                        <li>Conception et développement d'une application Flutter de conversations profondes favorisant l'introspection</li>
+                        <li>Utilisation de l'IA (ChatGPT et Claude) pour optimiser la génération de code</li>
+                        <li>Création de l'interface utilisateur avec Figma, de la maquette à la mise en production</li>
+                        <li>Publication réussie sur les stores iOS et Android avec gestion complète du cycle de développement réalisé sur Notion</li>
+                    </ul>
                 </div>
             </div>
+        </div>
 
-            <!-- Experience 3 -->
-            <div class="experience-item" data-index="2">
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <h3 class="experience-title">Créateur de Contenu Digital</h3>
-                        <p class="experience-company">Travailleur indépendant - Avril 2021 → Juin 2024</p>
-                    </div>
-                    <div class="experience-content">
-                        <ul>
-                            <li>Création et animation d'une communauté engagée de 7000 personnes sur Twitter</li>
-                            <li>Production de contenu de vulgarisation sur la conscience numérique et les technologies web3</li>
-                            <li>Création de threads viraux atteignant régulièrement plus de 40K impressions</li>
-                            <li>Sensibilisation à la protection des données personnelles</li>
-                        </ul>
-                    </div>
+        <!-- Experience 3 -->
+        <div class="experience-item" data-index="2">
+            <div class="timeline-point" style="top: 600px;"></div>
+            <div class="experience-card">
+                <div class="experience-header">
+                    <h3 class="experience-title">Créateur de Contenu Digital</h3>
+                    <p class="experience-company">Travailleur indépendant - Avril 2021 → Juin 2024</p>
+                </div>
+                <div class="experience-content">
+                    <ul>
+                        <li>Création et animation d'une communauté engagée de 7000 personnes sur Twitter</li>
+                        <li>Production de contenu de vulgarisation sur la conscience numérique et les technologies web3</li>
+                        <li>Création de threads viraux atteignant régulièrement plus de 40K impressions</li>
+                        <li>Sensibilisation à la protection des données personnelles</li>
+                    </ul>
                 </div>
             </div>
+        </div>
 
-            <!-- Experience 4 -->
-            <div class="experience-item" data-index="3">
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <h3 class="experience-title">Secouriste, Centre de Vaccination</h3>
-                        <p class="experience-company">Été 2021</p>
-                    </div>
-                    <div class="experience-content">
-                        <ul>
-                            <li>Participation à la campagne de vaccination contre la COVID-19</li>
-                            <li>Gestion de situations d'urgence et prise de décision sous pression</li>
-                            <li>Communication claire et rassurante avec des publics variés</li>
-                            <li>Développement d'une forte empathie et d'aptitudes d'écoute active</li>
-                        </ul>
-                    </div>
+        <!-- Experience 4 -->
+        <div class="experience-item" data-index="3">
+            <div class="timeline-point" style="top: 900px;"></div>
+            <div class="experience-card">
+                <div class="experience-header">
+                    <h3 class="experience-title">Secouriste, Centre de Vaccination</h3>
+                    <p class="experience-company">Été 2021</p>
+                </div>
+                <div class="experience-content">
+                    <ul>
+                        <li>Participation à la campagne de vaccination contre la COVID-19</li>
+                        <li>Gestion de situations d'urgence et prise de décision sous pression</li>
+                        <li>Communication claire et rassurante avec des publics variés</li>
+                        <li>Développement d'une forte empathie et d'aptitudes d'écoute active</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -770,9 +662,8 @@ Je ne suis pas un adepte de la langue de bois. Quand je repère un problème, je
                 <p>Création et optimisation de sites web - 7 jours</p>
             </div>
             <div class="formation-card">
-                <h4>Cycle préparatoire intégré (ingénieur)</h4>
-                <p>(2018-2020)</p>
-                <p>INSA Rennes</p>
+                <h4>Cycle préparatoire</h4>
+                <p>INSA Rennes (2018-2020)</p>
             </div>
             <div class="formation-card">
                 <h4>Baccalauréat Scientifique</h4>
@@ -838,15 +729,21 @@ Je ne suis pas un adepte de la langue de bois. Quand je repère un problème, je
 
         // Animation de la timeline et des expériences
         const experienceItems = document.querySelectorAll('.experience-item');
+        const timelinePoints = document.querySelectorAll('.timeline-point');
 
         function checkExperiences() {
-            experienceItems.forEach((item) => {
+            experienceItems.forEach((item, index) => {
                 const rect = item.getBoundingClientRect();
                 const windowHeight = window.innerHeight;
                 
                 // Si l'élément est visible
                 if (rect.top < windowHeight * 0.7 && rect.bottom > 0) {
                     item.classList.add('visible');
+                    timelinePoints[index].classList.add('active');
+                } else {
+                    // Optionnel : retirer les classes quand on scrolle en arrière
+                    // item.classList.remove('visible');
+                    // timelinePoints[index].classList.remove('active');
                 }
             });
         }
@@ -898,33 +795,6 @@ Je ne suis pas un adepte de la langue de bois. Quand je repère un problème, je
         }
 
         window.addEventListener('scroll', setActiveNav);
-
-        // Animation des mots-clés avec highlight
-        const keywords = document.querySelectorAll('.keyword');
-        let hasAnimated = false;
-
-        function animateKeywords() {
-            keywords.forEach((keyword, index) => {
-                setTimeout(() => {
-                    keyword.classList.add('highlight');
-                }, 500 + (index * 400)); // Délai progressif entre chaque mot
-            });
-        }
-
-        // Observer pour déclencher l'animation des mots-clés
-        const profileObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !hasAnimated) {
-                    hasAnimated = true;
-                    animateKeywords();
-                }
-            });
-        }, { threshold: 0.5 });
-
-        const profileSection = document.querySelector('.profile-section');
-        if (profileSection) {
-            profileObserver.observe(profileSection);
-        }
     </script>
 </body>
 </html>
