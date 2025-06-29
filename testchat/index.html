@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julien Henry - Portfolio</title>
+    <style>
+        /* Variables pour faciliter les modifications */
+        :root {
+            --primary-color: #0066ff;
+            --background-color: #f8f9fa;
+            --text-color: #212529;
+            --text-secondary: #6c757d;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --transition-speed: 0.3s;
+            --separator-color: #e9ecef;
+            --timeline-color: #ddd;
+            --timeline-active: #0066ff;
+            --highlight-color: rgba(0, 102, 255, 0.15);
+        }
+
+        /* Reset et styles généraux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px var(--shadow-color);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color var(--transition-speed);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px 40px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px var(--shadow-color);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary-color), #0052cc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all var(--transition-speed);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Sections générales */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        /* Profil Section */
+        .profile-section {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            margin: 40px auto;
+            max-width: 900px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        .profile-text {
+            font-size: 1rem;
+            text-align: center;
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+
+        /* Styles pour les mots-clés avec highlight */
+        .keyword {
+            position: relative;
+            display: inline-block;
+            padding: 0 4px;
+            z-index: 1;
+        }
+
+        .keyword::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 100%;
+            background: var(--highlight-color);
+            border-radius: 4px;
+            z-index: -1;
+            transition: width 0.6s ease;
+        }
+
+        .keyword.highlight::before {
+            width: 100%;
+        }
+
+        .keyword strong {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Compétences Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px var(--shadow-color);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.3s;
+            transition: transform var(--transition-speed);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .skill-card ul {
+            list-style: none;
+        }
+
+        .skill-card li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .skill-card li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        /* Experiences Section avec Timeline */
+        .experiences-section {
+            position: relative;
+        }
+
+        .experiences-section .section-title {
+            padding-left: 0;
+            margin-left: 0;
+        }
+
+        .experiences-container {
+            position: relative;
+            padding-left: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                var(--timeline-color) 10%, 
+                var(--timeline-color) 90%, 
+                transparent 100%);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .experience-item {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+            position: relative;
+        }
+
+        .experience-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .experience-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px var(--shadow-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 102, 255, 0.05), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .experience-item.visible .experience-card::before {
+            left: 100%;
+        }
+
+        .experience-header {
+            margin-bottom: 25px;
+        }
+
+        .experience-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .experience-company {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .experience-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease;
+        }
+
+        .experience-item.visible .experience-content {
+            max-height: none;
+        }
+
+        .experience-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .experience-content li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .experience-content li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .experience-content li strong {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        /* Styles spécifiques pour l'expérience avec app */
+        .experience-header.with-app {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .experience-info {
+            flex: 1;
+        }
+
+        .app-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .app-logo {
+            width: 60px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .app-btn {
+            background-color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--transition-speed);
+            box-shadow: 0 2px 5px var(--shadow-color);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .app-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px var(--shadow-color);
+            background-color: var(--background-color);
+        }
+
+        .app-btn i {
+            color: var(--primary-color);
+        }
+
+        /* Formation Section */
+        .formations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .formation-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.4s;
+        }
+
+        .formation-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            text-align: center;
+            box-shadow: 0 10px 30px var(--shadow-color);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: transform var(--transition-speed);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .experiences-container {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .timeline {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+                margin: 30px auto 0;
+            }
+
+            .profile-section {
+                padding: 40px 20px;
+            }
+
+            /* Adaptation pour l'expérience avec app sur mobile */
+            .experience-header.with-app {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .app-section {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+    </style>
+    <!-- Font et icônes -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <strong>Julien Henry</strong>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#hero">Accueil</a></li>
+                <li><a href="#profil">Profil</a></li>
+                <li><a href="#competences">Compétences</a></li>
+                <li><a href="#experiences">Expériences</a></li>
+                <li><a href="#formations">Formations</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <img src="/assets/images/photo.png" alt="Julien Henry" class="profile-img">
+            <h1>Julien Henry</h1>
+            <h2>Freelance • Support Client • IA & Automatisation</h2>
+            <p>DossierFacile @ BetaGouv</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-calendar"></i> Prendre RDV
+                </a>
+                <a href="/cv-julien-henry.pdf" class="btn btn-secondary" download>
+                    <i class="fas fa-download"></i> Télécharger CV
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profil Section -->
+    <section id="profil">
+        <h2 class="section-title">Profil</h2>
+        <div class="profile-section">
+            <p class="profile-text">
+                Profil <span class="keyword"><strong>polyvalent</strong></span> au parcours atypique, j'ai en effet renoncé au parcours d'ingénieur après 2 ans pour me lancer à mon compte. Ce choix m'a permis de développer plus intensément ma <span class="keyword"><strong>curiosité</strong></span> naturelle et mon goût pour l'autodidaxie.
+<br><br>
+Cette approche m'a donné une compréhension globale des projets : je saisis suffisamment la tech pour discuter avec les développeurs, et suffisamment les enjeux métier pour comprendre les vrais défis. Cette polyvalence me donne une bonne vision d'ensemble. Spécialisé en <span class="keyword"><strong>support client et automatisations IA</strong></span>, j'analyse les situations avec un <span class="keyword"><strong>œil critique</strong></span> et suis en capacité de faire le pont entre les équipes.
+<br><br>
+Je ne suis pas un adepte de la langue de bois. Quand je repère un problème, je donne facilement mon avis de manière constructive et propose des <span class="keyword"><strong>solutions concrètes</strong></span>. Ma bonne <span class="keyword"><strong>communication orale</strong></span> me permet d'exprimer clairement mes idées et de créer du lien avec des profils très différents.
+            </p>
+        </div>
+    </section>
+
+   <!-- Compétences Section -->
+<section id="competences">
+    <h2 class="section-title">Compétences</h2>
+    <div class="skills-grid">
+    <div class="skill-card">
+    <h3><i class="fas fa-code"></i> Techniques</h3>
+    <ul>
+    <li>Outils IA : <strong>n8n</strong>, Make, MCP servers, Ollama (déploiement sur Docker maîtrisé)</li>
+    <li>Automatisations IA : systèmes RAG, intégration WebHook (Mattermost ou autre), classification automatique de tickets ou de données</li>
+    <li>Développement : bases rudimentaires en JS, HTML/CSS et Dart (Flutter)</li>
+    </ul>
+    </div>
+    <div class="skill-card">
+    <h3><i class="fas fa-users"></i> Soft Skills</h3>
+    <ul>
+    <li><strong>Communication orale aisée et structurée</strong></li>
+    <li>Support client et relation utilisateur</li>
+    <li>Esprit de synthèse</li>
+    <li>Animation d'ateliers et formations</li>
+    </ul>
+    </div>
+    <div class="skill-card">
+    <h3><i class="fas fa-laptop"></i> Digitales</h3>
+    <ul>
+    <li>Crisp, gestion de tickets et création de bots</li>
+    <li>Notion, gestion de projet</li>
+    <li>Google Slides, présentations engageantes</li>
+    <li><strong>Adaptation rapide aux nouveaux outils</strong></li>
+    </ul>
+    </div>
+    <div class="skill-card">
+    <h3><i class="fas fa-language"></i> Langues</h3>
+    <ul>
+    <li><strong>Anglais: C1 (IELTS 7,5)</strong></li>
+    <li>Indonésien: B1</li>
+    </ul>
+    </div>
+    </div>
+    </section>
+
+    <!-- Expériences Section -->
+    <section id="experiences" class="experiences-section">
+        <h2 class="section-title">Expériences</h2>
+        <div class="experiences-container">
+            <div class="timeline"></div>
+            
+            <!-- Experience 1 -->
+            <div class="experience-item" data-index="0">
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h3 class="experience-title">Support Utilisateur</h3>
+                        <p class="experience-company">Dossier Facile - Juin 2024 → présent</p>
+                    </div>
+                    <div class="experience-content">
+                        <ul>
+                            <li>Gestion du support client via Crisp avec résolution efficace des problèmes utilisateurs</li>
+                            <li>Animation d'ateliers spécialisés sur la détection de faux documents ayant permis d'augmenter de 30% nos chiffres globaux de détection de faux documents</li>
+                            <li>Développement d'un système RAG sur n8n pour assistant IA conversationnel visant à améliorer la formation initiale et continue des opérateurs<br>
+                                <strong>Architecture complète :</strong> pipeline d'ingestion documentaire automatisé, vectorisation (Mistral), base vectorielle (Supabase), agent IA (Mistral) et intégration Mattermost via webhooks<br>
+                                <strong>Impact :</strong> assistance disponible 24h/24, réduction de la charge tuteurs, identification des gaps documentaires</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience 2 -->
+            <div class="experience-item" data-index="1">
+                <div class="experience-card">
+                    <div class="experience-header with-app">
+                        <div class="experience-info">
+                            <h3 class="experience-title">Développement d'Application Mobile</h3>
+                            <p class="experience-company">Travailleur indépendant - Mars 2024 → Juillet 2024</p>
+                        </div>
+                        <div class="app-section">
+                            <img src="/assets/images/icontitle.png" alt="Deeply App" class="app-logo">
+                            <a href="https://apps.apple.com/id/app/deeply-app/id6504491197" target="_blank" class="app-btn">
+                                <i class="fab fa-apple"></i>
+                                iOS
+                            </a>
+                            <a href="https://play.google.com/store/apps/details?id=com.deeply.app" target="_blank" class="app-btn">
+                                <i class="fab fa-android"></i>
+                                Android
+                            </a>
+                        </div>
+                    </div>
+                    <div class="experience-content">
+                        <ul>
+                            <li>Conception et développement d'une application Flutter de conversations profondes favorisant l'introspection</li>
+                            <li>Utilisation de l'IA (ChatGPT et Claude) pour optimiser la génération de code</li>
+                            <li>Création de l'interface utilisateur avec Figma, de la maquette à la mise en production</li>
+                            <li>Publication réussie sur les stores iOS et Android avec gestion complète du cycle de développement réalisé sur Notion</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience 3 -->
+            <div class="experience-item" data-index="2">
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h3 class="experience-title">Créateur de Contenu Digital</h3>
+                        <p class="experience-company">Travailleur indépendant - Avril 2021 → Juin 2024</p>
+                    </div>
+                    <div class="experience-content">
+                        <ul>
+                            <li>Création et animation d'une communauté engagée de 7000 personnes sur Twitter</li>
+                            <li>Production de contenu de vulgarisation sur la conscience numérique et les technologies web3</li>
+                            <li>Création de threads viraux atteignant régulièrement plus de 40K impressions</li>
+                            <li>Sensibilisation à la protection des données personnelles</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience 4 -->
+            <div class="experience-item" data-index="3">
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h3 class="experience-title">Secouriste, Centre de Vaccination</h3>
+                        <p class="experience-company">Été 2021</p>
+                    </div>
+                    <div class="experience-content">
+                        <ul>
+                            <li>Participation à la campagne de vaccination contre la COVID-19</li>
+                            <li>Gestion de situations d'urgence et prise de décision sous pression</li>
+                            <li>Communication claire et rassurante avec des publics variés</li>
+                            <li>Développement d'une forte empathie et d'aptitudes d'écoute active</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formations Section -->
+    <section id="formations">
+        <h2 class="section-title">Formations</h2>
+        <div class="formations-grid">
+            <div class="formation-card">
+                <h4>BNSSA & PSE2</h4>
+                <p>2021</p>
+                <p>Secourisme et sauvetage aquatique</p>
+            </div>
+            <div class="formation-card">
+                <h4>Formation SEO et WordPress</h4>
+                <p>2020</p>
+                <p>Création et optimisation de sites web - 7 jours</p>
+            </div>
+            <div class="formation-card">
+                <h4>Cycle préparatoire intégré (ingénieur)</h4>
+                <p>(2018-2020)</p>
+                <p>INSA Rennes</p>
+            </div>
+            <div class="formation-card">
+                <h4>Baccalauréat Scientifique</h4>
+                <p>2018</p>
+                <p>Mention Très Bien</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <h2 class="section-title">Contactez-moi</h2>
+        <p>N'hésitez pas à me contacter pour discuter de vos projets ou opportunités de collaboration.</p>
+        
+        <div class="contact-grid">
+            <a href="mailto:contact@julienhenry.io" class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>contact@julienhenry.io</span>
+            </a>
+            <a href="https://linkedin.com/in/julien-henry-io/" target="_blank" class="contact-item">
+                <i class="fab fa-linkedin"></i>
+                <span>LinkedIn</span>
+            </a>
+            <a href="https://wa.me/33651920872" target="_blank" class="contact-item">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </a>
+            <a href="tel:+33651920872" class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span>+33 6 51 92 08 72</span>
+            </a>
+        </div>
+
+        <div class="hero-buttons" style="margin-top: 40px;">
+            <a href="https://calendly.com/contact-julienhenry" target="_blank" class="btn btn-primary">
+                <i class="fas fa-calendar"></i> Prendre un rendez-vous
+            </a>
+            <a href="/cv-julien-henry.pdf" class="btn btn-secondary" download>
+                <i class="fas fa-download"></i> CV PDF
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 40px 20px; color: var(--text-secondary);">
+        <p>&copy; 2025 Julien Henry - Tous droits réservés</p>
+    </footer>
+
+    <script>
+        // Smooth scroll pour la navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animation de la timeline et des expériences
+        const experienceItems = document.querySelectorAll('.experience-item');
+
+        function checkExperiences() {
+            experienceItems.forEach((item) => {
+                const rect = item.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                // Si l'élément est visible
+                if (rect.top < windowHeight * 0.7 && rect.bottom > 0) {
+                    item.classList.add('visible');
+                }
+            });
+        }
+
+        // Vérifier au chargement et au scroll
+        window.addEventListener('scroll', checkExperiences);
+        window.addEventListener('load', checkExperiences);
+
+        // Animation au scroll pour les autres sections
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observer les éléments avec animation
+        document.querySelectorAll('.section-title, .skill-card, .formation-card').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Navigation active
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        function setActiveNav() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.style.color = 'var(--primary-color)';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', setActiveNav);
+
+        // Animation des mots-clés avec highlight
+        const keywords = document.querySelectorAll('.keyword');
+        let hasAnimated = false;
+
+        function animateKeywords() {
+            keywords.forEach((keyword, index) => {
+                setTimeout(() => {
+                    keyword.classList.add('highlight');
+                }, 500 + (index * 400)); // Délai progressif entre chaque mot
+            });
+        }
+
+        // Observer pour déclencher l'animation des mots-clés
+        const profileObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    hasAnimated = true;
+                    animateKeywords();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const profileSection = document.querySelector('.profile-section');
+        if (profileSection) {
+            profileObserver.observe(profileSection);
+        }
+    </script>
+    <script>
+  (function(d,t) {
+    var BASE_URL="https://chat.julienhenry.io";
+    var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=BASE_URL+"/packs/js/sdk.js";
+    g.defer = true;
+    g.async = true;
+    s.parentNode.insertBefore(g,s);
+    g.onload=function(){
+      window.chatwootSDK.run({
+        websiteToken: 'm2wYwPkskgkUHoZpQ7BAC7EV',
+        baseUrl: BASE_URL
+      })
+    }
+  })(document,"script");
+</script>
+
+</body>
+</html>
