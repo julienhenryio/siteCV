@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vérification MRZ — CNI France</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f5f6f8;
+  --card: #ffffff;
+  --border: #d1d5db;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --success: #16a34a;
+  --success-bg: #dcfce7;
+  --danger: #dc2626;
+  --danger-bg: #fef2f2;
+  --warn: #d97706;
+  --warn-bg: #fefce8;
+  --warn-border: #fbbf24;
+  --highlight: rgba(37,99,235,0.08);
+  --radius: 8px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  padding: 1.5rem;
+}
+
+h1 {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+h1 small {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.card h2 {
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent);
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.25rem 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.separator::before, .separator::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+  margin-top: 0.75rem;
+}
+
+label:first-of-type { margin-top: 0; }
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.92rem;
+  font-family: inherit;
+  background: #fff;
+  transition: background 0.4s, border-color 0.2s;
+}
+
+input[type="text"]:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+}
+
+input.mrz-input {
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+input.field-highlighted, select.field-highlighted {
+  background: var(--highlight);
+  border-color: var(--accent);
+}
+
+.char-count {
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-align: right;
+  margin-top: 0.15rem;
+}
+
+.char-count.error { color: var(--danger); font-weight: 600; }
+
+.mrz-alert {
+  background: var(--danger-bg);
+  color: var(--danger);
+  font-size: 0.8rem;
+  padding: 0.5rem 0.65rem;
+  border-radius: var(--radius);
+  margin-top: 0.35rem;
+  display: none;
+  line-height: 1.4;
+}
+
+.mrz-alert.visible { display: block; }
+
+.optional-tag {
+  font-weight: 400;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.required-tag {
+  color: var(--danger);
+}
+
+button {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.65rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+button:hover:not(:disabled) { background: var(--accent-hover); }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+button.btn-secondary {
+  background: #fff;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+button.btn-secondary:hover:not(:disabled) {
+  background: rgba(37,99,235,0.05);
+}
+
+/* Drop zone */
+.dropzone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+}
+
+.dropzone.dragover {
+  border-color: var(--accent);
+  background: rgba(37,99,235,0.04);
+}
+
+.dropzone input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.dropzone p { pointer-events: none; }
+.dropzone .icon { font-size: 1.8rem; margin-bottom: 0.3rem; }
+.dropzone .filename {
+  margin-top: 0.4rem;
+  font-weight: 600;
+  color: var(--text);
+  font-size: 0.85rem;
+}
+
+.upload-error {
+  background: var(--danger-bg);
+  color: var(--danger);
+  font-size: 0.85rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radius);
+  margin-top: 0.75rem;
+  display: none;
+  line-height: 1.4;
+}
+
+.upload-error.visible { display: block; }
+
+.upload-loading {
+  text-align: center;
+  padding: 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  display: none;
+}
+
+.upload-loading.visible { display: block; }
+
+/* Result */
+#result {
+  display: none;
+}
+
+#result.visible { display: block; }
+
+.verdict {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 800;
+  padding: 1rem;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+}
+
+.verdict.valid { background: var(--success-bg); color: var(--success); }
+.verdict.invalid { background: var(--danger-bg); color: var(--danger); }
+
+.info-note {
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.decoded-info {
+  background: var(--warn-bg);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-size: 0.88rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.detail-section {
+  margin-bottom: 1rem;
+}
+
+.detail-section h3 {
+  font-size: 0.92rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.detail-section h3::before { content: '▸ '; }
+.detail-section.open h3::before { content: '▾ '; }
+.detail-section .detail-content { display: none; }
+.detail-section.open .detail-content { display: block; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+th, td {
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+th {
+  background: var(--bg);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+td.status-ok { color: var(--success); font-weight: 700; }
+td.status-fail { color: var(--danger); font-weight: 700; }
+
+.spinner {
+  display: inline-block;
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<h1>Vérification MRZ — CNI France
+  <small>Carte nationale d'identité plastifiée (1988–2021)</small>
+</h1>
+
+<div class="container">
+  <div class="card">
+    <!-- Upload zone -->
+    <h2>Analyser un document</h2>
+    <div class="dropzone" id="dropzone">
+      <input type="file" id="fileInput" accept="image/*,.pdf">
+      <p class="icon">📄</p>
+      <p>Glissez un scan ou une photo ici, ou cliquez pour sélectionner</p>
+      <p class="filename" id="fileName"></p>
+    </div>
+    <button id="btnUpload" class="btn-secondary" disabled>Analyser le document</button>
+    <div class="upload-loading" id="uploadLoading">
+      <span class="spinner"></span>Analyse en cours…
+    </div>
+    <div class="upload-error" id="uploadError"></div>
+
+    <div class="separator">ou saisie manuelle</div>
+
+    <!-- Form fields -->
+    <label>Nom <span class="optional-tag">(optionnel)</span></label>
+    <input type="text" id="vNom" placeholder="DUPONT">
+
+    <label>Prénoms <span class="optional-tag">(optionnel)</span></label>
+    <input type="text" id="vPrenoms" placeholder="JEAN, MARIE">
+
+    <label>Date de naissance <span class="optional-tag">(optionnel, AAMMJJ)</span></label>
+    <input type="text" id="vDateNaissance" placeholder="850315" maxlength="6">
+
+    <label>Sexe <span class="optional-tag">(optionnel)</span></label>
+    <select id="vSexe">
+      <option value="">—</option>
+      <option value="M">M</option>
+      <option value="F">F</option>
+    </select>
+
+    <label>Numéro de document <span class="optional-tag">(optionnel, 12 chiffres)</span></label>
+    <input type="text" id="vNumero" placeholder="123456789012" maxlength="12">
+
+    <label>MRZ Ligne 1 <span class="required-tag">*</span></label>
+    <input type="text" class="mrz-input" id="mrz1" placeholder="IDFRADUPONT<<<<<<<<<<<<<<<<<301034" maxlength="36">
+    <div class="char-count" id="mrz1Count">0/36</div>
+    <div class="mrz-alert" id="mrz1Alert">La ligne MRZ doit contenir exactement 36 caractères. Les erreurs viennent souvent d'un mauvais nombre de caractères &lt; (chevrons). Vérifiez bien le nombre de &lt; entre le nom et le code département.</div>
+
+    <label>MRZ Ligne 2 <span class="required-tag">*</span></label>
+    <input type="text" class="mrz-input" id="mrz2" placeholder="1234567890121JEAN<<MARIE<<8503152M6" maxlength="36">
+    <div class="char-count" id="mrz2Count">0/36</div>
+    <div class="mrz-alert" id="mrz2Alert">La ligne MRZ doit contenir exactement 36 caractères. Les erreurs viennent souvent d'un mauvais nombre de caractères &lt; (chevrons). Vérifiez bien le nombre de &lt; entre le nom et le code département.</div>
+
+    <button id="btnVerify" disabled>Vérifier la MRZ</button>
+  </div>
+
+  <div id="result"></div>
+</div>
+
+<script>
+// ===== CONFIGURATION =====
+const WEBHOOK_URL = 'https://auto.julienhenry.io/webhook/78e2b359-6cf9-4620-8fde-60881dce2806';
+
+// ===== MRZ check logic (from mrz-check.js) =====
+function calculerCle(chaine) {
+  const poids = [7, 3, 1];
+  let total = 0;
+  for (let i = 0; i < chaine.length; i++) {
+    const c = chaine[i];
+    let valeur;
+    if (c === '<') valeur = 0;
+    else if (c >= 'A' && c <= 'Z') valeur = c.charCodeAt(0) - 55;
+    else if (c >= '0' && c <= '9') valeur = parseInt(c);
+    else valeur = 0;
+    total += valeur * poids[i % 3];
+  }
+  return total % 10;
+}
+
+function verifierMRZ(ligne1, ligne2, visuelData) {
+  const mrz = {
+    typeDoc: ligne1.substring(0, 2),
+    pays: ligne1.substring(2, 5),
+    nom: ligne1.substring(5, 30).replace(/<+$/g, '').split('<')[0],
+    numeroDocument: ligne2.substring(0, 12),
+    prenoms: ligne2.substring(13, 27).replace(/<+$/g, '').replace(/<</g, ', ').replace(/</g, '-'),
+    dateNaissance: ligne2.substring(27, 33),
+    sexe: ligne2[34]
+  };
+
+  const cleNumeroExtraite = parseInt(ligne2[12]);
+  const cleDateExtraite = parseInt(ligne2[33]);
+  const cleGlobaleExtraite = parseInt(ligne2[35]);
+
+  const cleNumeroCalculee = calculerCle(ligne2.substring(0, 12));
+  const cleDateCalculee = calculerCle(ligne2.substring(27, 33));
+  const cleGlobaleCalculee = calculerCle(ligne1 + ligne2.substring(0, 35));
+
+  const cles = {
+    cleNumero: { extraite: cleNumeroExtraite, calculee: cleNumeroCalculee, valide: cleNumeroExtraite === cleNumeroCalculee },
+    cleDate: { extraite: cleDateExtraite, calculee: cleDateCalculee, valide: cleDateExtraite === cleDateCalculee },
+    cleGlobale: { extraite: cleGlobaleExtraite, calculee: cleGlobaleCalculee, valide: cleGlobaleExtraite === cleGlobaleCalculee }
+  };
+
+  const clesOK = cles.cleNumero.valide && cles.cleDate.valide && cles.cleGlobale.valide;
+
+  let hasVisuel = false;
+  let concordanceOK = true;
+  let checks = null;
+
+  if (visuelData) {
+    const visuel = {
+      numeroDocument: visuelData.numeroDocument ? visuelData.numeroDocument.replace(/\s/g, '') : null,
+      nom: visuelData.nom ? visuelData.nom.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') : null,
+      dateNaissance: visuelData.dateNaissance || null,
+      sexe: visuelData.sexe ? visuelData.sexe.toUpperCase() : null
+    };
+
+    checks = {};
+    if (visuel.numeroDocument) {
+      checks.numero = { visuel: visuel.numeroDocument, mrz: mrz.numeroDocument, match: visuel.numeroDocument === mrz.numeroDocument };
+      hasVisuel = true;
+    }
+    if (visuel.nom) {
+      checks.nom = { visuel: visuel.nom, mrz: mrz.nom, match: visuel.nom === mrz.nom };
+      hasVisuel = true;
+    }
+    if (visuel.dateNaissance) {
+      checks.dateNaissance = { visuel: visuel.dateNaissance, mrz: mrz.dateNaissance, match: visuel.dateNaissance === mrz.dateNaissance };
+      hasVisuel = true;
+    }
+    if (visuel.sexe) {
+      checks.sexe = { visuel: visuel.sexe, mrz: mrz.sexe, match: visuel.sexe === mrz.sexe };
+      hasVisuel = true;
+    }
+    // Prénoms exclus : la MRZ tronque à 14 caractères, comparaison non fiable
+
+    if (hasVisuel) {
+      concordanceOK = Object.values(checks).every(c => c.match);
+    }
+  }
+
+  const toutValide = hasVisuel ? (concordanceOK && clesOK) : clesOK;
+
+  return {
+    valide: toutValide,
+    verdict: toutValide ? '✅ Document valide' : '❌ Document suspect',
+    cles, clesOK, checks, hasVisuel, concordanceOK, mrz,
+    mrzBrute: { ligne1, ligne2 }
+  };
+}
+
+function formatDateMRZ(aammjj) {
+  if (!aammjj || aammjj.length !== 6) return aammjj;
+  const yy = aammjj.substring(0, 2);
+  const mm = aammjj.substring(2, 4);
+  const dd = aammjj.substring(4, 6);
+  const year = parseInt(yy) > 40 ? '19' + yy : '20' + yy;
+  return dd + '/' + mm + '/' + year;
+}
+
+// ===== UI =====
+const resultEl = document.getElementById('result');
+const mrz1 = document.getElementById('mrz1');
+const mrz2 = document.getElementById('mrz2');
+const mrz1Count = document.getElementById('mrz1Count');
+const mrz2Count = document.getElementById('mrz2Count');
+const mrz1Alert = document.getElementById('mrz1Alert');
+const mrz2Alert = document.getElementById('mrz2Alert');
+const btnVerify = document.getElementById('btnVerify');
+const dropzone = document.getElementById('dropzone');
+const fileInput = document.getElementById('fileInput');
+const fileNameEl = document.getElementById('fileName');
+const btnUpload = document.getElementById('btnUpload');
+const uploadLoading = document.getElementById('uploadLoading');
+const uploadError = document.getElementById('uploadError');
+
+// --- MRZ validation ---
+function updateMRZValidation() {
+  const l1 = mrz1.value.length;
+  const l2 = mrz2.value.length;
+
+  mrz1Count.textContent = l1 + '/36';
+  mrz2Count.textContent = l2 + '/36';
+
+  mrz1Count.classList.toggle('error', l1 > 0 && l1 !== 36);
+  mrz2Count.classList.toggle('error', l2 > 0 && l2 !== 36);
+
+  mrz1Alert.classList.toggle('visible', l1 > 0 && l1 !== 36);
+  mrz2Alert.classList.toggle('visible', l2 > 0 && l2 !== 36);
+
+  btnVerify.disabled = !(l1 === 36 && l2 === 36);
+}
+
+mrz1.addEventListener('input', function() {
+  this.value = this.value.toUpperCase();
+  updateMRZValidation();
+});
+mrz2.addEventListener('input', function() {
+  this.value = this.value.toUpperCase();
+  updateMRZValidation();
+});
+
+// --- File upload ---
+fileInput.addEventListener('change', function() {
+  if (this.files.length) {
+    fileNameEl.textContent = this.files[0].name;
+    btnUpload.disabled = false;
+  }
+});
+
+dropzone.addEventListener('dragover', function(e) {
+  e.preventDefault();
+  this.classList.add('dragover');
+});
+dropzone.addEventListener('dragleave', function() {
+  this.classList.remove('dragover');
+});
+dropzone.addEventListener('drop', function(e) {
+  e.preventDefault();
+  this.classList.remove('dragover');
+  if (e.dataTransfer.files.length) {
+    fileInput.files = e.dataTransfer.files;
+    fileNameEl.textContent = e.dataTransfer.files[0].name;
+    btnUpload.disabled = false;
+  }
+});
+
+btnUpload.addEventListener('click', async function() {
+  if (!fileInput.files.length) return;
+
+  btnUpload.disabled = true;
+  uploadError.classList.remove('visible');
+  uploadLoading.classList.add('visible');
+  resultEl.classList.remove('visible');
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 30000);
+
+  try {
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+
+    const response = await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      body: formData,
+      signal: controller.signal
+    });
+    clearTimeout(timeout);
+
+    if (!response.ok) throw new Error('Erreur serveur : ' + response.status);
+
+    let data = await response.json();
+    // n8n peut renvoyer un tableau, on prend le premier élément
+    if (Array.isArray(data)) data = data[0];
+    remplirFormulaire(data);
+  } catch (err) {
+    clearTimeout(timeout);
+    const msg = err.name === 'AbortError'
+      ? 'Délai d\'attente dépassé (30s). Vous pouvez saisir les informations manuellement ci-dessous.'
+      : 'Impossible de contacter le serveur. Vous pouvez saisir les informations manuellement ci-dessous. (' + escapeHtml(err.message) + ')';
+    uploadError.innerHTML = msg;
+    uploadError.classList.add('visible');
+  } finally {
+    uploadLoading.classList.remove('visible');
+    btnUpload.disabled = !fileInput.files.length;
+  }
+});
+
+// --- Fill form from webhook response ---
+function remplirFormulaire(data) {
+  const fields = [];
+
+  if (data.nom) {
+    document.getElementById('vNom').value = data.nom;
+    fields.push('vNom');
+  }
+  if (data.prenoms) {
+    document.getElementById('vPrenoms').value = data.prenoms;
+    fields.push('vPrenoms');
+  }
+  if (data.dateNaissance) {
+    document.getElementById('vDateNaissance').value = data.dateNaissance;
+    fields.push('vDateNaissance');
+  }
+  if (data.sexe) {
+    const sel = document.getElementById('vSexe');
+    sel.value = data.sexe.toUpperCase();
+    fields.push('vSexe');
+  }
+  if (data.numeroDocument) {
+    document.getElementById('vNumero').value = data.numeroDocument.replace(/\s/g, '');
+    fields.push('vNumero');
+  }
+  if (data.mrzLigne1) {
+    mrz1.value = data.mrzLigne1.toUpperCase();
+    fields.push('mrz1');
+  }
+  if (data.mrzLigne2) {
+    mrz2.value = data.mrzLigne2.toUpperCase();
+    fields.push('mrz2');
+  }
+
+  updateMRZValidation();
+
+  // Highlight filled fields
+  fields.forEach(function(id) {
+    const el = document.getElementById(id);
+    el.classList.add('field-highlighted');
+    setTimeout(function() { el.classList.remove('field-highlighted'); }, 2500);
+  });
+
+  // Auto-verify if MRZ lines are valid (36 chars each)
+  if (mrz1.value.length === 36 && mrz2.value.length === 36) {
+    lancerVerification();
+  }
+}
+
+// --- Shared verify logic ---
+function lancerVerification() {
+  const ligne1 = mrz1.value.toUpperCase();
+  const ligne2 = mrz2.value.toUpperCase();
+
+  const nom = document.getElementById('vNom').value.trim();
+  const prenoms = document.getElementById('vPrenoms').value.trim();
+  const dateNaissance = document.getElementById('vDateNaissance').value.trim();
+  const sexe = document.getElementById('vSexe').value;
+  const numero = document.getElementById('vNumero').value.trim();
+
+  let visuelData = null;
+  if (nom || prenoms || dateNaissance || sexe || numero) {
+    visuelData = {};
+    if (nom) visuelData.nom = nom;
+    if (prenoms) visuelData.prenoms = prenoms;
+    if (dateNaissance) visuelData.dateNaissance = dateNaissance;
+    if (sexe) visuelData.sexe = sexe;
+    if (numero) visuelData.numeroDocument = numero;
+  }
+
+  const res = verifierMRZ(ligne1, ligne2, visuelData);
+  afficherResultat(res);
+}
+
+btnVerify.addEventListener('click', lancerVerification);
+
+// --- Display result ---
+function afficherResultat(res) {
+  let html = '<div class="card">';
+  html += '<div class="verdict ' + (res.valide ? 'valid' : 'invalid') + '">' + escapeHtml(res.verdict) + '</div>';
+
+  if (!res.valide) {
+    html += '<div style="background:var(--warn-bg);border:1px solid var(--warn-border);color:var(--warn);padding:0.65rem 0.85rem;border-radius:var(--radius);margin-bottom:1rem;font-size:0.88rem;line-height:1.5;">';
+    html += 'La reconnaissance optique (OCR) peut parfois mal interpréter certains caractères. Vérifiez les informations pré-remplies ci-dessous, corrigez si nécessaire, puis relancez la vérification.';
+    html += '</div>';
+  }
+
+  if (!res.hasVisuel) {
+    html += '<p class="info-note">Vérification basée uniquement sur la bande MRZ</p>';
+    html += '<div class="decoded-info">';
+    html += 'D\'après la bande MRZ :<br>';
+    html += '• Numéro de document : <strong>' + escapeHtml(res.mrz.numeroDocument) + '</strong><br>';
+    html += '• Date de naissance : <strong>' + escapeHtml(formatDateMRZ(res.mrz.dateNaissance)) + '</strong><br>';
+    html += '• Sexe : <strong>' + escapeHtml(res.mrz.sexe === 'M' ? 'Masculin' : res.mrz.sexe === 'F' ? 'Féminin' : res.mrz.sexe) + '</strong><br>';
+    html += '• Nom : <strong>' + escapeHtml(res.mrz.nom) + '</strong><br>';
+    html += '• Prénoms commençant par : <strong>' + escapeHtml(res.mrz.prenoms) + '</strong> <span style="color:var(--muted);font-size:0.82rem;">(la MRZ est limitée à 14 caractères, les prénoms peuvent être tronqués)</span>';
+    html += '</div>';
+  }
+
+  // Keys detail
+  html += '<div class="detail-section open">';
+  html += '<h3 onclick="this.parentElement.classList.toggle(\'open\')">Vérification des clés de contrôle</h3>';
+  html += '<div class="detail-content">';
+  html += '<table><thead><tr><th>Clé</th><th>Extraite</th><th>Calculée</th><th>Statut</th></tr></thead><tbody>';
+  html += cleRow('Numéro de document', res.cles.cleNumero);
+  html += cleRow('Date de naissance', res.cles.cleDate);
+  html += cleRow('Clé globale', res.cles.cleGlobale);
+  html += '</tbody></table>';
+  html += '</div></div>';
+
+  // Concordance if visual data provided
+  if (res.hasVisuel && res.checks) {
+    html += '<div class="detail-section open">';
+    html += '<h3 onclick="this.parentElement.classList.toggle(\'open\')">Concordance visuel / MRZ</h3>';
+    html += '<div class="detail-content">';
+    html += '<table><thead><tr><th>Champ</th><th>Visuel</th><th>MRZ</th><th>Statut</th></tr></thead><tbody>';
+    const labels = { numero: 'Numéro', nom: 'Nom', dateNaissance: 'Date de naissance', sexe: 'Sexe' };
+    for (const [key, check] of Object.entries(res.checks)) {
+      html += '<tr><td>' + (labels[key] || key) + '</td><td>' + escapeHtml(check.visuel) + '</td><td>' + escapeHtml(check.mrz) + '</td>';
+      html += '<td class="' + (check.match ? 'status-ok' : 'status-fail') + '">' + (check.match ? '✓' : '✗') + '</td></tr>';
+    }
+    html += '</tbody></table>';
+    html += '</div></div>';
+  }
+
+  html += '</div>';
+  resultEl.innerHTML = html;
+  resultEl.classList.add('visible');
+  resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function cleRow(label, cle) {
+  return '<tr><td>' + label + '</td><td>' + cle.extraite + '</td><td>' + cle.calculee + '</td>'
+    + '<td class="' + (cle.valide ? 'status-ok' : 'status-fail') + '">' + (cle.valide ? '✓' : '✗') + '</td></tr>';
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+</script>
+</body>
+</html>
