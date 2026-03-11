@@ -121,6 +121,15 @@ input.mrz-input {
   font-family: 'Courier New', Courier, monospace;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+@media (max-width: 500px) {
+  input.mrz-input {
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+    padding: 0.5rem 0.4rem;
+  }
 }
 
 input.field-highlighted, select.field-highlighted {
@@ -295,16 +304,28 @@ button.btn-secondary:hover:not(:disabled) {
 .detail-section .detail-content { display: none; }
 .detail-section.open .detail-content { display: block; }
 
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.85rem;
+  min-width: 360px;
 }
 
 th, td {
   padding: 0.45rem 0.65rem;
   border: 1px solid var(--border);
   text-align: left;
+  white-space: nowrap;
+}
+
+@media (max-width: 500px) {
+  table { font-size: 0.78rem; }
+  th, td { padding: 0.35rem 0.45rem; }
 }
 
 th {
@@ -344,7 +365,7 @@ td.status-fail { color: var(--danger); font-weight: 700; }
     <!-- Upload zone -->
     <h2>Analyser un document</h2>
     <div class="dropzone" id="dropzone">
-      <input type="file" id="fileInput" accept="image/*,.pdf">
+      <input type="file" id="fileInput" accept="image/*,.pdf" capture="environment">
       <p class="icon">📄</p>
       <p>Glissez un scan ou une photo ici, ou cliquez pour sélectionner</p>
       <p class="filename" id="fileName"></p>
@@ -705,19 +726,19 @@ function afficherResultat(res) {
   // Keys detail
   html += '<div class="detail-section open">';
   html += '<h3 onclick="this.parentElement.classList.toggle(\'open\')">Vérification des clés de contrôle</h3>';
-  html += '<div class="detail-content">';
+  html += '<div class="detail-content"><div class="table-wrap">';
   html += '<table><thead><tr><th>Clé</th><th>Extraite</th><th>Calculée</th><th>Statut</th></tr></thead><tbody>';
   html += cleRow('Numéro de document', res.cles.cleNumero);
   html += cleRow('Date de naissance', res.cles.cleDate);
   html += cleRow('Clé globale', res.cles.cleGlobale);
   html += '</tbody></table>';
-  html += '</div></div>';
+  html += '</div></div></div>';
 
   // Concordance if visual data provided
   if (res.hasVisuel && res.checks) {
     html += '<div class="detail-section open">';
     html += '<h3 onclick="this.parentElement.classList.toggle(\'open\')">Concordance visuel / MRZ</h3>';
-    html += '<div class="detail-content">';
+    html += '<div class="detail-content"><div class="table-wrap">';
     html += '<table><thead><tr><th>Champ</th><th>Visuel</th><th>MRZ</th><th>Statut</th></tr></thead><tbody>';
     const labels = { numero: 'Numéro', nom: 'Nom', dateNaissance: 'Date de naissance', sexe: 'Sexe' };
     for (const [key, check] of Object.entries(res.checks)) {
@@ -725,7 +746,7 @@ function afficherResultat(res) {
       html += '<td class="' + (check.match ? 'status-ok' : 'status-fail') + '">' + (check.match ? '✓' : '✗') + '</td></tr>';
     }
     html += '</tbody></table>';
-    html += '</div></div>';
+    html += '</div></div></div>';
   }
 
   html += '</div>';
