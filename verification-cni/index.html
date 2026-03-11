@@ -365,12 +365,12 @@ td.status-fail { color: var(--danger); font-weight: 700; }
     <!-- Upload zone -->
     <h2>Analyser un document</h2>
     <div class="dropzone" id="dropzone">
-      <input type="file" id="fileInput" accept="image/*,.pdf" capture="environment">
+      <input type="file" id="fileInput" accept="image/*,.pdf">
       <p class="icon">📄</p>
       <p>Glissez un scan ou une photo ici, ou cliquez pour sélectionner</p>
       <p class="filename" id="fileName"></p>
     </div>
-    <button id="btnUpload" class="btn-secondary" disabled>Analyser le document</button>
+    <button id="btnUpload" class="btn-secondary" style="display:none" disabled>Analyser le document</button>
     <div class="upload-loading" id="uploadLoading">
       <span class="spinner"></span>Analyse en cours…
     </div>
@@ -562,7 +562,7 @@ mrz2.addEventListener('input', function() {
 fileInput.addEventListener('change', function() {
   if (this.files.length) {
     fileNameEl.textContent = this.files[0].name;
-    btnUpload.disabled = false;
+    lancerUpload();
   }
 });
 
@@ -579,14 +579,13 @@ dropzone.addEventListener('drop', function(e) {
   if (e.dataTransfer.files.length) {
     fileInput.files = e.dataTransfer.files;
     fileNameEl.textContent = e.dataTransfer.files[0].name;
-    btnUpload.disabled = false;
+    lancerUpload();
   }
 });
 
-btnUpload.addEventListener('click', async function() {
+async function lancerUpload() {
   if (!fileInput.files.length) return;
 
-  btnUpload.disabled = true;
   uploadError.classList.remove('visible');
   uploadLoading.classList.add('visible');
   resultEl.classList.remove('visible');
@@ -620,9 +619,8 @@ btnUpload.addEventListener('click', async function() {
     uploadError.classList.add('visible');
   } finally {
     uploadLoading.classList.remove('visible');
-    btnUpload.disabled = !fileInput.files.length;
   }
-});
+}
 
 // --- Fill form from webhook response ---
 function remplirFormulaire(data) {
