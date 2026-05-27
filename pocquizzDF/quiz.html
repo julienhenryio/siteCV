@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr" data-fr-scheme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Quiz — Choix de la thématique</title>
+
+  <link rel="icon" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.0/dist/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.0/dist/dsfr.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.0/dist/utility/icons/icons.min.css">
+
+  <style>
+    .quiz-hero { text-align: center; padding: 2rem 0 1rem; }
+    .quiz-hero h1 { margin-bottom: 0.5rem; }
+    .quiz-hero .fr-text--lead { color: var(--text-mention-grey); max-width: 36rem; margin: 0 auto; }
+    .fr-tile--disabled { opacity: 0.55; pointer-events: none; }
+    .fr-tile__title a { font-size: 1.125rem; }
+    .tile-soon::after {
+      content: "Bientôt disponible";
+      display: inline-block;
+      background: var(--background-contrast-grey);
+      color: var(--text-mention-grey);
+      font-size: 0.625rem;
+      font-weight: 700;
+      padding: 0.125rem 0.5rem;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+    }
+    .mode-section-title {
+      font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-mention-grey);
+      margin: 2rem 0 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header role="banner" class="fr-header">
+    <div class="fr-header__body">
+      <div class="fr-container">
+        <div class="fr-header__body-row">
+          <div class="fr-header__brand fr-enlarge-link">
+            <div class="fr-header__brand-top">
+              <div class="fr-header__logo">
+                <p class="fr-logo">République<br>Française</p>
+              </div>
+            </div>
+            <div class="fr-header__service">
+              <a href="index.html" title="Accueil — Portail Opérateur">
+                <p class="fr-header__service-title">DossierFacile.fr</p>
+              </a>
+              <p class="fr-header__service-tagline">Portail Opérateur · Mini Quiz</p>
+            </div>
+          </div>
+          <div class="fr-header__tools">
+            <div class="fr-header__tools-links">
+              <ul class="fr-btns-group">
+                <li><a class="fr-btn fr-icon-logout-box-r-line" href="#">Déconnexion</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main role="main" id="content">
+    <div class="fr-container fr-py-4w">
+
+      <nav role="navigation" class="fr-breadcrumb" aria-label="vous êtes ici :">
+        <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-1">Voir le fil d'Ariane</button>
+        <div class="fr-collapse" id="breadcrumb-1">
+          <ol class="fr-breadcrumb__list">
+            <li><a class="fr-breadcrumb__link" href="index.html">Portail Opérateur</a></li>
+            <li><a class="fr-breadcrumb__link" aria-current="page">Mini Quiz</a></li>
+          </ol>
+        </div>
+      </nav>
+
+      <div class="quiz-hero">
+        <h1>Mini Quiz <span class="fr-text--regular fr-text--lg" style="color: var(--text-mention-grey)">— Formation opérateur</span></h1>
+        <p class="fr-text--lead">Choisissez un quiz pour vous entraîner. Chaque session comporte 10 questions tirées au sort, avec feedback immédiat et score final.</p>
+      </div>
+
+      <div class="fr-callout fr-mb-4w">
+        <h3 class="fr-callout__title">Format des questions</h3>
+        <p class="fr-callout__text">3 formats utilisés : <strong>Vrai/Faux</strong>, <strong>QCM</strong> (une seule bonne réponse) et <strong>QCM multi-réponses</strong> (plusieurs cases à cocher). Validez votre réponse pour voir le feedback explicatif.</p>
+      </div>
+
+      <!-- ── CAS DE TOLÉRANCE : 4 modes ───────────────────────── -->
+      <h2 class="fr-h4 fr-mb-1w">Cas de tolérance</h2>
+      <p style="color: var(--text-mention-grey); margin-bottom: 1.5rem;">Règles de tolérance par type de document et profil. 4 modes d'entraînement disponibles.</p>
+
+      <div class="fr-grid-row fr-grid-row--gutters">
+        <div class="fr-col-12 fr-col-md-6">
+          <div class="fr-tile fr-enlarge-link">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="quiz-tolerance.html?mode=random">Quiz aléatoire</a></h3>
+              <p class="fr-tile__desc">10 questions tirées au sort dans toutes les thématiques (locataire, garant, règles communes, différences).</p>
+              <p class="fr-tile__detail">Tous profils confondus</p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-refresh-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fr-col-12 fr-col-md-6">
+          <div class="fr-tile fr-enlarge-link">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="quiz-tolerance.html?mode=locataire">Locataire</a></h3>
+              <p class="fr-tile__desc">10 questions ciblées sur les tolérances applicables aux locataires (et règles communes).</p>
+              <p class="fr-tile__detail">Profil : Locataire</p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-user-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fr-col-12 fr-col-md-6">
+          <div class="fr-tile fr-enlarge-link">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="quiz-tolerance.html?mode=garant">Garant</a></h3>
+              <p class="fr-tile__desc">10 questions ciblées sur les tolérances applicables aux garants (et règles communes).</p>
+              <p class="fr-tile__detail">Profil : Garant</p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-team-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fr-col-12 fr-col-md-6">
+          <div class="fr-tile fr-enlarge-link">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="quiz-tolerance.html?mode=cross">Différences Locataire / Garant</a></h3>
+              <p class="fr-tile__desc">10 questions pour bien différencier les règles selon le profil — là où les opérateurs se trompent le plus.</p>
+              <p class="fr-tile__detail">Niveau : avancé</p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-git-merge-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Autres thématiques (à venir) ─────────────────────── -->
+      <p class="mode-section-title">Autres thématiques</p>
+
+      <div class="fr-grid-row fr-grid-row--gutters">
+        <div class="fr-col-12 fr-col-md-6 fr-col-lg-4">
+          <div class="fr-tile fr-tile--disabled">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="#">Détection de faux documents</a></h3>
+              <p class="fr-tile__desc">Repérer les indices de fraude.</p>
+              <p class="fr-tile__detail tile-soon"></p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-search-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="fr-col-12 fr-col-md-6 fr-col-lg-4">
+          <div class="fr-tile fr-tile--disabled">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="#">Modification des montants</a></h3>
+              <p class="fr-tile__desc">Procédure d'ajustement et bornes.</p>
+              <p class="fr-tile__detail tile-soon"></p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-money-euro-circle-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="fr-col-12 fr-col-md-6 fr-col-lg-4">
+          <div class="fr-tile fr-tile--disabled">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="#">Situations sensibles</a></h3>
+              <p class="fr-tile__desc">Dossiers complexes ou à risque.</p>
+              <p class="fr-tile__detail tile-soon"></p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-alert-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fr-mt-4w">
+        <a class="fr-btn fr-btn--secondary fr-icon-arrow-left-line fr-btn--icon-left" href="index.html">Retour au portail</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="fr-footer" role="contentinfo">
+    <div class="fr-container">
+      <div class="fr-footer__body">
+        <div class="fr-footer__brand fr-enlarge-link">
+          <p class="fr-logo">République<br>Française</p>
+        </div>
+        <div class="fr-footer__content">
+          <p class="fr-footer__content-desc">DossierFacile — Portail Opérateur — Mini POC quiz formation.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.0/dist/dsfr.module.min.js"></script>
+  <script type="text/javascript" nomodule src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.0/dist/dsfr.nomodule.min.js"></script>
+</body>
+</html>
