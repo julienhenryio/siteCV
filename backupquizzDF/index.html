@@ -194,6 +194,17 @@ h1.page-title {
   line-height: 1.4;
 }
 
+.multi-hint {
+  display: inline-block;
+  background: var(--info-bg);
+  color: var(--info);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.5rem 0.875rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
 .answers {
   display: flex;
   flex-direction: column;
@@ -229,6 +240,16 @@ h1.page-title {
 }
 
 .answer-btn:disabled { cursor: default; }
+
+.answer-btn.is-selected {
+  border-color: var(--bf500);
+  background: #f5f5fe;
+}
+
+.answer-btn.is-selected .answer-letter {
+  background: var(--bf500);
+  color: var(--white);
+}
 
 .answer-letter {
   display: inline-flex;
@@ -401,6 +422,80 @@ h1.page-title {
   text-decoration: underline;
 }
 
+/* ---------- QR code ---------- */
+.qr-cta {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--grey-200);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.qr-cta__text {
+  flex: 1;
+  min-width: 200px;
+  color: var(--grey-700);
+  font-size: 0.9rem;
+}
+
+.qr-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 18, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.qr-modal__box {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  max-width: 90vw;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.qr-modal__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.qr-modal__img {
+  width: min(420px, 70vw);
+  height: auto;
+  display: block;
+  margin: 0 auto 1rem;
+  image-rendering: pixelated;
+}
+
+.qr-modal__hint {
+  color: var(--grey-700);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.qr-modal__close {
+  position: fixed;
+  top: 1rem;
+  right: 1.25rem;
+  background: var(--white);
+  border: none;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+
 /* ---------- Utility ---------- */
 .hidden { display: none !important; }
 
@@ -430,16 +525,15 @@ h1.page-title {
         Testez vos connaissances sur DossierFacile et apprenez à repérer les arnaques
         à la location. Choisissez un parcours pour commencer.
       </p>
-      <div class="quiz-grid">
-        <button class="quiz-tile" data-quiz="general" type="button">
-          <span class="quiz-tile__badge">Parcours 1</span>
-          <span class="quiz-tile__title">Découvrir DossierFacile</span>
-          <span class="quiz-tile__desc">10 questions sur le service, son fonctionnement et la protection de vos documents.</span>
-        </button>
-        <button class="quiz-tile" data-quiz="scam" type="button">
-          <span class="quiz-tile__badge">Parcours 2</span>
-          <span class="quiz-tile__title">Repérer les arnaques</span>
-          <span class="quiz-tile__desc">10 questions pour apprendre à éviter les pièges des fausses annonces de location.</span>
+      <div class="quiz-grid" id="quiz-grid"></div>
+
+      <div class="qr-cta">
+        <span class="qr-cta__text">
+          Sur grand écran ? Affichez le QR code pour que tout le monde puisse
+          rejoindre le quiz depuis son téléphone.
+        </span>
+        <button id="btn-show-qr" class="btn btn--secondary" type="button">
+          Afficher le QR code en grand
         </button>
       </div>
     </section>
@@ -456,6 +550,10 @@ h1.page-title {
 
       <h2 class="question-text" id="question-text"></h2>
 
+      <p class="multi-hint hidden" id="multi-hint">
+        Plusieurs bonnes réponses : sélectionnez-les toutes, puis validez.
+      </p>
+
       <div class="answers" id="answers"></div>
 
       <div id="feedback" class="feedback hidden">
@@ -465,6 +563,7 @@ h1.page-title {
 
       <div class="btn-row">
         <button id="btn-quit" class="btn btn--secondary" type="button">Quitter</button>
+        <button id="btn-validate" class="btn btn--primary hidden" type="button" disabled>Valider mes réponses</button>
         <button id="btn-next" class="btn btn--primary hidden" type="button">Question suivante</button>
       </div>
     </section>
@@ -485,6 +584,16 @@ h1.page-title {
     </section>
 
   </div>
+
+  <!-- ===== QR CODE MODAL ===== -->
+  <div id="qr-modal" class="qr-modal hidden" role="dialog" aria-modal="true" aria-labelledby="qr-modal-title">
+    <button id="btn-close-qr" class="qr-modal__close" type="button" aria-label="Fermer">&times;</button>
+    <div class="qr-modal__box">
+      <div class="qr-modal__title" id="qr-modal-title">Scannez pour lancer le quiz</div>
+      <img class="qr-modal__img" src="qr-backupquizzdf.png" alt="QR code vers le quiz DossierFacile">
+      <div class="qr-modal__hint">Pointez l'appareil photo de votre téléphone vers le QR code.</div>
+    </div>
+  </div>
 </main>
 
 <footer class="fr-footer">
@@ -495,221 +604,45 @@ h1.page-title {
   </p>
 </footer>
 
-<script>
-const QUIZZES = {
-  general: {
-    title: "Découvrir DossierFacile",
-    questions: [
-      {
-        text: "Quel est le rôle de DossierFacile ?",
-        answers: [
-          "Créer un dossier de location propre, complet et vérifié",
-          "Trouver un appartement à ma place",
-          "Appeler les propriétaires pour moi"
-        ],
-        correct: 0,
-        explanation: "DossierFacile t'aide à constituer un dossier clair et sécurisé, accepté partout."
-      },
-      {
-        text: "Combien coûte DossierFacile ?",
-        answers: [
-          "10 €",
-          "2 € par document",
-          "C'est 100 % gratuit"
-        ],
-        correct: 2,
-        explanation: "DossierFacile est un service public gratuit."
-      },
-      {
-        text: "Quels documents pouvez-vous importer dans DossierFacile ?",
-        answers: [
-          "Une photo floue prise dans le bus",
-          "Vos justificatifs lisibles (CNI, justificatif de ressources, avis d'imposition…)",
-          "Votre carte de cantine"
-        ],
-        correct: 1,
-        explanation: "Plus c'est lisible, plus ton dossier sera rapidement validé."
-      },
-      {
-        text: "DossierFacile refuse les faux documents. Pourquoi ?",
-        answers: [
-          "Parce que l'administration n'aime pas les blagues",
-          "Pour protéger les jeunes et éviter les arnaques",
-          "Parce que c'est plus joli"
-        ],
-        correct: 1,
-        explanation: "DossierFacile sécurise ton dossier et évite les fraudes."
-      },
-      {
-        text: "Une fois ton dossier validé, que dois-tu transmettre au propriétaire ?",
-        answers: [
-          "Le lien sécurisé fourni par DossierFacile",
-          "Toutes tes pièces justificatives en pièce jointe",
-          "Une photo de ton dossier sur Snapchat"
-        ],
-        correct: 0,
-        explanation: "Ne diffuse jamais tes documents personnels. Envoie uniquement le lien sécurisé."
-      },
-      {
-        text: "Sur quel site dois-tu faire très attention avant d'envoyer ton dossier ?",
-        answers: [
-          "Le site du gouvernement",
-          "Leboncoin ou tout autre site d'annonce entre particuliers",
-          "Le site de ta mission locale"
-        ],
-        correct: 1,
-        explanation: "Ne partage jamais ton dossier avec quelqu'un que tu ne connais pas ou non identifié."
-      },
-      {
-        text: "Un « propriétaire » te demande tes documents par SMS avant de te proposer une visite. Que fais-tu ?",
-        answers: [
-          "Tu envoies tes justificatifs directement pour gagner du temps",
-          "Tu refuses et tu attends une visite ou un vrai interlocuteur",
-          "Tu envoies seulement ton DossierFacile sans les pièces justificatives"
-        ],
-        correct: 1,
-        explanation: "Une vraie location commence toujours par une visite ou un échange sûr."
-      },
-      {
-        text: "Pourquoi DossierFacile ajoute un filigrane sur chaque document ?",
-        answers: [
-          "Pour faire joli",
-          "Pour montrer que tu es quelqu'un de sérieux",
-          "Pour éviter la réutilisation frauduleuse de tes documents"
-        ],
-        correct: 2,
-        explanation: "Le filigrane protège ton identité et tes documents."
-      },
-      {
-        text: "Quelle est la durée moyenne pour valider un dossier complet ?",
-        answers: [
-          "Quelques heures",
-          "15 jours",
-          "2 mois"
-        ],
-        correct: 0,
-        explanation: "DossierFacile est rapide : ton dossier peut être validé le jour même."
-      },
-      {
-        text: "Si ton dossier est incomplet, que se passe-t-il ?",
-        answers: [
-          "Il est rejeté pour toujours",
-          "Les vérificateurs t'indiquent ce qu'il manque pour le valider",
-          "On te supprime ton compte"
-        ],
-        correct: 1,
-        explanation: "DossierFacile t'accompagne jusqu'à la validation, même si tu débutes."
-      }
-    ]
-  },
-  scam: {
-    title: "Repérer les arnaques",
-    questions: [
-      {
-        text: "Tu trouves un appart trop beau pour être vrai : 300 € le T2 en plein centre. Le propriétaire veut tes documents avant même de te parler. Tu fais quoi ?",
-        answers: [
-          "Tu envoies tout, let's go",
-          "Tu demandes une visite ou un contact vérifié",
-          "Tu envoies juste ta carte d'identité"
-        ],
-        correct: 1,
-        explanation: "Une vraie location commence toujours par une visite ou un interlocuteur identifié."
-      },
-      {
-        text: "On te demande de payer l'acompte avant la visite. C'est…",
-        answers: [
-          "Une pratique normale",
-          "Une arnaque 99 % du temps",
-          "Un moyen de réserver ton futur palace"
-        ],
-        correct: 1,
-        explanation: "Ne jamais payer avant d'avoir visité et signé un vrai bail."
-      },
-      {
-        text: "À qui peux-tu envoyer tes pièces justificatives (CNI, fiche de paie…) ?",
-        answers: [
-          "À n'importe qui, tant qu'il répond vite",
-          "Seulement via le lien sécurisé DossierFacile",
-          "À tous les propriétaires de Leboncoin, ça va plus vite"
-        ],
-        correct: 1,
-        explanation: "Ne partage jamais tes documents en clair. Utilise le lien sécurisé."
-      },
-      {
-        text: "Le propriétaire communique uniquement par WhatsApp depuis un numéro étranger. Tu fais quoi ?",
-        answers: [
-          "Tu continues, peut-être qu'il habite à Bali",
-          "Tu demandes un contact vérifiable et officiel",
-          "Tu envoies ton dossier pour gagner du temps"
-        ],
-        correct: 1,
-        explanation: "Les arnaqueurs passent souvent par WhatsApp, SMS et numéros étrangers."
-      },
-      {
-        text: "Une annonce demande un garant qui gagne 10 fois le loyer. C'est…",
-        answers: [
-          "Une exigence normale",
-          "Un signe d'arnaque ou de redirection vers un site frauduleux",
-          "Un concours de richesse"
-        ],
-        correct: 1,
-        explanation: "Exigences irréalistes = signal d'alerte."
-      },
-      {
-        text: "Tu repères une annonce sans photo, sans description, juste « URGENT ». Tu fais quoi ?",
-        answers: [
-          "Tu fonces",
-          "Tu demandes plus d'infos et un rendez-vous",
-          "Tu envoies ton dossier, on ne sait jamais"
-        ],
-        correct: 1,
-        explanation: "Les annonces floues ou vides sont très souvent suspectes."
-      },
-      {
-        text: "Le propriétaire refuse de te montrer le logement, « car il est à l'étranger ». Il te demande d'envoyer ton dossier pour « réserver ».",
-        answers: [
-          "C'est normal",
-          "Arnaque ultra fréquente",
-          "Peut-être, selon son humeur"
-        ],
-        correct: 1,
-        explanation: "Un propriétaire absent qui ne montre pas le logement = red flag."
-      },
-      {
-        text: "Comment DossierFacile protège-t-il tes documents ?",
-        answers: [
-          "En ajoutant un filigrane (watermark)",
-          "En floutant tout",
-          "En mettant ton nom en néon"
-        ],
-        correct: 0,
-        explanation: "Le filigrane empêche la réutilisation frauduleuse de tes documents."
-      },
-      {
-        text: "Sur quel site dois-tu être particulièrement vigilant ?",
-        answers: [
-          "Leboncoin et tout site de petites annonces entre particuliers",
-          "Le site du gouvernement",
-          "Le site de ta mission locale"
-        ],
-        correct: 0,
-        explanation: "Les arnaques sont très courantes sur les plateformes de petites annonces."
-      },
-      {
-        text: "Quel est l'un des plus gros pièges ?",
-        answers: [
-          "Croire qu'une bonne affaire existe encore à 300 € en centre-ville",
-          "Penser que le wifi est gratuit",
-          "Dire bonjour"
-        ],
-        correct: 0,
-        explanation: "Les arnaques jouent sur l'urgence et le prix trop attractif."
-      }
-    ]
-  }
-};
+<!-- Contenu du quiz (questions/réponses) : modifiable dans le fichier questions.js -->
+<script src="questions.js"></script>
 
+<script>
 const LETTERS = ['A', 'B', 'C', 'D'];
+
+/* On lit le contenu défini dans questions.js et on le convertit
+   au format interne (text / answers / correct / explanation).
+   La bonne réponse y est indiquée par une ou plusieurs lettres
+   (ex : "A", ou "B, C" pour deux bonnes réponses). On transforme
+   ces lettres en liste de numéros de position (ex : [1, 2]). */
+function parseCorrect(value) {
+  const letters = String(value || 'A').toUpperCase().match(/[A-D]/g) || ['A'];
+  const indices = letters
+    .map(l => LETTERS.indexOf(l))
+    .filter(i => i >= 0);
+  const unique = [...new Set(indices)].sort((a, b) => a - b);
+  return unique.length ? unique : [0];
+}
+
+function buildQuizzes(raw) {
+  const out = {};
+  Object.entries(raw).forEach(([key, quiz]) => {
+    out[key] = {
+      badge: quiz.badge || '',
+      title: quiz.title || '',
+      description: quiz.description || '',
+      questions: (quiz.questions || []).map(q => ({
+        text: q.question || q.text || '',
+        answers: q.reponses || q.answers || [],
+        correct: parseCorrect(q.bonneReponse !== undefined ? q.bonneReponse : q.correct),
+        explanation: q.explication || q.explanation || ''
+      }))
+    };
+  });
+  return out;
+}
+
+const QUIZZES = buildQuizzes(typeof QUIZZES_CONTENT !== 'undefined' ? QUIZZES_CONTENT : {});
 
 const screens = {
   home: document.getElementById('screen-home'),
@@ -721,7 +654,8 @@ let state = {
   quizKey: null,
   index: 0,
   score: 0,
-  answered: false
+  answered: false,
+  selected: []
 };
 
 function show(name) {
@@ -730,15 +664,27 @@ function show(name) {
 }
 
 function startQuiz(key) {
-  state = { quizKey: key, index: 0, score: 0, answered: false };
+  state = { quizKey: key, index: 0, score: 0, answered: false, selected: [] };
   show('quiz');
   renderQuestion();
+}
+
+function currentQuestion() {
+  return QUIZZES[state.quizKey].questions[state.index];
+}
+
+/* Met en forme une liste de lettres : [1,2] -> "B et C" */
+function formatLetters(indices) {
+  const letters = indices.map(i => LETTERS[i]);
+  if (letters.length === 1) return letters[0];
+  return letters.slice(0, -1).join(', ') + ' et ' + letters[letters.length - 1];
 }
 
 function renderQuestion() {
   const quiz = QUIZZES[state.quizKey];
   const q = quiz.questions[state.index];
   const total = quiz.questions.length;
+  const multi = q.correct.length > 1;
 
   document.getElementById('progress-label').textContent =
     `Question ${state.index + 1} / ${total}`;
@@ -747,6 +693,10 @@ function renderQuestion() {
     `${(state.index / total) * 100}%`;
 
   document.getElementById('question-text').textContent = q.text;
+
+  // Consigne « plusieurs bonnes réponses » uniquement en mode multi
+  const hint = document.getElementById('multi-hint');
+  hint.classList.toggle('hidden', !multi);
 
   const answersEl = document.getElementById('answers');
   answersEl.innerHTML = '';
@@ -759,32 +709,61 @@ function renderQuestion() {
       <span class="answer-text">${text}</span>
       <span class="answer-icon" aria-hidden="true"></span>
     `;
-    btn.addEventListener('click', () => handleAnswer(i, btn));
+    if (multi) {
+      btn.addEventListener('click', () => toggleSelection(i, btn));
+    } else {
+      btn.addEventListener('click', () => { state.selected = [i]; revealAnswer(); });
+    }
     answersEl.appendChild(btn);
   });
 
   document.getElementById('feedback').classList.add('hidden');
   document.getElementById('btn-next').classList.add('hidden');
+
+  const validateBtn = document.getElementById('btn-validate');
+  validateBtn.classList.toggle('hidden', !multi);
+  validateBtn.disabled = true;
+
   state.answered = false;
+  state.selected = [];
 }
 
-function handleAnswer(choice, btn) {
+/* Mode multi : on coche / décoche une réponse */
+function toggleSelection(i, btn) {
+  if (state.answered) return;
+  const pos = state.selected.indexOf(i);
+  if (pos >= 0) {
+    state.selected.splice(pos, 1);
+    btn.classList.remove('is-selected');
+  } else {
+    state.selected.push(i);
+    btn.classList.add('is-selected');
+  }
+  document.getElementById('btn-validate').disabled = state.selected.length === 0;
+}
+
+/* Compare la sélection du joueur aux bonnes réponses attendues */
+function revealAnswer() {
   if (state.answered) return;
   state.answered = true;
 
   const quiz = QUIZZES[state.quizKey];
   const q = quiz.questions[state.index];
-  const isCorrect = choice === q.correct;
+  const correctSet = new Set(q.correct);
+  const selectedSet = new Set(state.selected);
+  const isCorrect = correctSet.size === selectedSet.size &&
+    [...correctSet].every(i => selectedSet.has(i));
 
   if (isCorrect) state.score++;
 
   const buttons = document.querySelectorAll('.answer-btn');
   buttons.forEach((b, i) => {
     b.disabled = true;
-    if (i === q.correct) {
+    b.classList.remove('is-selected');
+    if (correctSet.has(i)) {
       b.classList.add('is-correct');
       b.querySelector('.answer-icon').textContent = '✓';
-    } else if (i === choice) {
+    } else if (selectedSet.has(i)) {
       b.classList.add('is-wrong');
       b.querySelector('.answer-icon').textContent = '✗';
     }
@@ -797,6 +776,7 @@ function handleAnswer(choice, btn) {
   feedback.classList.remove('hidden', 'is-correct', 'is-wrong');
   fbTitle.classList.remove('is-correct', 'is-wrong');
 
+  const label = q.correct.length > 1 ? 'les bonnes réponses étaient' : 'la bonne réponse était';
   if (isCorrect) {
     feedback.classList.add('is-correct');
     fbTitle.classList.add('is-correct');
@@ -804,11 +784,12 @@ function handleAnswer(choice, btn) {
   } else {
     feedback.classList.add('is-wrong');
     fbTitle.classList.add('is-wrong');
-    fbTitle.textContent = `Mauvaise réponse — la bonne réponse était ${LETTERS[q.correct]}`;
+    fbTitle.textContent = `Mauvaise réponse — ${label} ${formatLetters(q.correct)}`;
   }
   fbMsg.textContent = q.explanation;
 
   document.getElementById('score-label').textContent = `Score : ${state.score}`;
+  document.getElementById('btn-validate').classList.add('hidden');
 
   const nextBtn = document.getElementById('btn-next');
   const isLast = state.index === quiz.questions.length - 1;
@@ -854,9 +835,40 @@ function showResult() {
   show('result');
 }
 
-document.querySelectorAll('.quiz-tile').forEach(tile => {
-  tile.addEventListener('click', () => startQuiz(tile.dataset.quiz));
+function renderHome() {
+  const grid = document.getElementById('quiz-grid');
+  grid.innerHTML = '';
+  Object.entries(QUIZZES).forEach(([key, quiz]) => {
+    const tile = document.createElement('button');
+    tile.type = 'button';
+    tile.className = 'quiz-tile';
+    tile.dataset.quiz = key;
+    const badge = document.createElement('span');
+    badge.className = 'quiz-tile__badge';
+    badge.textContent = quiz.badge;
+    const title = document.createElement('span');
+    title.className = 'quiz-tile__title';
+    title.textContent = quiz.title;
+    const desc = document.createElement('span');
+    desc.className = 'quiz-tile__desc';
+    desc.textContent = quiz.description;
+    tile.append(badge, title, desc);
+    tile.addEventListener('click', () => startQuiz(key));
+    grid.appendChild(tile);
+  });
+}
+renderHome();
+const qrModal = document.getElementById('qr-modal');
+function openQr() { qrModal.classList.remove('hidden'); }
+function closeQr() { qrModal.classList.add('hidden'); }
+document.getElementById('btn-show-qr').addEventListener('click', openQr);
+document.getElementById('btn-close-qr').addEventListener('click', closeQr);
+qrModal.addEventListener('click', (e) => { if (e.target === qrModal) closeQr(); });
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !qrModal.classList.contains('hidden')) closeQr();
 });
+
+document.getElementById('btn-validate').addEventListener('click', revealAnswer);
 document.getElementById('btn-next').addEventListener('click', nextQuestion);
 document.getElementById('btn-quit').addEventListener('click', () => show('home'));
 document.getElementById('btn-retry').addEventListener('click', () => startQuiz(state.quizKey));
