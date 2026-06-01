@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr" data-fr-scheme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portail Opérateur — DossierFacile</title>
+
+  <link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.0/dist/favicon/apple-touch-icon.png">
+  <link rel="icon" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.0/dist/favicon/favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.0/dist/dsfr.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.0/dist/utility/icons/icons.min.css">
+
+  <style>
+    .portail-hero { text-align: center; padding: 2rem 0 1rem; }
+    .portail-hero h1 { margin: 1rem 0 0.5rem; }
+    .portail-hero .fr-text--lead { color: var(--text-mention-grey); }
+    .section-label {
+      font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-mention-grey);
+      text-align: center;
+      margin: 2.5rem 0 1rem;
+    }
+    .section-divider { border-top: 1px solid var(--border-default-grey); margin: 0 auto; max-width: 80%; }
+    .fr-tile__title a { font-size: 1.125rem; }
+    .quiz-tile .fr-tile__body::before {
+      content: "Nouveau";
+      display: inline-block;
+      background: var(--background-action-high-blue-france);
+      color: #fff;
+      font-size: 0.625rem;
+      font-weight: 700;
+      padding: 0.125rem 0.5rem;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      align-self: flex-start;
+    }
+  </style>
+</head>
+<body>
+
+  <header role="banner" class="fr-header">
+    <div class="fr-header__body">
+      <div class="fr-container">
+        <div class="fr-header__body-row">
+          <div class="fr-header__brand fr-enlarge-link">
+            <div class="fr-header__brand-top">
+              <div class="fr-header__logo">
+                <p class="fr-logo">République<br>Française</p>
+              </div>
+            </div>
+            <div class="fr-header__service">
+              <a href="index.html" title="Accueil — Portail Opérateur">
+                <p class="fr-header__service-title">DossierFacile.fr</p>
+              </a>
+              <p class="fr-header__service-tagline">Portail Opérateur</p>
+            </div>
+          </div>
+          <div class="fr-header__tools">
+            <div class="fr-header__tools-links">
+              <ul class="fr-btns-group">
+                <li>
+                  <a class="fr-btn fr-icon-logout-box-r-line" href="#">Déconnexion</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main role="main" id="content">
+    <div class="fr-container fr-py-4w">
+
+      <div class="portail-hero">
+        <h1>Portail <strong>Opérateur</strong></h1>
+        <p class="fr-text--lead">Outils et ressources pour le traitement des dossiers</p>
+      </div>
+
+      <!-- ── 01 · STRUCTURE & SÉCURITÉ ── -->
+      <p class="section-label">01 · Structure &amp; sécurité</p>
+      <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--center">
+        <div class="fr-col-12 fr-col-md-4">
+          <div class="fr-tile fr-enlarge-link">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="#">Organigramme</a></h3>
+              <p class="fr-tile__desc">Structure de l'équipe</p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-building-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="fr-col-12 fr-col-md-4">
+          <div class="fr-tile fr-enlarge-link">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="#">Charte des opérations</a></h3>
+              <p class="fr-tile__desc">Règles et engagements</p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-file-text-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="fr-col-12 fr-col-md-4">
+          <div class="fr-tile fr-enlarge-link">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="#">Sécurité</a></h3>
+              <p class="fr-tile__desc">Bonnes pratiques</p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-lock-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 02 · GUIDES OPÉRATIONNELS ── -->
+      <p class="section-label">02 · Guides opérationnels</p>
+      <div class="fr-grid-row fr-grid-row--gutters">
+        <div class="fr-col-12 fr-col-md-4">
+          <div class="fr-tile fr-enlarge-link">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="#">Guide de validation</a></h3>
+              <p class="fr-tile__desc">Étapes de traitement</p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-checkbox-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="fr-col-12 fr-col-md-4">
+          <div class="fr-tile fr-enlarge-link">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="#">Modification des montants</a></h3>
+              <p class="fr-tile__desc">Procédure d'ajustement</p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-money-euro-circle-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="fr-col-12 fr-col-md-4">
+          <div class="fr-tile fr-enlarge-link">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="#">Cas de tolérance</a></h3>
+              <p class="fr-tile__desc">Règles par document et profil</p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-scales-3-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="fr-col-12 fr-col-md-4">
+          <div class="fr-tile fr-enlarge-link">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="#">Guide de lecture comptable</a></h3>
+              <p class="fr-tile__desc">Analyse des pièces</p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-bar-chart-box-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="fr-col-12 fr-col-md-4">
+          <div class="fr-tile fr-enlarge-link">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="#">Situations sensibles</a></h3>
+              <p class="fr-tile__desc">Cas particuliers</p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-alert-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="fr-col-12 fr-col-md-4">
+          <div class="fr-tile fr-enlarge-link">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="#">Bibliothèque de phrases</a></h3>
+              <p class="fr-tile__desc">Modèles de messages</p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-chat-3-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 03 · RESSOURCES & RÉFÉRENCES ── -->
+      <p class="section-label">03 · Ressources &amp; références</p>
+      <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--center">
+        <div class="fr-col-12 fr-col-md-4">
+          <div class="fr-tile fr-enlarge-link">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="#">Tips opérateur</a></h3>
+              <p class="fr-tile__desc">Astuces quotidiennes</p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-lightbulb-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="fr-col-12 fr-col-md-4">
+          <div class="fr-tile fr-enlarge-link">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="#">Détection Faux Documents</a></h3>
+              <p class="fr-tile__desc">Indices de fraude</p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-search-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="fr-col-12 fr-col-md-4">
+          <div class="fr-tile fr-enlarge-link">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="#">Métadonnées</a></h3>
+              <p class="fr-tile__desc">Lecture des informations techniques</p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-information-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 04 · LIENS ── -->
+      <p class="section-label">04 · Liens</p>
+      <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--center">
+        <div class="fr-col-12 fr-col-md-4">
+          <div class="fr-tile fr-enlarge-link">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="#">Liens utiles</a></h3>
+              <p class="fr-tile__desc">Outils externes</p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-links-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 05 · FORMATION (nouvelle rubrique) ── -->
+      <p class="section-label">05 · Formation</p>
+      <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--center">
+        <div class="fr-col-12 fr-col-md-4">
+          <div class="fr-tile fr-enlarge-link quiz-tile">
+            <div class="fr-tile__body">
+              <h3 class="fr-tile__title"><a href="quiz.html">Mini Quiz</a></h3>
+              <p class="fr-tile__desc">Testez vos connaissances opérationnelles</p>
+            </div>
+            <div class="fr-tile__header">
+              <div class="fr-tile__pictogram"><span class="fr-icon-questionnaire-line" aria-hidden="true"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="fr-footer" role="contentinfo">
+    <div class="fr-container">
+      <div class="fr-footer__body">
+        <div class="fr-footer__brand fr-enlarge-link">
+          <p class="fr-logo">République<br>Française</p>
+        </div>
+        <div class="fr-footer__content">
+          <p class="fr-footer__content-desc">DossierFacile — Portail Opérateur — Mini POC quiz formation.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.0/dist/dsfr.module.min.js"></script>
+  <script type="text/javascript" nomodule src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.0/dist/dsfr.nomodule.min.js"></script>
+</body>
+</html>

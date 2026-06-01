@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr" data-fr-scheme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz — Cas de tolérance</title>
+
+  <link rel="icon" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.0/dist/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.0/dist/dsfr.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.0/dist/utility/icons/icons.min.css">
+
+  <style>
+    .quiz-shell { max-width: 760px; margin: 0 auto; }
+    .quiz-progress { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .quiz-progress__bar { flex: 1; height: 8px; background: var(--background-contrast-grey); border-radius: 999px; overflow: hidden; }
+    .quiz-progress__fill { height: 100%; background: var(--background-action-high-blue-france); border-radius: 999px; transition: width 0.3s ease; }
+    .quiz-progress__label { font-size: 0.875rem; color: var(--text-mention-grey); white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .question-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
+    .question-type-tag, .question-category-tag {
+      display: inline-block; font-size: 0.625rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.2rem 0.6rem; border-radius: 999px;
+      background: var(--background-alt-blue-france);
+      color: var(--text-action-high-blue-france);
+    }
+    .question-type-tag.is-tf { background: var(--background-alt-purple-glycine); color: var(--text-action-high-purple-glycine); }
+    .question-type-tag.is-multi { background: var(--background-alt-green-bourgeon); color: var(--text-default-success); }
+    .question-category-tag { background: var(--background-contrast-grey); color: var(--text-mention-grey); }
+    .question-text { font-size: 1.25rem; font-weight: 600; line-height: 1.4; margin-bottom: 0.5rem; }
+    .multi-hint { font-size: 0.875rem; font-style: italic; color: var(--text-mention-grey); margin-bottom: 1rem; }
+    .answer-option {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      width: 100%; text-align: left;
+      padding: 0.875rem 1.25rem; margin-bottom: 0.75rem;
+      background: #fff;
+      border: 2px solid var(--border-default-grey);
+      border-radius: 0.5rem;
+      cursor: pointer; font-family: inherit; font-size: 1rem;
+      transition: border-color 0.15s, background 0.15s;
+      color: var(--text-default-grey);
+    }
+    .answer-option:hover:not(:disabled) { border-color: var(--border-action-high-blue-france); background: var(--background-alt-blue-france); }
+    .answer-option:disabled { cursor: default; }
+    .answer-option.is-selected { border-color: var(--border-action-high-blue-france); background: var(--background-alt-blue-france); color: var(--text-action-high-blue-france); font-weight: 600; }
+    .answer-option.is-correct { border-color: var(--border-default-success); background: var(--background-alt-green-bourgeon); color: var(--text-default-success); font-weight: 600; }
+    .answer-option.is-wrong   { border-color: var(--border-default-error);   background: var(--background-alt-red-marianne);  color: var(--text-default-error);   font-weight: 600; }
+    .answer-option.is-dimmed  { opacity: 0.55; }
+    .answer-letter {
+      display: inline-flex; width: 1.75rem; height: 1.75rem;
+      align-items: center; justify-content: center;
+      background: var(--background-contrast-grey);
+      border-radius: 999px; font-weight: 700; font-size: 0.875rem;
+      flex-shrink: 0;
+    }
+    .answer-option.is-multi .answer-letter { border-radius: 0.25rem; }
+    .answer-option.is-selected .answer-letter { background: var(--background-action-high-blue-france); color: #fff; }
+    .answer-option.is-correct  .answer-letter { background: var(--background-action-high-success);     color: #fff; }
+    .answer-option.is-wrong    .answer-letter { background: var(--background-action-high-error);       color: #fff; }
+    .feedback-alert { margin-top: 1rem; }
+    .feedback-alert .fr-alert__title { font-weight: 700; }
+    .mode-banner {
+      display: inline-block; padding: 0.375rem 0.875rem;
+      background: var(--background-action-high-blue-france);
+      color: #fff; border-radius: 999px; font-size: 0.75rem;
+      font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .score-hero {
+      text-align: center; padding: 2rem 1rem;
+      background: var(--background-alt-blue-france);
+      border-radius: 0.5rem; margin-bottom: 2rem;
+    }
+    .score-circle {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 8rem; height: 8rem; border-radius: 999px;
+      background: #fff; border: 4px solid var(--border-action-high-blue-france);
+      font-size: 2.5rem; font-weight: 700; color: var(--text-action-high-blue-france);
+      margin-bottom: 1rem;
+    }
+    .score-circle.is-good { border-color: var(--border-default-success); color: var(--text-default-success); }
+    .score-circle.is-bad  { border-color: var(--border-default-error);   color: var(--text-default-error); }
+    .review-item { padding: 1rem 1.25rem; border: 1px solid var(--border-default-grey); border-radius: 0.5rem; margin-bottom: 0.75rem; }
+    .review-item__head { display: flex; gap: 0.75rem; align-items: flex-start; }
+    .review-item__icon { font-size: 1.25rem; flex-shrink: 0; }
+    .review-item__num { font-variant-numeric: tabular-nums; color: var(--text-mention-grey); font-weight: 600; font-size: 0.875rem; flex-shrink: 0; }
+    .review-item__q { font-weight: 600; margin-bottom: 0.5rem; }
+    .review-item__a { font-size: 0.875rem; color: var(--text-mention-grey); line-height: 1.5; }
+  </style>
+</head>
+<body>
+
+  <header role="banner" class="fr-header">
+    <div class="fr-header__body">
+      <div class="fr-container">
+        <div class="fr-header__body-row">
+          <div class="fr-header__brand fr-enlarge-link">
+            <div class="fr-header__brand-top">
+              <div class="fr-header__logo">
+                <p class="fr-logo">République<br>Française</p>
+              </div>
+            </div>
+            <div class="fr-header__service">
+              <a href="index.html" title="Accueil — Portail Opérateur">
+                <p class="fr-header__service-title">DossierFacile.fr</p>
+              </a>
+              <p class="fr-header__service-tagline">Portail Opérateur · Quiz</p>
+            </div>
+          </div>
+          <div class="fr-header__tools">
+            <div class="fr-header__tools-links">
+              <ul class="fr-btns-group">
+                <li><a class="fr-btn fr-icon-logout-box-r-line" href="#">Déconnexion</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main role="main" id="content">
+    <div class="fr-container fr-py-4w">
+
+      <nav role="navigation" class="fr-breadcrumb" aria-label="vous êtes ici :">
+        <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="breadcrumb-1">Voir le fil d'Ariane</button>
+        <div class="fr-collapse" id="breadcrumb-1">
+          <ol class="fr-breadcrumb__list">
+            <li><a class="fr-breadcrumb__link" href="index.html">Portail Opérateur</a></li>
+            <li><a class="fr-breadcrumb__link" href="quiz.html">Mini Quiz</a></li>
+            <li><a class="fr-breadcrumb__link" aria-current="page">Cas de tolérance — <span id="mode-breadcrumb">…</span></a></li>
+          </ol>
+        </div>
+      </nav>
+
+      <div class="quiz-shell">
+
+        <!-- ── Écran QUESTION ── -->
+        <section id="quiz-question-screen">
+          <span class="mode-banner" id="mode-badge">…</span>
+          <h1 class="fr-h3 fr-mb-1w">
+            <span class="fr-icon-scales-3-line" aria-hidden="true"></span>
+            Cas de tolérance
+          </h1>
+          <p class="fr-text--lead fr-mb-3w" style="color: var(--text-mention-grey);">
+            10 questions tirées au sort. Sélectionnez votre/vos réponse(s) puis validez.
+          </p>
+
+          <div class="quiz-progress">
+            <span class="quiz-progress__label" id="progress-label">Question 1 / 10</span>
+            <div class="quiz-progress__bar"><div class="quiz-progress__fill" id="progress-fill" style="width:10%"></div></div>
+            <span class="quiz-progress__label" id="score-label">Score : 0</span>
+          </div>
+
+          <div class="question-tags">
+            <span id="question-type-tag-wrapper"></span>
+            <span id="question-category-wrapper"></span>
+          </div>
+          <p class="question-text" id="question-text">Chargement…</p>
+          <p class="multi-hint" id="multi-hint" hidden>Plusieurs réponses possibles — cochez toutes les bonnes propositions.</p>
+
+          <div id="answers-container"></div>
+
+          <div id="feedback-container"></div>
+
+          <div class="fr-mt-3w" style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+            <a class="fr-btn fr-btn--tertiary fr-icon-arrow-left-line fr-btn--icon-left" href="quiz.html">Quitter le quiz</a>
+            <div style="display: flex; gap: 0.75rem;">
+              <button class="fr-btn fr-icon-check-line fr-btn--icon-left" id="validate-btn" disabled>Valider</button>
+              <button class="fr-btn fr-icon-arrow-right-line fr-btn--icon-right" id="next-btn" hidden>Question suivante</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Écran RÉSULTAT ── -->
+        <section id="quiz-result-screen" hidden>
+          <div class="score-hero">
+            <div class="score-circle" id="score-circle"><span id="score-value">0%</span></div>
+            <h1 class="fr-h3" id="score-title">Bravo !</h1>
+            <p id="score-message" style="margin: 0; color: var(--text-mention-grey);">…</p>
+          </div>
+
+          <h2 class="fr-h4">Récapitulatif</h2>
+          <div id="review-container" class="fr-mb-3w"></div>
+
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button class="fr-btn fr-icon-refresh-line fr-btn--icon-left" id="restart-btn">Recommencer (nouvelles questions)</button>
+            <a class="fr-btn fr-btn--secondary" href="quiz.html">Changer de mode</a>
+            <a class="fr-btn fr-btn--tertiary" href="index.html">Retour au portail</a>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="fr-footer" role="contentinfo">
+    <div class="fr-container">
+      <div class="fr-footer__body">
+        <div class="fr-footer__brand fr-enlarge-link">
+          <p class="fr-logo">République<br>Française</p>
+        </div>
+        <div class="fr-footer__content">
+          <p class="fr-footer__content-desc">DossierFacile — Portail Opérateur — Mini POC quiz formation.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="quiz-data.js"></script>
+  <script src="quiz.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.0/dist/dsfr.module.min.js"></script>
+  <script type="text/javascript" nomodule src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.0/dist/dsfr.nomodule.min.js"></script>
+</body>
+</html>
