@@ -1,6 +1,9 @@
 # macOS
 .DS_Store
 
+# Contexte local Claude (repo public — ne jamais committer)
+CLAUDE.md
+
 # Mission 2 (Next.js)
 node_modules/
 .next/
