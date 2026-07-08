@@ -23,7 +23,7 @@ Statique, déployé sur Netlify depuis la racine du repo. Chaque sous-dossier es
 ## Design
 
 - Les **2 quiz DossierFacile restent volontairement en design système de l'État** (mission DossierFacile) — **ne pas** leur appliquer le design system batik.
-- `verification-cni` sera repassé aux tokens batik lors de la Mission 2.
+- `verification-cni` utilise les **tokens batik** (repassé le 8 juillet 2026) — première app consommant le design system.
 
 ## Archives
 

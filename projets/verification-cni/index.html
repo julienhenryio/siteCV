@@ -5,48 +5,74 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vérification MRZ — CNI France</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap');
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #f5f6f8;
-  --card: #ffffff;
-  --border: #d1d5db;
-  --text: #1f2937;
-  --muted: #6b7280;
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
-  --success: #16a34a;
-  --success-bg: #dcfce7;
-  --danger: #dc2626;
-  --danger-bg: #fef2f2;
-  --warn: #d97706;
-  --warn-bg: #fefce8;
-  --warn-border: #fbbf24;
-  --highlight: rgba(37,99,235,0.08);
-  --radius: 8px;
+  /* Tokens batik — source : design_system/design_system_v2_batik.html */
+  --paper: #F7F0E2;
+  --surface: #FDF8EE;
+  --sand: #E9DBC5;
+  --soga: #C15A28;
+  --soga-dark: #A2481D;
+  --turmeric: #E0913A;
+  --indigo: #2C3E63;
+  --indigo-dark: #213050;
+  --ink: #2A2018;
+  --ink-soft: #7C6B58;
+
+  /* Mapping sémantique — ces noms sont aussi utilisés par le HTML généré en JS */
+  --bg: var(--paper);
+  --card: var(--surface);
+  --border: #E1D3BC;
+  --text: var(--ink);
+  --muted: var(--ink-soft);
+  --accent: var(--soga);
+  --accent-hover: var(--soga-dark);
+  --success: #35784A;
+  --success-bg: #E7EFE0;
+  --danger: #B3372B;
+  --danger-bg: #F6E3DE;
+  --warn: #9A6B1E;
+  --warn-bg: #F7E7CE;
+  --warn-border: var(--turmeric);
+  --highlight: rgba(193, 90, 40, 0.10);
+  --radius: 10px;
+  --radius-card: 14px;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.5;
+  line-height: 1.6;
   padding: 1.5rem;
 }
 
+.batik-strip {
+  height: 14px;
+  margin: -1.5rem -1.5rem 1.5rem;
+  background-color: var(--soga);
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2244%22 height=%2214%22 viewBox=%220 0 44 14%22><g fill=%22none%22 stroke=%22%23F7F0E2%22 stroke-width=%221.4%22 opacity=%22.55%22><path d=%22M0 7 Q11 -3 22 7 T44 7%22/><path d=%22M0 11 Q11 1 22 11 T44 11%22/></g><g fill=%22%23F7F0E2%22 opacity=%22.5%22><circle cx=%2211%22 cy=%224%22 r=%221.1%22/><circle cx=%2233%22 cy=%224%22 r=%221.1%22/></g></svg>');
+}
+
 h1 {
+  font-family: 'Fraunces', Georgia, serif;
   text-align: center;
-  font-size: 1.4rem;
+  font-size: 1.7rem;
+  line-height: 1.2;
   margin-bottom: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 h1 small {
+  font-family: 'Inter', system-ui, sans-serif;
   display: block;
   font-size: 0.85rem;
   font-weight: 400;
   color: var(--muted);
-  margin-top: 0.25rem;
+  margin-top: 0.35rem;
 }
 
 .container {
@@ -57,16 +83,20 @@ h1 small {
 .card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-top: 6px solid var(--indigo);
+  border-radius: var(--radius-card);
   padding: 1.5rem;
   margin-bottom: 1.5rem;
+  box-shadow: 0 6px 20px rgba(42, 32, 24, 0.06);
 }
 
 .card h2 {
-  font-size: 1.05rem;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 600;
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--accent);
+  border-bottom: 1px solid var(--sand);
 }
 
 .separator {
@@ -75,18 +105,20 @@ h1 small {
   gap: 0.75rem;
   margin: 1.25rem 0;
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: 0.72rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.14em;
 }
 
 .separator::before, .separator::after {
   content: '';
   flex: 1;
   height: 1px;
-  background: var(--border);
 }
+
+.separator::before { background: linear-gradient(to right, transparent, var(--sand)); }
+.separator::after { background: linear-gradient(to left, transparent, var(--sand)); }
 
 label {
   display: block;
@@ -102,23 +134,26 @@ label:first-of-type { margin-top: 0; }
 input[type="text"],
 select {
   width: 100%;
-  padding: 0.5rem 0.65rem;
-  border: 1px solid var(--border);
+  padding: 0.6rem 0.85rem;
+  border: 1.5px solid var(--border);
   border-radius: var(--radius);
   font-size: 0.92rem;
   font-family: inherit;
-  background: #fff;
-  transition: background 0.4s, border-color 0.2s;
+  color: var(--ink);
+  background: var(--surface);
+  transition: background 0.4s, border-color 0.2s, box-shadow 0.2s;
 }
+
+input[type="text"]::placeholder { color: #b8a68f; }
 
 input[type="text"]:focus, select:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+  box-shadow: 0 0 0 3px rgba(193, 90, 40, 0.14);
 }
 
 input.mrz-input {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, 'Courier New', monospace;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 0.78rem;
@@ -172,28 +207,32 @@ input.field-highlighted, select.field-highlighted {
 button {
   margin-top: 1rem;
   width: 100%;
-  padding: 0.65rem;
+  padding: 0.7rem 1.4rem;
   background: var(--accent);
   color: #fff;
   border: none;
   border-radius: var(--radius);
+  font-family: inherit;
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s;
+  box-shadow: 0 4px 14px rgba(193, 90, 40, 0.26);
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
-button:hover:not(:disabled) { background: var(--accent-hover); }
-button:disabled { opacity: 0.45; cursor: not-allowed; }
+button:hover:not(:disabled) { background: var(--accent-hover); transform: translateY(-1px); }
+button:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
 
 button.btn-secondary {
-  background: #fff;
-  color: var(--accent);
-  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--soga);
+  border: 1.5px solid var(--soga);
+  box-shadow: none;
 }
 
 button.btn-secondary:hover:not(:disabled) {
-  background: rgba(37,99,235,0.05);
+  background: var(--soga);
+  color: #fff;
 }
 
 /* Drop zone */
@@ -210,7 +249,7 @@ button.btn-secondary:hover:not(:disabled) {
 
 .dropzone.dragover {
   border-color: var(--accent);
-  background: rgba(37,99,235,0.04);
+  background: rgba(193, 90, 40, 0.05);
 }
 
 .dropzone input[type="file"] {
@@ -260,9 +299,10 @@ button.btn-secondary:hover:not(:disabled) {
 #result.visible { display: block; }
 
 .verdict {
+  font-family: 'Fraunces', Georgia, serif;
   text-align: center;
-  font-size: 1.6rem;
-  font-weight: 800;
+  font-size: 1.55rem;
+  font-weight: 700;
   padding: 1rem;
   border-radius: var(--radius);
   margin-bottom: 1rem;
@@ -355,6 +395,8 @@ td.status-fail { color: var(--danger); font-weight: 700; }
 </style>
 </head>
 <body>
+
+<div class="batik-strip"></div>
 
 <h1>Vérification MRZ — CNI France
   <small>Carte nationale d'identité plastifiée (1988–2021)</small>
