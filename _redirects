@@ -1,6 +1,14 @@
 # Anciennes URLs des mini-apps (déplacées sous /projets/ le 2026-07-08)
-# Le matching Netlify est insensible à la casse (/pocquizzDF/ marche aussi).
+# ATTENTION : le matching Netlify est SENSIBLE à la casse → une règle par
+# variante réellement partagée (casse d'origine des dossiers + minuscules).
+
+# Casse d'origine (liens historiques, QR code imprimé)
+/pocquizzDF/*        /projets/quiz-dossierfacile/:splat    301
+/backupquizzDF/*     /projets/quiz-logement-jeunes/:splat  301
+
+# Minuscules (URLs canoniques produites par Pretty URLs)
 /pocquizzdf/*        /projets/quiz-dossierfacile/:splat    301
 /backupquizzdf/*     /projets/quiz-logement-jeunes/:splat  301
+
 /verification-cni/*  /projets/verification-cni/:splat      301
 /pokerwithoutchips/* /projets/poker/:splat                 301
