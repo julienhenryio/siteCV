@@ -1,0 +1,6 @@
+# Anciennes URLs des mini-apps (déplacées sous /projets/ le 2026-07-08)
+# Le matching Netlify est insensible à la casse (/pocquizzDF/ marche aussi).
+/pocquizzdf/*        /projets/quiz-dossierfacile/:splat    301
+/backupquizzdf/*     /projets/quiz-logement-jeunes/:splat  301
+/verification-cni/*  /projets/verification-cni/:splat      301
+/pokerwithoutchips/* /projets/poker/:splat                 301
