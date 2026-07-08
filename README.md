@@ -8,14 +8,22 @@ Statique, déployé sur Netlify depuis la racine du repo. Chaque sous-dossier es
 | Dossier / fichier | Rôle | Statut | URL |
 |---|---|---|---|
 | `index.html` | CV one-page (hero, compétences, expériences, contact) | En prod — refonte prévue (Mission 2) | [julienhenry.io](https://julienhenry.io) |
-| `pocquizzDF/` | Quiz DossierFacile — formation opérateurs (cas de tolérance) | **En prod — utilisé, ne pas casser les URLs** | [/pocquizzDF/quiz.html](https://julienhenry.io/pocquizzDF/quiz.html) |
-| `backupquizzDF/` | Quiz DossierFacile — Forum Logement Jeunes (QR code partagé) | **En prod — utilisé, ne pas casser les URLs** | [/backupquizzDF/](https://julienhenry.io/backupquizzDF/) |
-| `verification-cni/` | POC validation MRZ de CNI françaises | POC — partageable | [/verification-cni/](https://julienhenry.io/verification-cni/) |
-| `pokerwithoutchips/` | App poker sans jetons (build Vite compilé) | Perso | [/pokerwithoutchips/](https://julienhenry.io/pokerwithoutchips/) |
-| `links/` | Page de liens type Linktree | En prod | [/links/](https://julienhenry.io/links/) |
+| `projets/quiz-dossierfacile/` | Quiz DossierFacile — formation opérateurs (cas de tolérance) | **En prod — utilisé** | [/projets/quiz-dossierfacile/quiz.html](https://julienhenry.io/projets/quiz-dossierfacile/quiz.html) |
+| `projets/quiz-logement-jeunes/` | Quiz DossierFacile — Forum Logement Jeunes (QR code partagé) | **En prod — utilisé** | [/projets/quiz-logement-jeunes/](https://julienhenry.io/projets/quiz-logement-jeunes/) |
+| `projets/verification-cni/` | POC validation MRZ de CNI françaises | POC — partageable | [/projets/verification-cni/](https://julienhenry.io/projets/verification-cni/) |
+| `projets/poker/` | App poker sans jetons (build Vite compilé, base patchée vers `/projets/poker/`) | Perso | [/projets/poker/](https://julienhenry.io/projets/poker/) |
+| `links/` | Page de liens type Linktree (URL courte volontairement à la racine) | En prod | [/links/](https://julienhenry.io/links/) |
 | `design_system/` | Planche de référence du design system batik v2 (tokens couleurs, Fraunces + Inter, composants) | Référence interne | — |
 | `assets/` | Images et favicons partagés | — | — |
 | `_headers` | Headers Netlify (cache favicons) | — | — |
+| `_redirects` | Redirects Netlify : anciennes URLs des apps (pré-2026-07) → `/projets/...` | Ne pas supprimer (QR codes imprimés) | — |
+
+`projets/` accueillera aussi les futurs POC clients et petites apps perso. En Mission 2 (Next.js), `/projets` deviendra la page hub qui les liste.
+
+## Design
+
+- Les **2 quiz DossierFacile restent volontairement en design système de l'État** (mission DossierFacile) — **ne pas** leur appliquer le design system batik.
+- `verification-cni` sera repassé aux tokens batik lors de la Mission 2.
 
 ## Archives
 
@@ -28,5 +36,5 @@ git show archive/2026-07-pre-refonte --stat
 ## Refonte prévue (Mission 2)
 
 - Coquille **Next.js 15 en export statique** (`output: 'export'`) : vitrine + offre/services + hub projets + études de cas en **MDX**.
-- Les apps existantes (quiz, verification-cni, poker, links) resteront servies en statique depuis `public/`, **URLs inchangées**.
+- Les apps existantes resteront servies en statique depuis `public/projets/...`, **URLs inchangées**.
 - Design : tokens du design system batik (`design_system/design_system_v2_batik.html`).
