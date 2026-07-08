@@ -1,0 +1,7 @@
+# macOS
+.DS_Store
+
+# Mission 2 (Next.js)
+node_modules/
+.next/
+out/
