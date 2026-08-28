@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Projets — Julien Henry</title>
+<meta name="description" content="Les outils que je construis : lecture MRZ de carte d'identité, quiz de formation pour DossierFacile, sensibilisation aux arnaques à la location, et quelques objets personnels.">
+<meta name="author" content="Julien Henry">
+<link rel="canonical" href="https://julienhenry.io/projets/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://julienhenry.io/projets/">
+<meta property="og:title" content="Projets — Julien Henry">
+<meta property="og:description" content="Les outils que je construis, en production comme au brouillon.">
+<meta property="og:locale" content="fr_FR">
+
+<link rel="icon" href="/assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+<script>try{var t=localStorage.getItem('batik-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
+<link rel="stylesheet" href="/assets/css/batik.css">
+<style>
+.proj-desc{font-size:13.8px;color:var(--tinta-soft);margin:10px 0 15px;}
+.internal{background:var(--prada);border:1px solid var(--pasir);border-radius:14px;padding:26px 28px;}
+.internal h3{font-size:19px;margin-bottom:12px;}
+.internal p{font-size:14.5px;color:var(--tinta-soft);max-width:70ch;}
+.internal p+p{margin-top:12px;}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<div class="selvedge"></div>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">
+      <span class="mark"></span>
+      <span class="nm">Julien Henry</span>
+      <span class="tg">systèmes &amp; IA</span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-a" href="/">Accueil</a>
+      <a class="nav-a" href="/cv/">Parcours</a>
+    </div>
+    <div class="nav-end">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Changer de thème">
+        <svg class="i-moon" width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 9.6A5.9 5.9 0 0 1 6.4 2.5a5.9 5.9 0 1 0 7.1 7.1Z"/></svg>
+        <svg class="i-sun" width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1v1.6M8 13.4V15M15 8h-1.6M2.6 8H1M12.9 3.1l-1.1 1.1M4.2 11.8l-1.1 1.1M12.9 12.9l-1.1-1.1M4.2 4.2 3.1 3.1"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm" href="https://calendar.proton.me/bookings#t5u1UMyKpn2-8ykPxkCgGYenajHa3SH2M1uS8z7Jzu0=" target="_blank" rel="noopener"><span class="cta-full">Prendre rendez-vous</span><span class="cta-short">Rendez-vous</span></a>
+    </div>
+  </div>
+</nav>
+
+<main id="contenu">
+
+<header class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Le labo</p>
+    <h1>Projets</h1>
+    <p class="lede">
+      Ce que je construis quand personne ne me le demande, et ce qui a fini par servir pour de vrai.
+      Certains tournent en production, d'autres sont des brouillons assumés.
+    </p>
+  </div>
+</header>
+
+<section class="section-tight" style="padding-top:44px;">
+  <div class="wrap">
+    <div class="grid-cards rv">
+
+      <a class="card-link" href="/projets/verification-cni/">
+        <article class="card">
+          <div class="card-top" style="background:var(--soga);"></div>
+          <div class="card-body">
+            <div class="card-head">
+              <h3 style="font-size:19px;">Vérification CNI</h3>
+              <span class="badge b-kunyit">Prototype</span>
+            </div>
+            <p class="proj-desc">
+              Lecture de la bande MRZ d'une carte d'identité française et contrôle de cohérence entre
+              les données saisies et celles encodées. Calcul des clés de contrôle 7-3-1, comparaison
+              visuel / MRZ, résultat en tableau.
+            </p>
+            <div class="chips">
+              <span class="badge b-soga">n8n</span>
+              <span class="badge b-soga">JavaScript</span>
+              <span class="badge b-soga">OCR</span>
+            </div>
+            <div class="card-foot">
+              <span class="num">Premier consommateur du design system</span>
+              <span class="lnk">Ouvrir
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
+              </span>
+            </div>
+          </div>
+        </article>
+      </a>
+
+      <a class="card-link" href="/projets/quiz-dossierfacile/quiz.html">
+        <article class="card">
+          <div class="card-top" style="background:var(--nila);"></div>
+          <div class="card-body">
+            <div class="card-head">
+              <h3 style="font-size:19px;">Quiz opérateurs DossierFacile</h3>
+              <span class="badge b-nila">En production</span>
+            </div>
+            <p class="proj-desc">
+              Outil de formation continue pour les opérateurs : cas de tolérance, détection de faux
+              documents. Volontairement en design système de l'État — c'est un outil de service
+              public, il doit en avoir l'air.
+            </p>
+            <div class="chips">
+              <span class="badge b-soga">DSFR</span>
+              <span class="badge b-soga">JavaScript</span>
+            </div>
+            <div class="card-foot">
+              <span class="num">Utilisé par les équipes</span>
+              <span class="lnk">Ouvrir
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
+              </span>
+            </div>
+          </div>
+        </article>
+      </a>
+
+      <a class="card-link" href="/projets/quiz-logement-jeunes/">
+        <article class="card">
+          <div class="card-top" style="background:var(--nila);"></div>
+          <div class="card-body">
+            <div class="card-head">
+              <h3 style="font-size:19px;">Quiz Logement Jeunes</h3>
+              <span class="badge b-nila">En production</span>
+            </div>
+            <p class="proj-desc">
+              Sensibilisation des jeunes aux arnaques à la location et aux pièges du dossier de
+              candidature. Diffusé par QR code en événement — les affiches imprimées pointent encore
+              vers ces URLs.
+            </p>
+            <div class="chips">
+              <span class="badge b-soga">DSFR</span>
+              <span class="badge b-soga">JavaScript</span>
+            </div>
+            <div class="card-foot">
+              <span class="num">Diffusé par QR code</span>
+              <span class="lnk">Ouvrir
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
+              </span>
+            </div>
+          </div>
+        </article>
+      </a>
+
+      <a class="card-link" href="/projets/poker/">
+        <article class="card">
+          <div class="card-top" style="background:var(--kunyit);"></div>
+          <div class="card-body">
+            <div class="card-head">
+              <h3 style="font-size:19px;">Poker sans jetons</h3>
+              <span class="badge b-neutral">Perso</span>
+            </div>
+            <p class="proj-desc">
+              Une soirée, un jeu de cartes, aucun jeton sous la main. Suivi des tapis et des mises
+              depuis le téléphone de chacun. Écrit dans la foulée, gardé parce qu'il resert.
+            </p>
+            <div class="chips">
+              <span class="badge b-soga">React</span>
+              <span class="badge b-soga">Vite</span>
+            </div>
+            <div class="card-foot">
+              <span class="num">Projet du samedi soir</span>
+              <span class="lnk">Ouvrir
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
+              </span>
+            </div>
+          </div>
+        </article>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="section-tight" style="padding-bottom:76px;">
+  <div class="wrap">
+    <div class="internal rv">
+      <p class="sec-label">Hors ligne</p>
+      <h3>Ce qui ne s'ouvre pas dans un navigateur</h3>
+      <p>
+        L'essentiel de ce que je fabrique ne tient pas dans une page web : des workflows n8n
+        auto-hébergés, des agents dirigés depuis Claude Code ou OpenCode, un agent Hermes qui tourne
+        sur mon propre VPS, des interfaces internes taillées pour un usage unique.
+      </p>
+      <p>
+        Ce ne sont pas des produits et ils n'ont pas vocation à le devenir. C'est mon terrain d'essai :
+        j'y casse les choses avant de les proposer à un client. Une bonne partie de ce que je déploie
+        en mission a d'abord tourné là, en moins propre.
+      </p>
+      <p style="margin-top:18px;">
+        <a class="lnk" href="https://calendar.proton.me/bookings#t5u1UMyKpn2-8ykPxkCgGYenajHa3SH2M1uS8z7Jzu0=" target="_blank" rel="noopener">
+          Si un de ces sujets recoupe le vôtre, parlons-en
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-inner">
+    <div class="foot-links">
+      <a href="/">Accueil</a>
+      <a href="/cv/">Parcours &amp; CV</a>
+      <a href="mailto:contact@julienhenry.io">Contact</a>
+      <a href="https://linkedin.com/in/julien-henry-io/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <p class="foot-note">© 2026 Julien Henry · Nantes</p>
+  </div>
+</footer>
+
+<script src="/assets/js/theme.js"></script>
+</body>
+</html>

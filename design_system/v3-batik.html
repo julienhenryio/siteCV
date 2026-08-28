@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Design system v3 — Atelier batik · Julien Henry</title>
+<style>
+  body{margin:0;padding:28px 16px;background:#EDE5D4;font-family:system-ui,sans-serif;transition:background .3s ease;}
+  body[data-theme="malam"]{background:#0C1220;}
+  .wrap{max-width:920px;margin:0 auto;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BLOC EMBARQUABLE — copier à partir d'ici (<div id="ds3">)
+     Thème : ajouter data-theme="malam" (nuit) ou "terang" (jour)
+     sur le <div id="ds3">. Sans attribut, le script suit le
+     réglage système et le bouton Jour/Nuit fait la bascule.
+     ═══════════════════════════════════════════════════════════════ -->
+<div id="ds3">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Mono:wght@450;600&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ══ Jetons — thème jour (terang) ═══════════════════════════ */
+#ds3,
+#ds3 [data-theme="terang"]{
+  --kain:#F4EDDD;          /* coton écru — fond de page */
+  --prada:#FBF6EA;         /* surface — cartes, champs */
+  --pasir:#E4D6BC;         /* bordures */
+  --pasir-2:#D2C0A0;       /* bordures de champ */
+  --pasir-3:#C0AB88;       /* bordure au survol */
+  --soga:#B4501F;          /* teinture soga — aplats */
+  --soga-dark:#93400F;     /* survol */
+  --soga-ink:#A0470F;      /* soga en texte (6,0:1) */
+  --soga-soft:#F1DECD;
+  --on-soga:#FDF8ED;
+  --nila:#22334F;          /* indigo — aplats secondaires */
+  --nila-dark:#182740;
+  --nila-ink:#22334F;
+  --nila-soft:#E0E5EE;
+  --on-nila:#EEF1F6;
+  --kunyit:#D2921F;        /* curcuma — accent */
+  --kunyit-soft:#F6E8C8;
+  --kunyit-ink:#835A0C;
+  --daun:#356248;          /* feuille — succès */
+  --daun-soft:#E0E9E1;
+  --daun-ink:#356248;
+  --mengkudu:#9E3928;      /* mengkudu — erreur */
+  --mengkudu-soft:#F2DED8;
+  --mengkudu-ink:#9E3928;
+  --tinta:#251E15;         /* encre — texte */
+  --tinta-soft:#756450;    /* texte secondaire (5,0:1) */
+  --neutral-soft:#EAE0CC;
+  --table-head:#F0E7D4;
+  --table-hover:#F5EDDC;
+  --code-bg:#EDE3CF;
+  --disabled-bg:#EFE7D6;
+  --disabled-ink:#9C8C77;
+  --placeholder:#B6A489;
+  --bd-info:#C6CEDC; --bd-ok:#C6D6C8; --bd-warn:#E6D3A6; --bd-err:#E2C4BC;
+  --shadow:0 5px 18px rgba(37,30,21,.05);
+  --ring:0 0 0 2px var(--prada),0 0 0 4px rgba(180,80,31,.45);
+  --ring-err:0 0 0 2px var(--prada),0 0 0 4px rgba(158,57,40,.4);
+  --kawung:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'><g fill='none' stroke='%23B4501F' stroke-opacity='.13' stroke-width='1.1'><circle cx='32' cy='32' r='16'/><circle cx='0' cy='0' r='16'/><circle cx='64' cy='0' r='16'/><circle cx='0' cy='64' r='16'/><circle cx='64' cy='64' r='16'/></g><circle cx='32' cy='32' r='1.6' fill='%23B4501F' fill-opacity='.2'/></svg>");
+  --chevron:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1.5 1.5 L6 6 L10.5 1.5' fill='none' stroke='%23756450' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  --selvedge:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='16' viewBox='0 0 48 16'><g fill='none' stroke-linecap='round'><path d='M0 9 Q6 1 12 9 T24 9 T36 9 T48 9' stroke='%23F4EDDD' stroke-width='1.5' opacity='.6'/><path d='M-12 14 Q-6 6 0 14 T12 14 T24 14 T36 14 T48 14 T60 14' stroke='%23D2921F' stroke-width='1.3' opacity='.75'/></g></svg>");
+}
+
+/* ══ Jetons — thème nuit (malam) ════════════════════════════ */
+/* La nuit n'est pas un négatif : l'indigo devient le tissu,
+   le soga s'éclaircit pour rester lisible, le texte reste écru. */
+#ds3[data-theme="malam"],
+#ds3 [data-theme="malam"]{
+  --kain:#131B2C;
+  --prada:#1C2740;
+  --pasir:#2D3A57;
+  --pasir-2:#42517A;
+  --pasir-3:#556694;
+  --soga:#C9622C;
+  --soga-dark:#DC7038;     /* en nuit, le survol éclaircit */
+  --soga-ink:#EC9762;      /* soga en texte (7,4:1 sur kain) */
+  --soga-soft:#3A2314;
+  --on-soga:#FFF4E7;
+  --nila:#3A5081;
+  --nila-dark:#46609A;
+  --nila-ink:#A9C0EA;
+  --nila-soft:#23324F;
+  --on-nila:#EDF1FA;
+  --kunyit:#E9B44C;
+  --kunyit-soft:#372B13;
+  --kunyit-ink:#E9B44C;
+  --daun:#6FA982;
+  --daun-soft:#1B3025;
+  --daun-ink:#7FBB92;
+  --mengkudu:#DE8873;
+  --mengkudu-soft:#38201B;
+  --mengkudu-ink:#E89A86;
+  --tinta:#F0E6D4;
+  --tinta-soft:#A2ABC2;
+  --neutral-soft:#2A3552;
+  --table-head:#212D48;
+  --table-hover:#25324E;
+  --code-bg:#232F4A;
+  --disabled-bg:#1A2337;
+  --disabled-ink:#6C7893;
+  --placeholder:#6E7A93;
+  --bd-info:#33456B; --bd-ok:#2C4A38; --bd-warn:#514019; --bd-err:#54322A;
+  --shadow:0 6px 22px rgba(0,0,0,.42);
+  --ring:0 0 0 2px var(--prada),0 0 0 4px rgba(201,98,44,.55);
+  --ring-err:0 0 0 2px var(--prada),0 0 0 4px rgba(222,136,115,.45);
+  --kawung:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'><g fill='none' stroke='%23E9B44C' stroke-opacity='.12' stroke-width='1.1'><circle cx='32' cy='32' r='16'/><circle cx='0' cy='0' r='16'/><circle cx='64' cy='0' r='16'/><circle cx='0' cy='64' r='16'/><circle cx='64' cy='64' r='16'/></g><circle cx='32' cy='32' r='1.6' fill='%23E9B44C' fill-opacity='.22'/></svg>");
+  --chevron:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1.5 1.5 L6 6 L10.5 1.5' fill='none' stroke='%23A2ABC2' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  --selvedge:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='16' viewBox='0 0 48 16'><g fill='none' stroke-linecap='round'><path d='M0 9 Q6 1 12 9 T24 9 T36 9 T48 9' stroke='%23131B2C' stroke-width='1.5' opacity='.55'/><path d='M-12 14 Q-6 6 0 14 T12 14 T24 14 T36 14 T48 14 T60 14' stroke='%23E9B44C' stroke-width='1.3' opacity='.8'/></g></svg>");
+}
+
+/* ══ Structure ══════════════════════════════════════════════ */
+#ds3{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--kain);
+  color:var(--tinta);
+  line-height:1.6;
+  border:1px solid var(--pasir);
+  border-radius:16px;
+  overflow:hidden;
+  transition:background .3s ease,color .3s ease,border-color .3s ease;
+}
+#ds3 *{box-sizing:border-box;}
+#ds3 ::selection{background:var(--kunyit-soft);color:var(--tinta);}
+#ds3 .pad{padding:28px;}
+#ds3 .serif{font-family:'Fraunces',Georgia,serif;}
+#ds3 .mono{font-family:'IBM Plex Mono',ui-monospace,monospace;}
+#ds3 h1,#ds3 h2,#ds3 h3{font-family:'Fraunces',Georgia,serif;font-weight:600;margin:0;}
+#ds3 p{margin:0;}
+
+#ds3 .selvedge{height:16px;background-color:var(--soga);background-image:var(--selvedge);background-repeat:repeat-x;}
+#ds3 .head{background-color:var(--kain);background-image:var(--kawung);border-bottom:1px solid var(--pasir);}
+#ds3 .stitch{border:0;border-top:1.5px dashed var(--pasir-2);margin:32px 0;}
+#ds3 .sec-label{
+  font:600 10.5px/1.4 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--tinta-soft);margin:0 0 16px;display:flex;align-items:center;gap:9px;
+}
+#ds3 .sec-label::before{content:"";width:8px;height:8px;background:var(--soga);transform:rotate(45deg);border-radius:1.5px;flex:none;}
+#ds3 .grp{font:600 10px/1.4 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--soga-ink);margin:20px 0 10px;}
+#ds3 .grp:first-child{margin-top:0;}
+#ds3 .note{font-size:12.5px;color:var(--tinta-soft);margin-top:12px;}
+#ds3 .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
+#ds3 .stack{display:flex;flex-direction:column;gap:10px;}
+#ds3 .rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease;}
+#ds3 .rv.on{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){#ds3 .rv{opacity:1;transform:none;transition:none;}#ds3 *{animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+/* ══ Bascule de thème ═══════════════════════════════════════ */
+#ds3 .theme-switch{
+  display:inline-flex;gap:3px;padding:3px;border-radius:11px;
+  background:var(--prada);border:1px solid var(--pasir);
+}
+#ds3 .theme-switch button{
+  font:600 12px 'Inter',sans-serif;display:inline-flex;align-items:center;gap:6px;
+  padding:6px 12px;border:0;border-radius:8px;cursor:pointer;
+  background:transparent;color:var(--tinta-soft);transition:background .2s,color .2s;
+}
+#ds3 .theme-switch button:hover{color:var(--tinta);}
+#ds3 .theme-switch button:focus-visible{outline:none;box-shadow:var(--ring);}
+#ds3 .theme-switch button[aria-pressed="true"]{background:var(--soga);color:var(--on-soga);}
+
+/* ══ Boutons ════════════════════════════════════════════════ */
+#ds3 .btn{
+  font:600 14px/1 'Inter',sans-serif;border-radius:10px;padding:12px 20px;
+  border:1.5px solid transparent;cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+  transition:background .18s ease,color .18s ease,transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+  text-decoration:none;
+}
+#ds3 .btn:focus-visible{outline:none;box-shadow:var(--ring);}
+#ds3 .btn-primary{background:var(--soga);color:var(--on-soga);box-shadow:0 3px 10px rgba(147,64,15,.22);}
+#ds3 .btn-primary:hover{background:var(--soga-dark);transform:translateY(-1px);}
+#ds3 .btn-secondary{background:var(--nila);color:var(--on-nila);}
+#ds3 .btn-secondary:hover{background:var(--nila-dark);transform:translateY(-1px);}
+#ds3 .btn-outline{background:transparent;color:var(--soga-ink);border-color:var(--soga);}
+#ds3 .btn-outline:hover{background:var(--soga);color:var(--on-soga);}
+#ds3 .btn-ghost{background:transparent;color:var(--tinta-soft);}
+#ds3 .btn-ghost:hover{background:var(--neutral-soft);color:var(--tinta);}
+#ds3 .btn-danger{background:transparent;color:var(--mengkudu-ink);border-color:var(--mengkudu);}
+#ds3 .btn-danger:hover{background:var(--mengkudu);color:var(--on-soga);}
+#ds3 .btn-sm{padding:8px 14px;font-size:13px;border-radius:9px;}
+#ds3 .btn-icon{padding:11px;border-radius:10px;}
+#ds3 .btn[disabled]{opacity:.42;cursor:not-allowed;transform:none;box-shadow:none;}
+#ds3 .spin{animation:ds3rot .9s linear infinite;}
+@keyframes ds3rot{to{transform:rotate(360deg);}}
+
+/* ══ Liens ══════════════════════════════════════════════════ */
+#ds3 .lnk{color:var(--soga-ink);font:600 13px 'Inter',sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
+#ds3 .lnk:hover,#ds3 .lnk:focus-visible{
+  text-decoration-line:underline;text-decoration-style:dashed;
+  text-decoration-color:var(--soga);text-underline-offset:4px;
+}
+
+/* ══ Champs ═════════════════════════════════════════════════ */
+#ds3 .field{display:block;}
+#ds3 .lab{font:600 12.5px 'Inter',sans-serif;color:var(--tinta);display:block;margin:0 0 6px;}
+#ds3 .lab .req{color:var(--soga-ink);}
+#ds3 .inp{
+  font:400 14px 'Inter',sans-serif;width:100%;padding:11px 13px;border-radius:10px;
+  border:1.5px solid var(--pasir-2);background:var(--prada);color:var(--tinta);
+  outline:none;transition:border-color .18s,box-shadow .18s,background .3s;
+}
+#ds3 .inp:hover{border-color:var(--pasir-3);}
+#ds3 .inp:focus{border-color:var(--soga);box-shadow:var(--ring);}
+#ds3 .inp::placeholder{color:var(--placeholder);}
+#ds3 .inp[disabled]{background:var(--disabled-bg);color:var(--disabled-ink);cursor:not-allowed;}
+#ds3 textarea.inp{resize:vertical;min-height:88px;line-height:1.55;}
+#ds3 select.inp{
+  appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:38px;
+  background-image:var(--chevron);background-repeat:no-repeat;background-position:right 14px center;
+}
+#ds3 select.inp option{background:var(--prada);color:var(--tinta);}
+#ds3 .inp-err{border-color:var(--mengkudu);}
+#ds3 .inp-err:focus{box-shadow:var(--ring-err);}
+#ds3 .help{font-size:12px;color:var(--tinta-soft);margin:6px 0 0;}
+#ds3 .help-err{color:var(--mengkudu-ink);display:flex;align-items:center;gap:5px;}
+
+#ds3 .chk,#ds3 .rad,#ds3 .tgl{display:inline-flex;align-items:center;gap:10px;font-size:13.5px;cursor:pointer;}
+#ds3 .chk input,#ds3 .rad input,#ds3 .tgl input{position:absolute;opacity:0;width:0;height:0;}
+#ds3 .box{
+  width:19px;height:19px;flex:none;border:1.5px solid var(--pasir-2);background:var(--prada);
+  display:inline-flex;align-items:center;justify-content:center;transition:.15s;
+}
+#ds3 .chk .box{border-radius:6px;}
+#ds3 .rad .box{border-radius:50%;}
+#ds3 .chk .box svg{opacity:0;transform:scale(.5);transition:.15s;color:var(--on-soga);}
+#ds3 .chk input:checked+.box{background:var(--soga);border-color:var(--soga);}
+#ds3 .chk input:checked+.box svg{opacity:1;transform:none;}
+#ds3 .rad .box::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--soga);transform:scale(0);transition:.15s;}
+#ds3 .rad input:checked+.box{border-color:var(--soga);}
+#ds3 .rad input:checked+.box::after{transform:scale(1);}
+#ds3 .tgl .track{width:38px;height:22px;flex:none;border-radius:20px;background:var(--pasir-2);position:relative;transition:background .2s;}
+#ds3 .tgl .track::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--prada);box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .2s;}
+#ds3 .tgl input:checked+.track{background:var(--soga);}
+#ds3 .tgl input:checked+.track::after{transform:translateX(16px);}
+#ds3 input:focus-visible+.box,#ds3 input:focus-visible+.track{box-shadow:var(--ring);}
+
+/* ══ Badges ═════════════════════════════════════════════════ */
+#ds3 .badge{font:600 11px 'Inter',sans-serif;padding:4px 11px;border-radius:20px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;}
+#ds3 .badge .dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none;}
+#ds3 .b-nila{background:var(--nila-soft);color:var(--nila-ink);}
+#ds3 .b-soga{background:var(--soga-soft);color:var(--soga-ink);}
+#ds3 .b-kunyit{background:var(--kunyit-soft);color:var(--kunyit-ink);}
+#ds3 .b-daun{background:var(--daun-soft);color:var(--daun-ink);}
+#ds3 .b-mengkudu{background:var(--mengkudu-soft);color:var(--mengkudu-ink);}
+#ds3 .b-neutral{background:var(--neutral-soft);color:var(--tinta-soft);}
+#ds3 .badge-mono{font-family:'IBM Plex Mono',monospace;font-weight:450;font-size:10.5px;letter-spacing:.04em;}
+
+/* ══ Cartes ═════════════════════════════════════════════════ */
+#ds3 .card{background:var(--prada);border:1px solid var(--pasir);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;transition:background .3s,border-color .3s;}
+#ds3 .card-body{padding:20px;}
+#ds3 .card-top{height:5px;}
+#ds3 .card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+#ds3 .card-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;padding-top:14px;border-top:1.5px dashed var(--pasir);}
+#ds3 .grid-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:16px;}
+#ds3 .price{font:600 26px 'IBM Plex Mono',monospace;color:var(--tinta);}
+#ds3 .feat{list-style:none;padding:0;margin:14px 0 18px;display:flex;flex-direction:column;gap:9px;font-size:13.5px;}
+#ds3 .feat li{display:flex;align-items:flex-start;gap:9px;}
+#ds3 .feat svg{flex:none;margin-top:3px;color:var(--daun-ink);}
+
+/* ══ Messages ═══════════════════════════════════════════════ */
+#ds3 .alert{display:flex;gap:11px;align-items:flex-start;padding:12px 15px;border-radius:12px;border:1px solid;border-left-width:4px;font-size:13.5px;}
+#ds3 .alert svg{flex:none;margin-top:2px;}
+#ds3 .alert strong{font-weight:600;}
+#ds3 .a-info{background:var(--nila-soft);border-color:var(--bd-info);border-left-color:var(--nila-ink);color:var(--nila-ink);}
+#ds3 .a-ok{background:var(--daun-soft);border-color:var(--bd-ok);border-left-color:var(--daun-ink);color:var(--daun-ink);}
+#ds3 .a-warn{background:var(--kunyit-soft);border-color:var(--bd-warn);border-left-color:var(--kunyit);color:var(--kunyit-ink);}
+#ds3 .a-err{background:var(--mengkudu-soft);border-color:var(--bd-err);border-left-color:var(--mengkudu-ink);color:var(--mengkudu-ink);}
+
+/* ══ Tableau ════════════════════════════════════════════════ */
+#ds3 .tbl-wrap{overflow-x:auto;border:1px solid var(--pasir);border-radius:12px;background:var(--prada);}
+#ds3 .tbl{width:100%;border-collapse:collapse;font-size:13.5px;}
+#ds3 .tbl th{
+  font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--tinta-soft);text-align:left;padding:11px 15px;background:var(--table-head);border-bottom:1px solid var(--pasir);white-space:nowrap;
+}
+#ds3 .tbl td{padding:12px 15px;border-bottom:1px solid var(--pasir);white-space:nowrap;}
+#ds3 .tbl tbody tr:last-child td{border-bottom:0;}
+#ds3 .tbl tbody tr{transition:background .15s;}
+#ds3 .tbl tbody tr:hover{background:var(--table-hover);}
+#ds3 .num{font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-variant-numeric:tabular-nums;color:var(--tinta-soft);}
+
+/* ══ Navigation ═════════════════════════════════════════════ */
+#ds3 .navbar{display:flex;align-items:center;gap:20px;flex-wrap:wrap;background:var(--prada);border:1px solid var(--pasir);border-radius:14px;padding:11px 16px;}
+#ds3 .brand{display:flex;align-items:center;gap:10px;}
+#ds3 .brand .mark{width:11px;height:11px;background:var(--soga);transform:rotate(45deg);border-radius:2px;flex:none;}
+#ds3 .brand .nm{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:16px;}
+#ds3 .brand .tg{font:450 10px 'IBM Plex Mono',monospace;letter-spacing:.11em;text-transform:uppercase;color:var(--tinta-soft);}
+#ds3 .nav-links{display:flex;gap:18px;flex-wrap:wrap;margin-left:auto;}
+#ds3 .nav-a{font:500 13.5px 'Inter',sans-serif;color:var(--tinta-soft);text-decoration:none;transition:color .15s;}
+#ds3 .nav-a:hover,#ds3 .nav-a:focus-visible{
+  color:var(--tinta);text-decoration-line:underline;text-decoration-style:dashed;
+  text-decoration-color:var(--soga);text-underline-offset:6px;
+}
+
+/* ══ Panneaux d'aperçu de thème ═════════════════════════════ */
+#ds3 .theme-panel{background:var(--kain);color:var(--tinta);border:1px solid var(--pasir);border-radius:14px;padding:18px;background-image:var(--kawung);}
+#ds3 .panel-tag{font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-soft);margin-bottom:14px;display:block;}
+
+/* ══ Nuancier ═══════════════════════════════════════════════ */
+#ds3 .swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(116px,1fr));gap:13px;}
+#ds3 .sw-chip{height:62px;border-radius:12px;border:1px solid var(--pasir);transition:background .3s;}
+#ds3 .sw-name{font:600 12.5px 'Inter',sans-serif;margin:9px 0 0;}
+#ds3 .sw-hex{font:450 11px 'IBM Plex Mono',monospace;color:var(--tinta-soft);margin:2px 0 0;}
+#ds3 .sw-hex .alt{opacity:.62;}
+#ds3 .sw-use{font-size:11px;color:var(--tinta-soft);margin:1px 0 0;}
+
+/* ══ Échelle typo ═══════════════════════════════════════════ */
+#ds3 .type-row{display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;padding:12px 0;border-bottom:1.5px dashed var(--pasir);}
+#ds3 .type-row:last-child{border-bottom:0;}
+#ds3 .type-spec{font:450 10.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta-soft);white-space:nowrap;}
+#ds3 code{font-family:'IBM Plex Mono',monospace;font-size:12.5px;background:var(--code-bg);padding:2px 7px;border-radius:5px;color:var(--soga-ink);}
+#ds3 pre{font-family:'IBM Plex Mono',monospace;font-size:12px;background:var(--code-bg);color:var(--tinta);padding:13px 15px;border-radius:10px;overflow-x:auto;margin:0;border:1px solid var(--pasir);}
+</style>
+
+<div class="selvedge"></div>
+
+<!-- ── En-tête ── -->
+<div class="head pad">
+  <div class="row" style="justify-content:space-between;align-items:flex-start;">
+    <div>
+      <p class="serif" style="font-size:13.5px;font-style:italic;color:var(--soga-ink);margin-bottom:5px;">Julien Henry</p>
+      <h1 style="font-size:32px;line-height:1.12;margin-bottom:8px;">Système de design</h1>
+    </div>
+    <div class="theme-switch" role="group" aria-label="Thème">
+      <button type="button" data-set-theme="terang" aria-pressed="true">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1v1.6M8 13.4V15M15 8h-1.6M2.6 8H1M12.9 3.1l-1.1 1.1M4.2 11.8l-1.1 1.1M12.9 12.9l-1.1-1.1M4.2 4.2 3.1 3.1"/></svg>
+        Jour
+      </button>
+      <button type="button" data-set-theme="malam" aria-pressed="false">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 9.6A5.9 5.9 0 0 1 6.4 2.5a5.9 5.9 0 1 0 7.1 7.1Z"/></svg>
+        Nuit
+      </button>
+    </div>
+  </div>
+  <p style="font-size:14px;color:var(--tinta-soft);max-width:52ch;">Atelier batik — teintures naturelles, lisière tissée, points de couture. Une identité d'artisan pour des systèmes qui doivent tourner sans surveillance.</p>
+  <p class="mono" style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-soft);margin-top:14px;">Version 3 · deux thèmes · juillet 2026</p>
+</div>
+
+<div class="pad">
+
+<!-- ── Thème ── -->
+<div class="rv">
+  <p class="sec-label">Thème — terang &amp; malam</p>
+  <div class="grid-cards" style="max-width:780px;">
+
+    <div class="theme-panel" data-theme="terang">
+      <span class="panel-tag">Terang · le jour</span>
+      <div class="card">
+        <div class="card-top" style="background:var(--soga);"></div>
+        <div class="card-body" style="padding:16px;">
+          <div class="card-head">
+            <h3 style="font-size:17px;">Synchronisation CRM</h3>
+            <span class="badge b-daun"><span class="dot"></span>Active</span>
+          </div>
+          <p style="font-size:13px;color:var(--tinta-soft);margin:8px 0 14px;">Dernière exécution il y a 4 minutes.</p>
+          <div class="row" style="gap:9px;">
+            <button class="btn btn-primary btn-sm">Ouvrir</button>
+            <button class="btn btn-ghost btn-sm">Journal</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="theme-panel" data-theme="malam">
+      <span class="panel-tag">Malam · la nuit</span>
+      <div class="card">
+        <div class="card-top" style="background:var(--soga);"></div>
+        <div class="card-body" style="padding:16px;">
+          <div class="card-head">
+            <h3 style="font-size:17px;">Synchronisation CRM</h3>
+            <span class="badge b-daun"><span class="dot"></span>Active</span>
+          </div>
+          <p style="font-size:13px;color:var(--tinta-soft);margin:8px 0 14px;">Dernière exécution il y a 4 minutes.</p>
+          <div class="row" style="gap:9px;">
+            <button class="btn btn-primary btn-sm">Ouvrir</button>
+            <button class="btn btn-ghost btn-sm">Journal</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="note">Les deux thèmes vivent dans les mêmes jetons : seule la valeur change, jamais la structure. Un composant écrit une fois fonctionne dans les deux.</p>
+  <pre style="margin-top:14px;">&lt;div id="ds3" data-theme="malam"&gt;   <span style="color:var(--tinta-soft);">&lt;!-- forcer la nuit --&gt;</span>
+&lt;div id="ds3" data-theme="terang"&gt;  <span style="color:var(--tinta-soft);">&lt;!-- forcer le jour --&gt;</span>
+&lt;div id="ds3"&gt;                      <span style="color:var(--tinta-soft);">&lt;!-- suit le réglage système --&gt;</span></pre>
+  <p class="note">L'attribut fonctionne aussi sur un bloc imbriqué : les deux aperçus ci-dessus sont dans la même page.</p>
+</div>
+
+<hr class="stitch">
+
+<!-- ── Navigation ── -->
+<div class="rv">
+  <p class="sec-label">Barre de navigation</p>
+  <nav class="navbar">
+    <span class="brand"><span class="mark"></span><span class="nm">Julien Henry</span><span class="tg">systèmes &amp; IA</span></span>
+    <span class="nav-links">
+      <a class="nav-a" href="#">Services</a>
+      <a class="nav-a" href="#">Réalisations</a>
+      <a class="nav-a" href="#">Tarifs</a>
+      <a class="nav-a" href="#">Contact</a>
+    </span>
+    <button class="btn btn-primary btn-sm">Prendre rendez-vous</button>
+  </nav>
+  <p class="note">Survol des liens : soulignement pointillé — le point de couture, motif récurrent du système.</p>
+</div>
+
+<hr class="stitch">
+
+<!-- ── Couleurs ── -->
+<div class="rv">
+  <p class="sec-label">Couleurs</p>
+  <p class="note" style="margin:-6px 0 16px;">Les pastilles suivent le thème actif. Chaque teinte porte sa valeur de jour, puis sa valeur de nuit.</p>
+
+  <p class="grp">Fondations</p>
+  <div class="swatches">
+    <div><div class="sw-chip" style="background:var(--kain);"></div><p class="sw-name">Kain</p><p class="sw-hex">#F4EDDD <span class="alt">· #131B2C</span></p><p class="sw-use">fond de page</p></div>
+    <div><div class="sw-chip" style="background:var(--prada);"></div><p class="sw-name">Prada</p><p class="sw-hex">#FBF6EA <span class="alt">· #1C2740</span></p><p class="sw-use">cartes, champs</p></div>
+    <div><div class="sw-chip" style="background:var(--pasir);"></div><p class="sw-name">Pasir</p><p class="sw-hex">#E4D6BC <span class="alt">· #2D3A57</span></p><p class="sw-use">bordures</p></div>
+    <div><div class="sw-chip" style="background:var(--tinta);"></div><p class="sw-name">Tinta</p><p class="sw-hex">#251E15 <span class="alt">· #F0E6D4</span></p><p class="sw-use">texte principal</p></div>
+    <div><div class="sw-chip" style="background:var(--tinta-soft);"></div><p class="sw-name">Tinta douce</p><p class="sw-hex">#756450 <span class="alt">· #A2ABC2</span></p><p class="sw-use">texte secondaire</p></div>
+  </div>
+
+  <p class="grp">Teintures</p>
+  <div class="swatches">
+    <div><div class="sw-chip" style="background:var(--soga);"></div><p class="sw-name">Soga</p><p class="sw-hex">#B4501F <span class="alt">· #C9622C</span></p><p class="sw-use">primaire, aplats</p></div>
+    <div><div class="sw-chip" style="background:var(--soga-ink);"></div><p class="sw-name">Soga texte</p><p class="sw-hex">#A0470F <span class="alt">· #EC9762</span></p><p class="sw-use">liens, libellés</p></div>
+    <div><div class="sw-chip" style="background:var(--nila);"></div><p class="sw-name">Nila</p><p class="sw-hex">#22334F <span class="alt">· #3A5081</span></p><p class="sw-use">secondaire</p></div>
+    <div><div class="sw-chip" style="background:var(--kunyit);"></div><p class="sw-name">Kunyit</p><p class="sw-hex">#D2921F <span class="alt">· #E9B44C</span></p><p class="sw-use">accent</p></div>
+  </div>
+
+  <p class="grp">Sémantique</p>
+  <div class="row" style="gap:9px;">
+    <span class="badge b-daun"><span class="dot"></span>Succès — Daun</span>
+    <span class="badge b-mengkudu"><span class="dot"></span>Erreur — Mengkudu</span>
+    <span class="badge b-kunyit"><span class="dot"></span>Vigilance — Kunyit</span>
+    <span class="badge b-nila"><span class="dot"></span>Information — Nila</span>
+  </div>
+  <p class="note">Règle de nuit : les teintures s'éclaircissent (le soga passe de #B4501F à #C9622C), et le survol éclaircit au lieu de foncer. Toutes les paires texte/fond restent au-dessus de 4,5:1.</p>
+</div>
+
+<hr class="stitch">
+
+<!-- ── Typographie ── -->
+<div class="rv">
+  <p class="sec-label">Typographie</p>
+  <div class="type-row">
+    <h2 class="serif" style="font-size:30px;line-height:1.15;">L'automatisation, façon atelier.</h2>
+    <span class="type-spec">Fraunces 600 · 30/34</span>
+  </div>
+  <div class="type-row">
+    <h3 class="serif" style="font-size:21px;">Un système qui tient la route</h3>
+    <span class="type-spec">Fraunces 600 · 21/28</span>
+  </div>
+  <div class="type-row">
+    <p style="font-size:15px;max-width:46ch;">Inter porte le texte courant : lisible, neutre, sans manières. C'est la voix de travail du système.</p>
+    <span class="type-spec">Inter 400 · 15/24</span>
+  </div>
+  <div class="type-row">
+    <p style="font-size:12.5px;color:var(--tinta-soft);">Légendes, métadonnées, mentions secondaires.</p>
+    <span class="type-spec">Inter 400 · 12,5/18</span>
+  </div>
+  <div class="type-row">
+    <p class="mono" style="font-size:13px;">POST /webhook/devis → <span style="color:var(--daun-ink);">200 OK</span> · 1,24 s</p>
+    <span class="type-spec">Plex Mono 450 · 13</span>
+  </div>
+  <p class="note">Trois rôles, trois voix : Fraunces pour le discours, Inter pour le travail, Plex Mono pour tout ce qui est mesuré. Exemple en ligne : <code>workflow.prod.json</code></p>
+</div>
+
+<hr class="stitch">
+
+<!-- ── Boutons ── -->
+<div class="rv">
+  <p class="sec-label">Boutons</p>
+  <div class="row">
+    <button class="btn btn-primary">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2.5" y="3.5" width="11" height="10" rx="2"/><path d="M2.5 6.8H13.5M5.5 2v3M10.5 2v3"/></svg>
+      Prendre rendez-vous
+    </button>
+    <button class="btn btn-secondary">Voir la réalisation</button>
+    <button class="btn btn-outline">Contour</button>
+    <button class="btn btn-ghost">Discret</button>
+    <button class="btn btn-danger">Supprimer</button>
+  </div>
+  <div class="row" style="margin-top:14px;">
+    <button class="btn btn-primary btn-sm">Petit format</button>
+    <button class="btn btn-outline btn-sm">Petit contour</button>
+    <button class="btn btn-secondary btn-icon" aria-label="Suivant">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
+    </button>
+    <button class="btn btn-primary">
+      <svg class="spin" width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-opacity=".35" stroke-width="2"/><path d="M14 8A6 6 0 0 0 8 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      Envoi en cours
+    </button>
+    <button class="btn btn-primary" disabled>Indisponible</button>
+  </div>
+  <p class="note">Focus clavier : double anneau soga (essayez la touche Tab). De jour la teinture fonce au survol, de nuit elle s'éclaircit — c'est la même règle vue des deux côtés.</p>
+</div>
+
+<hr class="stitch">
+
+<!-- ── Formulaire ── -->
+<div class="rv">
+  <p class="sec-label">Formulaire — demande de projet</p>
+  <div class="card" style="max-width:600px;">
+    <div class="card-top" style="background:var(--soga);"></div>
+    <div class="card-body">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;">
+        <label class="field">
+          <span class="lab">Nom <span class="req">*</span></span>
+          <input class="inp" type="text" placeholder="Prénom et nom">
+        </label>
+        <label class="field">
+          <span class="lab">E-mail <span class="req">*</span></span>
+          <input class="inp inp-err" type="email" value="julien@atelier" aria-invalid="true">
+          <span class="help help-err">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="8" cy="8" r="6.3"/><path d="m5.8 5.8 4.4 4.4M10.2 5.8l-4.4 4.4"/></svg>
+            Il manque le domaine après l'arobase.
+          </span>
+        </label>
+      </div>
+
+      <label class="field" style="margin-top:16px;">
+        <span class="lab">Type de projet</span>
+        <select class="inp">
+          <option value="" selected disabled>Choisir…</option>
+          <option>Automatisation d'un processus (n8n, Make)</option>
+          <option>Agent IA pour le support client</option>
+          <option>Connexion entre deux outils (API)</option>
+          <option>Audit d'un système existant</option>
+          <option>Autre chose</option>
+        </select>
+        <span class="help">Si rien ne correspond, choisissez « Autre chose » et décrivez-le plus bas.</span>
+      </label>
+
+      <fieldset style="border:0;padding:0;margin:18px 0 0;">
+        <legend class="lab" style="padding:0;">Budget envisagé</legend>
+        <div class="row" style="gap:18px;margin-top:4px;">
+          <label class="rad"><input type="radio" name="budget"><span class="box"></span>Moins de 2 000 €</label>
+          <label class="rad"><input type="radio" name="budget" checked><span class="box"></span>2 000 à 5 000 €</label>
+          <label class="rad"><input type="radio" name="budget"><span class="box"></span>Plus de 5 000 €</label>
+        </div>
+      </fieldset>
+
+      <label class="field" style="margin-top:18px;">
+        <span class="lab">Le projet en quelques lignes</span>
+        <textarea class="inp" rows="3" maxlength="400" placeholder="Ce que vous faites à la main aujourd'hui, et à quelle fréquence."></textarea>
+        <span class="help">400 caractères suffisent — on précisera au téléphone.</span>
+      </label>
+
+      <label class="field" style="margin-top:16px;">
+        <span class="lab">Référence interne</span>
+        <input class="inp" type="text" value="DEV-2026-0142" disabled>
+      </label>
+
+      <div class="stack" style="margin-top:20px;gap:13px;">
+        <label class="chk">
+          <input type="checkbox" checked>
+          <span class="box"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8.4 3.4 3.4L13 4.8"/></svg></span>
+          J'accepte d'être recontacté au sujet de cette demande.
+        </label>
+        <label class="tgl"><input type="checkbox" checked><span class="track"></span>Me rappeler par téléphone plutôt que par e-mail</label>
+        <label class="tgl"><input type="checkbox"><span class="track"></span>Recevoir la lettre mensuelle (un e-mail, jamais plus)</label>
+      </div>
+
+      <div class="row" style="margin-top:22px;">
+        <button class="btn btn-primary">
+          Envoyer la demande
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
+        </button>
+        <button class="btn btn-ghost">Tout effacer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="stitch">
+
+<!-- ── Badges ── -->
+<div class="rv">
+  <p class="sec-label">Badges &amp; étiquettes</p>
+  <p class="grp">États</p>
+  <div class="row" style="gap:9px;">
+    <span class="badge b-nila">En production</span>
+    <span class="badge b-kunyit">Prototype</span>
+    <span class="badge b-daun"><span class="dot"></span>Actif</span>
+    <span class="badge b-mengkudu"><span class="dot"></span>Incident</span>
+    <span class="badge b-neutral">Archivé</span>
+  </div>
+  <p class="grp">Technique</p>
+  <div class="row" style="gap:9px;">
+    <span class="badge b-soga">n8n</span>
+    <span class="badge b-soga">JavaScript</span>
+    <span class="badge b-soga">Webhook</span>
+    <span class="badge b-neutral badge-mono">v2.1.0</span>
+    <span class="badge b-nila badge-mono">postgres</span>
+  </div>
+</div>
+
+<hr class="stitch">
+
+<!-- ── Cartes ── -->
+<div class="rv">
+  <p class="sec-label">Cartes</p>
+  <div class="grid-cards" style="max-width:780px;">
+
+    <div class="card">
+      <div class="card-top" style="background:var(--nila);"></div>
+      <div class="card-body">
+        <div class="card-head">
+          <h3 style="font-size:19px;">Vérification MRZ</h3>
+          <span class="badge b-nila">En production</span>
+        </div>
+        <p style="font-size:13.5px;color:var(--tinta-soft);margin:9px 0 14px;">Lecture de la bande MRZ d'une carte d'identité française et contrôle de cohérence des données saisies.</p>
+        <div class="row" style="gap:8px;">
+          <span class="badge b-soga">n8n</span>
+          <span class="badge b-soga">JavaScript</span>
+          <span class="badge b-neutral badge-mono">v2.1.0</span>
+        </div>
+        <div class="card-foot">
+          <span class="num">Mise à jour 12 juil. 2026</span>
+          <a class="lnk" href="#">Ouvrir
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top" style="background:var(--soga);"></div>
+      <div class="card-body">
+        <div class="card-head">
+          <h3 style="font-size:19px;">Suivi mensuel</h3>
+          <span class="badge b-kunyit">Le plus choisi</span>
+        </div>
+        <p style="margin:10px 0 0;"><span class="price">490 €</span><span style="font-size:12.5px;color:var(--tinta-soft);"> / mois</span></p>
+        <ul class="feat">
+          <li><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8.4 3.4 3.4L13 4.8"/></svg>Surveillance des automatisations en place</li>
+          <li><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8.4 3.4 3.4L13 4.8"/></svg>Correction sous 24 h ouvrées</li>
+          <li><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8.4 3.4 3.4L13 4.8"/></svg>Un point par mois, chiffres à l'appui</li>
+        </ul>
+        <button class="btn btn-outline" style="width:100%;justify-content:center;">Choisir cette formule</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="stitch">
+
+<!-- ── Messages ── -->
+<div class="rv">
+  <p class="sec-label">Messages</p>
+  <div class="stack" style="max-width:640px;">
+    <div class="alert a-info">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="8" r="6.3"/><path d="M8 7.4V11"/><circle cx="8" cy="5" r=".9" fill="currentColor" stroke="none"/></svg>
+      <span>La version 2.1.0 du scénario est en ligne depuis 9 h 12.</span>
+    </div>
+    <div class="alert a-ok">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.3"/><path d="m5.2 8.3 2.1 2.1 3.7-4.2"/></svg>
+      <span><strong>Sauvegarde terminée.</strong> 128 exécutions vérifiées, aucune anomalie.</span>
+    </div>
+    <div class="alert a-warn">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.6 14.2 13H1.8Z"/><path d="M8 6.4v3.2"/><circle cx="8" cy="11.4" r=".8" fill="currentColor" stroke="none"/></svg>
+      <span>Le quota de l'API atteint 85 %. Relevez la limite avant le 5 août pour éviter une coupure.</span>
+    </div>
+    <div class="alert a-err">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="8" cy="8" r="6.3"/><path d="m5.8 5.8 4.4 4.4M10.2 5.8l-4.4 4.4"/></svg>
+      <span><strong>Le webhook n'a pas répondu.</strong> Trois tentatives effectuées ; relancez-le ou vérifiez l'URL de destination.</span>
+    </div>
+  </div>
+</div>
+
+<hr class="stitch">
+
+<!-- ── Tableau ── -->
+<div class="rv">
+  <p class="sec-label">Tableau — dernières exécutions</p>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead>
+        <tr><th>Automatisation</th><th>État</th><th>Durée</th><th>Dernière exécution</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Synchronisation CRM → Notion</td>
+          <td><span class="badge b-daun"><span class="dot"></span>Réussie</span></td>
+          <td class="num">1,24 s</td>
+          <td class="num">30 juil. 09:41</td>
+        </tr>
+        <tr>
+          <td>Tri des demandes de support</td>
+          <td><span class="badge b-daun"><span class="dot"></span>Réussie</span></td>
+          <td class="num">3,80 s</td>
+          <td class="num">30 juil. 09:12</td>
+        </tr>
+        <tr>
+          <td>Relances de facturation</td>
+          <td><span class="badge b-mengkudu"><span class="dot"></span>Échouée</span></td>
+          <td class="num">0,41 s</td>
+          <td class="num">29 juil. 23:02</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr class="stitch">
+
+<!-- ── Notes d'intégration ── -->
+<div class="rv">
+  <p class="sec-label">Intégration</p>
+  <div class="stack" style="max-width:640px;font-size:13.5px;">
+    <p>Le bloc entier tient dans <code>#ds3</code> : aucun style ne fuit vers le reste de la page. Pour poser le thème côté serveur ou depuis ton propre script :</p>
+    <pre>document.getElementById('ds3')
+        .setAttribute('data-theme', 'malam');</pre>
+    <p style="color:var(--tinta-soft);">Sans attribut, le script lit <code>prefers-color-scheme</code> au chargement et suit le système en direct tant que personne n'a touché au sélecteur. Pour retenir le choix d'une visite à l'autre, ajoute une ligne <code>localStorage</code> dans le script en bas du bloc.</p>
+  </div>
+</div>
+
+<p class="mono" style="text-align:center;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--tinta-soft);margin-top:34px;">Design system v3 · Atelier batik · terang &amp; malam</p>
+
+</div><!-- /.pad -->
+
+<script>
+(function(){
+  var root=document.getElementById('ds3');
+  if(!root)return;
+  var btns=root.querySelectorAll('[data-set-theme]');
+  var mq=window.matchMedia?window.matchMedia('(prefers-color-scheme: dark)'):null;
+  var manual=root.hasAttribute('data-theme');
+
+  function paint(theme){
+    root.setAttribute('data-theme',theme);
+    if(document.body)document.body.setAttribute('data-theme',theme);
+    btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.setTheme===theme?'true':'false');});
+  }
+  paint(manual?root.getAttribute('data-theme'):(mq&&mq.matches?'malam':'terang'));
+
+  btns.forEach(function(b){b.addEventListener('click',function(){manual=true;paint(b.dataset.setTheme);});});
+  if(mq&&mq.addEventListener){
+    mq.addEventListener('change',function(e){if(!manual)paint(e.matches?'malam':'terang');});
+  }
+
+  /* Révélation au défilement */
+  var els=root.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){els.forEach(function(el){el.classList.add('on');});return;}
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});
+  },{threshold:.12});
+  els.forEach(function(el){io.observe(el);});
+  setTimeout(function(){
+    els.forEach(function(el){if(el.getBoundingClientRect().top<window.innerHeight)el.classList.add('on');});
+  },80);
+})();
+</script>
+</div>
+<!-- ═══════════════════ fin du bloc embarquable ═══════════════════ -->
+
+</div>
+</body>
+</html>

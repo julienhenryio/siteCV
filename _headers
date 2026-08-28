@@ -2,5 +2,18 @@
   Content-Type: image/png
   Cache-Control: public, max-age=31536000, immutable
 
+# La règle générique ci-dessus force image/png sur tout le dossier.
+# Chaque fichier qui n'est pas un PNG doit donc redéclarer son type.
 /assets/favicon/favicon.ico
   Content-Type: image/vnd.microsoft.icon
+
+/assets/favicon/favicon.svg
+  Content-Type: image/svg+xml
+
+/assets/favicon/site.webmanifest
+  Content-Type: application/manifest+json
+  Cache-Control: public, max-age=86400
+
+/favicon.ico
+  Content-Type: image/vnd.microsoft.icon
+  Cache-Control: public, max-age=604800

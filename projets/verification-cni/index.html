@@ -4,40 +4,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vérification MRZ — CNI France</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap');
 
+<link rel="icon" href="/assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
+
+<script>try{var t=localStorage.getItem('batik-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
+<!-- Jetons batik v3 (terang + malam) : source unique du design system. -->
+<link rel="stylesheet" href="/assets/css/batik.css">
+
+<style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Couche de correspondance : les noms sémantiques de cette page — également
+   utilisés par le HTML généré en JS — pointent vers les jetons de batik.css.
+   Aucune valeur hexadécimale ici : le thème nuit suit automatiquement. */
 :root {
-  /* Tokens batik — source : design_system/design_system_v2_batik.html */
-  --paper: #F7F0E2;
-  --surface: #FDF8EE;
-  --sand: #E9DBC5;
-  --soga: #C15A28;
-  --soga-dark: #A2481D;
-  --turmeric: #E0913A;
-  --indigo: #2C3E63;
-  --indigo-dark: #213050;
-  --ink: #2A2018;
-  --ink-soft: #7C6B58;
+  --surface: var(--prada);
+  --sand: var(--pasir);
+  --indigo: var(--nila);
+  --ink: var(--tinta);
 
-  /* Mapping sémantique — ces noms sont aussi utilisés par le HTML généré en JS */
-  --bg: var(--paper);
-  --card: var(--surface);
-  --border: #E1D3BC;
-  --text: var(--ink);
-  --muted: var(--ink-soft);
+  --bg: var(--kain);
+  --card: var(--prada);
+  --border: var(--pasir);
+  --text: var(--tinta);
+  --muted: var(--tinta-soft);
   --accent: var(--soga);
   --accent-hover: var(--soga-dark);
-  --success: #35784A;
-  --success-bg: #E7EFE0;
-  --danger: #B3372B;
-  --danger-bg: #F6E3DE;
-  --warn: #9A6B1E;
-  --warn-bg: #F7E7CE;
-  --warn-border: var(--turmeric);
-  --highlight: rgba(193, 90, 40, 0.10);
+  --success: var(--daun-ink);
+  --success-bg: var(--daun-soft);
+  --danger: var(--mengkudu-ink);
+  --danger-bg: var(--mengkudu-soft);
+  --warn: var(--kunyit-ink);
+  --warn-bg: var(--kunyit-soft);
+  --warn-border: var(--kunyit);
+  --highlight: var(--soga-soft);
   --radius: 10px;
   --radius-card: 14px;
 }
@@ -50,11 +55,13 @@ body {
   padding: 1.5rem;
 }
 
+/* Lisière tissée — motif fourni par batik.css, il suit donc le thème. */
 .batik-strip {
-  height: 14px;
+  height: 16px;
   margin: -1.5rem -1.5rem 1.5rem;
   background-color: var(--soga);
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2244%22 height=%2214%22 viewBox=%220 0 44 14%22><g fill=%22none%22 stroke=%22%23F7F0E2%22 stroke-width=%221.4%22 opacity=%22.55%22><path d=%22M0 7 Q11 -3 22 7 T44 7%22/><path d=%22M0 11 Q11 1 22 11 T44 11%22/></g><g fill=%22%23F7F0E2%22 opacity=%22.5%22><circle cx=%2211%22 cy=%224%22 r=%221.1%22/><circle cx=%2233%22 cy=%224%22 r=%221.1%22/></g></svg>');
+  background-image: var(--selvedge);
+  background-repeat: repeat-x;
 }
 
 h1 {
@@ -87,7 +94,7 @@ h1 small {
   border-radius: var(--radius-card);
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 6px 20px rgba(42, 32, 24, 0.06);
+  box-shadow: var(--shadow);
 }
 
 .card h2 {
@@ -144,12 +151,12 @@ select {
   transition: background 0.4s, border-color 0.2s, box-shadow 0.2s;
 }
 
-input[type="text"]::placeholder { color: #b8a68f; }
+input[type="text"]::placeholder { color: var(--placeholder); }
 
 input[type="text"]:focus, select:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(193, 90, 40, 0.14);
+  box-shadow: var(--ring);
 }
 
 input.mrz-input {
@@ -209,14 +216,14 @@ button {
   width: 100%;
   padding: 0.7rem 1.4rem;
   background: var(--accent);
-  color: #fff;
+  color: var(--on-soga);
   border: none;
   border-radius: var(--radius);
   font-family: inherit;
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(193, 90, 40, 0.26);
+  box-shadow: 0 4px 14px rgba(147, 64, 15, 0.26);
   transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
@@ -225,14 +232,14 @@ button:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
 
 button.btn-secondary {
   background: transparent;
-  color: var(--soga);
+  color: var(--soga-ink);
   border: 1.5px solid var(--soga);
   box-shadow: none;
 }
 
 button.btn-secondary:hover:not(:disabled) {
   background: var(--soga);
-  color: #fff;
+  color: var(--on-soga);
 }
 
 /* Drop zone */
@@ -249,7 +256,7 @@ button.btn-secondary:hover:not(:disabled) {
 
 .dropzone.dragover {
   border-color: var(--accent);
-  background: rgba(193, 90, 40, 0.05);
+  background: var(--soga-soft);
 }
 
 .dropzone input[type="file"] {

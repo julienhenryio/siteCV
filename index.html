@@ -1,930 +1,519 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Julien Henry - Portfolio</title>
-    <style>
-        /* Variables pour faciliter les modifications */
-        :root {
-            --primary-color: #0066ff;
-            --background-color: #f8f9fa;
-            --text-color: #212529;
-            --text-secondary: #6c757d;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-            --transition-speed: 0.3s;
-            --separator-color: #e9ecef;
-            --timeline-color: #ddd;
-            --timeline-active: #0066ff;
-            --highlight-color: rgba(0, 102, 255, 0.15);
-        }
-
-        /* Reset et styles généraux */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px var(--shadow-color);
-            z-index: 1000;
-            padding: 15px 0;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            transition: color var(--transition-speed);
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 80px 20px 40px;
-            text-align: center;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            animation: fadeInUp 1s ease;
-        }
-
-        .profile-img {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--primary-color);
-            margin-bottom: 30px;
-            box-shadow: 0 8px 20px var(--shadow-color);
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, var(--primary-color), #0052cc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero h2 {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            font-weight: 400;
-            margin-bottom: 20px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 30px;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all var(--transition-speed);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background: var(--primary-color);
-            color: white;
-            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        /* Sections générales */
-        section {
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-            opacity: 0;
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        /* Profil Section */
-        .profile-section {
-            background: white;
-            border-radius: 20px;
-            padding: 60px;
-            box-shadow: 0 10px 30px var(--shadow-color);
-            margin: 40px auto;
-            max-width: 900px;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-            animation-delay: 0.2s;
-        }
-
-        .profile-text {
-            font-size: 1rem;
-            text-align: center;
-            line-height: 1.8;
-            color: var(--text-color);
-        }
-
-        /* Styles pour les mots-clés avec highlight */
-        .keyword {
-            position: relative;
-            display: inline-block;
-            padding: 0 4px;
-            z-index: 1;
-        }
-
-        .keyword::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 100%;
-            background: var(--highlight-color);
-            border-radius: 4px;
-            z-index: -1;
-            transition: width 0.6s ease;
-        }
-
-        .keyword.highlight::before {
-            width: 100%;
-        }
-
-        .keyword strong {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Compétences Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .skill-card {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px var(--shadow-color);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-            animation-delay: 0.3s;
-            transition: transform var(--transition-speed);
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .skill-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-        }
-
-        .skill-card ul {
-            list-style: none;
-        }
-
-        .skill-card li {
-            padding: 8px 0;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .skill-card li:before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: var(--primary-color);
-        }
-
-        /* Experiences Section avec Timeline */
-        .experiences-section {
-            position: relative;
-        }
-
-        .experiences-section .section-title {
-            padding-left: 0;
-            margin-left: 0;
-        }
-
-        .experiences-container {
-            position: relative;
-            padding-left: 0;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .timeline {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, 
-                transparent 0%, 
-                var(--timeline-color) 10%, 
-                var(--timeline-color) 90%, 
-                transparent 100%);
-            opacity: 0.3;
-            z-index: -1;
-        }
-
-        .experience-item {
-            margin-bottom: 80px;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.6s ease;
-            position: relative;
-        }
-
-        .experience-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .experience-card {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px var(--shadow-color);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .experience-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 102, 255, 0.05), transparent);
-            transition: left 0.8s ease;
-        }
-
-        .experience-item.visible .experience-card::before {
-            left: 100%;
-        }
-
-        .experience-header {
-            margin-bottom: 25px;
-        }
-
-        .experience-title {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-
-        .experience-company {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            font-style: italic;
-        }
-
-        .experience-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.6s ease;
-        }
-
-        .experience-item.visible .experience-content {
-            max-height: none;
-        }
-
-        .experience-content ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .experience-content li {
-            padding: 10px 0;
-            padding-left: 25px;
-            position: relative;
-            line-height: 1.6;
-        }
-
-        .experience-content li:before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            top: 10px;
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            line-height: 1;
-        }
-
-        .experience-content li strong {
-            color: var(--primary-color);
-            font-weight: 500;
-        }
-
-        /* Styles spécifiques pour l'expérience avec app */
-        .experience-header.with-app {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 20px;
-        }
-
-        .experience-info {
-            flex: 1;
-        }
-
-        .app-section {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-        }
-
-        .app-logo {
-            width: 60px;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .app-btn {
-            background-color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all var(--transition-speed);
-            box-shadow: 0 2px 5px var(--shadow-color);
-            font-size: 0.9rem;
-            white-space: nowrap;
-        }
-
-        .app-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px var(--shadow-color);
-            background-color: var(--background-color);
-        }
-
-        .app-btn i {
-            color: var(--primary-color);
-        }
-
-        /* Formation Section */
-        .formations-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
-
-        .formation-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px var(--shadow-color);
-            text-align: center;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-            animation-delay: 0.4s;
-        }
-
-        .formation-card h4 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            background: white;
-            border-radius: 20px;
-            padding: 60px;
-            text-align: center;
-            box-shadow: 0 10px 30px var(--shadow-color);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
-        }
-
-        .contact-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: var(--text-color);
-            transition: transform var(--transition-speed);
-        }
-
-        .contact-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .contact-item i {
-            font-size: 2rem;
-            color: var(--primary-color);
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .experiences-container {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-
-            .timeline {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                width: 100%;
-                max-width: 300px;
-                margin: 30px auto 0;
-            }
-
-            .profile-section {
-                padding: 40px 20px;
-            }
-
-            /* Adaptation pour l'expérience avec app sur mobile */
-            .experience-header.with-app {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .app-section {
-                width: 100%;
-                justify-content: flex-start;
-            }
-        }
-    </style>
-    <!-- Font et icônes -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Julien Henry — Freelance IA &amp; automatisation</title>
+<meta name="description" content="J'automatise le travail répétitif des TPE, PME et indépendants : n8n, agents IA, intégrations d'API, déployés sur une infrastructure que vous gardez sous votre contrôle.">
+<meta name="author" content="Julien Henry">
+<link rel="canonical" href="https://julienhenry.io/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://julienhenry.io/">
+<meta property="og:title" content="Julien Henry — Freelance IA &amp; automatisation">
+<meta property="og:description" content="J'automatise le travail répétitif des TPE, PME et indépendants. Systèmes sur-mesure, déployés sur votre infrastructure.">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="/assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+<!-- Thème posé avant le premier rendu : évite le flash blanc en thème nuit. -->
+<script>try{var t=localStorage.getItem('batik-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
+<link rel="stylesheet" href="/assets/css/batik.css">
+<style>
+/* ── Spécifique à la page d'accueil ────────────────────────── */
+.hero{position:relative;padding:74px 0 60px;background-image:var(--kawung);overflow:hidden;}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:44px;align-items:center;}
+.hero h1{font-size:clamp(31px,5.2vw,49px);letter-spacing:-.015em;margin:14px 0 20px;max-width:19ch;}
+.hero h1 em{font-style:normal;color:var(--soga-ink);}
+.hero .lede{font-size:17.5px;max-width:54ch;}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;}
+.hero-meta{margin-top:20px;font-size:13px;color:var(--tinta-soft);display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;}
+.hero-meta .sep{width:4px;height:4px;border-radius:50%;background:var(--pasir-3);}
+.portrait{width:180px;height:180px;border-radius:50%;object-fit:cover;border:3px solid var(--prada);box-shadow:var(--shadow-lg);flex:none;}
+@media (max-width:600px){.hero-meta{display:block;}.hero-meta .sep{display:none;}.hero-meta span{display:block;}}
+@media (max-width:820px){
+  .hero{padding:52px 0 44px;}
+  .hero-grid{grid-template-columns:1fr;gap:28px;}
+  .portrait{width:112px;height:112px;order:-1;}
+}
+
+/* Cartes de service */
+.svc{background:var(--prada);border:1px solid var(--pasir);border-radius:14px;padding:22px;transition:border-color .2s,transform .2s,box-shadow .2s;}
+.svc:hover{border-color:var(--pasir-3);transform:translateY(-2px);box-shadow:var(--shadow);}
+.svc .ico{width:38px;height:38px;border-radius:10px;background:var(--soga-soft);color:var(--soga-ink);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+.svc h3{font-size:17px;margin-bottom:8px;}
+.svc p{font-size:13.8px;color:var(--tinta-soft);}
+
+/* Méthode */
+.method{display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:28px;}
+.method h3{font-size:19px;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+.method h3::before{content:"";width:9px;height:9px;background:var(--kunyit);transform:rotate(45deg);border-radius:1.5px;flex:none;}
+.method p{font-size:14.5px;color:var(--tinta-soft);}
+.method p+p{margin-top:11px;}
+.pull{
+  border-left:3px solid var(--soga);padding:4px 0 4px 18px;margin-top:38px;
+  font-family:'Fraunces',Georgia,serif;font-size:19px;line-height:1.5;max-width:56ch;
+}
+
+/* Études de cas — pleine largeur, aparté à gauche, détail à droite */
+.cases{display:grid;gap:18px;}
+.case{background:var(--prada);border:1px solid var(--pasir);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);}
+.case-body{padding:26px 28px;display:grid;grid-template-columns:230px minmax(0,1fr);gap:34px;align-items:start;}
+.case h3{font-size:21px;}
+.case-aside .badge{margin-top:12px;}
+.case-aside .chips{margin-top:16px;}
+.case dl{margin:0;display:grid;gap:16px;}
+@media (max-width:800px){
+  .case-body{grid-template-columns:1fr;gap:20px;padding:22px;}
+  .case-aside{display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
+  .case-aside .badge,.case-aside .chips{margin-top:0;}
+}
+.case dt{font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.13em;text-transform:uppercase;color:var(--tinta-soft);margin-bottom:5px;}
+.case dd{margin:0;font-size:14px;color:var(--tinta-soft);}
+.case .out{background:var(--soga-soft);border-radius:11px;padding:14px 16px;}
+.case .out dt{color:var(--soga-ink);}
+.case .out dd{color:var(--tinta);font-weight:500;font-size:14.5px;}
+.case .out strong{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--soga-ink);}
+
+/* Labo */
+.lab{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:44px;align-items:start;}
+@media (max-width:880px){.lab{grid-template-columns:1fr;gap:28px;}}
+.lab-list{display:grid;gap:11px;}
+.lab-item{display:flex;gap:16px;align-items:center;padding:14px 17px;background:var(--prada);border:1px solid var(--pasir);border-radius:11px;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s;}
+.lab-item:hover{border-color:var(--soga);transform:translateX(2px);}
+.lab-item:focus-visible{outline:none;box-shadow:var(--ring);}
+.lab-item .t{display:block;font-weight:600;font-size:14.5px;}
+.lab-item .d{display:block;font-size:13px;color:var(--tinta-soft);margin-top:3px;line-height:1.45;}
+.lab-item .arrow{margin-left:auto;color:var(--soga-ink);flex:none;}
+
+/* Contact */
+.contact{background:var(--prada);border:1px solid var(--pasir);border-radius:18px;padding:44px 38px;text-align:center;box-shadow:var(--shadow);}
+.contact h2{font-size:clamp(25px,4vw,33px);margin-bottom:14px;}
+.contact .lede{margin:0 auto;}
+.contact-links{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:center;margin-top:26px;}
+@media (max-width:560px){.contact{padding:32px 22px;}}
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="nav-logo">
-                <strong>Julien Henry</strong>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#hero">Accueil</a></li>
-                <li><a href="#profil">Profil</a></li>
-                <li><a href="#competences">Compétences</a></li>
-                <li><a href="#experiences">Expériences</a></li>
-                <li><a href="#formations">Formations</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<div class="selvedge"></div>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <div class="hero-content">
-            <img src="/assets/images/photo.png" alt="Julien Henry" class="profile-img">
-            <h1>Julien Henry</h1>
-            <h2>Freelance • Support Client • IA & Automatisation</h2>
-            <p>DossierFacile @ BetaGouv</p>
-            <div class="hero-buttons">
-                <a href="#contact" class="btn btn-primary">
-                    <i class="fas fa-calendar"></i> Prendre RDV
-                </a>
-                <a href="/cv-julien-henry.pdf" class="btn btn-secondary" download>
-                    <i class="fas fa-download"></i> Télécharger CV
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Profil Section -->
-    <section id="profil">
-        <h2 class="section-title">Profil</h2>
-        <div class="profile-section">
-            <p class="profile-text">
-                Profil <span class="keyword"><strong>polyvalent</strong></span> au parcours atypique, j'ai en effet renoncé au parcours d'ingénieur après 2 ans pour me lancer à mon compte. Ce choix m'a permis de développer plus intensément ma <span class="keyword"><strong>curiosité</strong></span> naturelle et mon goût pour l'autodidaxie.
-<br><br>
-Cette approche m'a donné une compréhension globale des projets : je saisis suffisamment la tech pour discuter avec les développeurs, et suffisamment les enjeux métier pour comprendre les vrais défis. Cette polyvalence me donne une bonne vision d'ensemble. Spécialisé en <span class="keyword"><strong>support client et automatisations IA</strong></span>, j'analyse les situations avec un <span class="keyword"><strong>œil critique</strong></span> et suis en capacité de faire le pont entre les équipes.
-<br><br>
-Je ne suis pas un adepte de la langue de bois. Quand je repère un problème, je donne facilement mon avis de manière constructive et propose des <span class="keyword"><strong>solutions concrètes</strong></span>. Ma bonne <span class="keyword"><strong>communication orale</strong></span> me permet d'exprimer clairement mes idées et de créer du lien avec des profils très différents.
-            </p>
-        </div>
-    </section>
-
-   <!-- Compétences Section -->
-<section id="competences">
-    <h2 class="section-title">Compétences</h2>
-    <div class="skills-grid">
-    <div class="skill-card">
-    <h3><i class="fas fa-code"></i> Techniques</h3>
-    <ul>
-    <li>Outils IA : <strong>n8n</strong>, Make, MCP servers, Ollama (déploiement sur Docker maîtrisé)</li>
-    <li>Automatisations IA : systèmes RAG, intégration WebHook (Mattermost ou autre), classification automatique de tickets ou de données</li>
-    <li>Développement : bases rudimentaires en JS, HTML/CSS et Dart (Flutter)</li>
-    </ul>
+<!-- ══ Navigation ══════════════════════════════════════════ -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">
+      <span class="mark"></span>
+      <span class="nm">Julien Henry</span>
+      <span class="tg">systèmes &amp; IA</span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-a" href="#services">Ce que je fais</a>
+      <a class="nav-a" href="#methode">Ma façon de travailler</a>
+      <a class="nav-a" href="#realisations">Réalisations</a>
+      <a class="nav-a" href="#labo">Le labo</a>
     </div>
-    <div class="skill-card">
-    <h3><i class="fas fa-users"></i> Soft Skills</h3>
-    <ul>
-    <li><strong>Communication orale aisée et structurée</strong></li>
-    <li>Support client et relation utilisateur</li>
-    <li>Esprit de synthèse</li>
-    <li>Animation d'ateliers et formations</li>
-    </ul>
+    <div class="nav-end">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Changer de thème">
+        <svg class="i-moon" width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 9.6A5.9 5.9 0 0 1 6.4 2.5a5.9 5.9 0 1 0 7.1 7.1Z"/></svg>
+        <svg class="i-sun" width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1v1.6M8 13.4V15M15 8h-1.6M2.6 8H1M12.9 3.1l-1.1 1.1M4.2 11.8l-1.1 1.1M12.9 12.9l-1.1-1.1M4.2 4.2 3.1 3.1"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm" href="https://calendar.proton.me/bookings#t5u1UMyKpn2-8ykPxkCgGYenajHa3SH2M1uS8z7Jzu0=" target="_blank" rel="noopener"><span class="cta-full">Prendre rendez-vous</span><span class="cta-short">Rendez-vous</span></a>
     </div>
-    <div class="skill-card">
-    <h3><i class="fas fa-laptop"></i> Digitales</h3>
-    <ul>
-    <li>Crisp, gestion de tickets et création de bots</li>
-    <li>Notion, gestion de projet</li>
-    <li>Google Slides, présentations engageantes</li>
-    <li><strong>Adaptation rapide aux nouveaux outils</strong></li>
-    </ul>
+  </div>
+</nav>
+
+<main id="contenu">
+
+<!-- ══ Hero ════════════════════════════════════════════════ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Freelance IA &amp; automatisation · Nantes</p>
+        <h1>J'automatise ce qui vous fait perdre du temps — et je le construis pour que <em>ça tienne</em>.</h1>
+        <p class="lede">
+          Vous traitez encore à la main des dossiers, des relances, des questions clients qui reviennent
+          toutes les semaines. Je conçois le système qui s'en charge, et je le déploie sur une
+          infrastructure que vous gardez sous votre contrôle.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="https://calendar.proton.me/bookings#t5u1UMyKpn2-8ykPxkCgGYenajHa3SH2M1uS8z7Jzu0=" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2.5" y="3.5" width="11" height="10" rx="2"/><path d="M2.5 6.8H13.5M5.5 2v3M10.5 2v3"/></svg>
+            Prendre rendez-vous
+          </a>
+          <a class="btn btn-outline btn-lg" href="https://www.malt.fr/profile/julienlhenry" target="_blank" rel="noopener">
+            Mon profil Malt
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h7v7M13 3 3.5 12.5"/></svg>
+          </a>
+        </div>
+        <p class="hero-meta">
+          <span>Missions à distance ou sur site</span>
+          <span class="sep"></span>
+          <span>Français &amp; anglais</span>
+          <span class="sep"></span>
+          <span>Indépendant depuis avril 2025</span>
+        </p>
+      </div>
+      <img class="portrait" src="/assets/images/photo.png" alt="Portrait de Julien Henry" width="180" height="180">
     </div>
-    <div class="skill-card">
-    <h3><i class="fas fa-language"></i> Langues</h3>
-    <ul>
-    <li><strong>Anglais: C1 (IELTS 7,5)</strong></li>
-    <li>Indonésien: B1</li>
-    </ul>
+  </div>
+</header>
+
+<!-- ══ Chiffres ════════════════════════════════════════════ -->
+<div class="wrap">
+  <div class="stat-strip rv">
+    <div class="stat">
+      <p class="v">~15</p>
+      <p class="k">TPE, PME et indépendants accompagnés depuis avril 2025</p>
     </div>
+    <div class="stat">
+      <p class="v">÷ 7 à 8</p>
+      <p class="k">Temps de traitement d'un dossier d'audit, chez un family office</p>
     </div>
-    </section>
+    <div class="stat">
+      <p class="v">+ 30 %</p>
+      <p class="k">Détection de faux documents après mes ateliers chez DossierFacile</p>
+    </div>
+    <div class="stat">
+      <p class="v">24/7</p>
+      <p class="k">Assistance opérateurs, via un système RAG que j'ai conçu et déployé</p>
+    </div>
+  </div>
+</div>
 
-    <!-- Expériences Section -->
-    <section id="experiences" class="experiences-section">
-        <h2 class="section-title">Expériences</h2>
-        <div class="experiences-container">
-            <div class="timeline"></div>
-            
-            <!-- Experience 1 -->
-            <div class="experience-item" data-index="0">
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <h3 class="experience-title">Support Utilisateur</h3>
-                        <p class="experience-company">Dossier Facile - Juin 2024 → présent</p>
-                    </div>
-                    <div class="experience-content">
-                        <ul>
-                            <li>Gestion du support client via Crisp avec résolution efficace des problèmes utilisateurs</li>
-                            <li>Animation d'ateliers spécialisés sur la détection de faux documents ayant permis d'augmenter de 30% nos chiffres globaux de détection de faux documents</li>
-                            <li>Développement d'un système RAG sur n8n pour assistant IA conversationnel visant à améliorer la formation initiale et continue des opérateurs<br>
-                                <strong>Architecture complète :</strong> pipeline d'ingestion documentaire automatisé, vectorisation (Mistral), base vectorielle (Supabase), agent IA (Mistral) et intégration Mattermost via webhooks<br>
-                                <strong>Impact :</strong> assistance disponible 24h/24, réduction de la charge tuteurs, identification des gaps documentaires</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+<!-- ══ Services ════════════════════════════════════════════ -->
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="rv">
+      <p class="sec-label">Ce que je fais</p>
+      <h2 style="font-size:clamp(26px,4vw,35px);max-width:22ch;margin-bottom:14px;">Six façons de me confier du travail</h2>
+      <p class="lede" style="margin-bottom:34px;">
+        Rarement les six en même temps. La plupart des missions commencent par un audit,
+        et n'en gardent ensuite que deux ou trois.
+      </p>
+    </div>
 
-            <!-- Experience 2 -->
-            <div class="experience-item" data-index="1">
-                <div class="experience-card">
-                    <div class="experience-header with-app">
-                        <div class="experience-info">
-                            <h3 class="experience-title">Développement d'Application Mobile</h3>
-                            <p class="experience-company">Travailleur indépendant - Mars 2024 → Juillet 2024</p>
-                        </div>
-                        <div class="app-section">
-                            <img src="/assets/images/icontitle.png" alt="Deeply App" class="app-logo">
-                            <a href="https://apps.apple.com/id/app/deeply-app/id6504491197" target="_blank" class="app-btn">
-                                <i class="fab fa-apple"></i>
-                                iOS
-                            </a>
-                            <a href="https://play.google.com/store/apps/details?id=com.deeply.app" target="_blank" class="app-btn">
-                                <i class="fab fa-android"></i>
-                                Android
-                            </a>
-                        </div>
-                    </div>
-                    <div class="experience-content">
-                        <ul>
-                            <li>Conception et développement d'une application Flutter de conversations profondes favorisant l'introspection</li>
-                            <li>Utilisation de l'IA (ChatGPT et Claude) pour optimiser la génération de code</li>
-                            <li>Création de l'interface utilisateur avec Figma, de la maquette à la mise en production</li>
-                            <li>Publication réussie sur les stores iOS et Android avec gestion complète du cycle de développement réalisé sur Notion</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="grid-cards rv">
+      <article class="svc">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 4.5 4.5"/><path d="M10.5 7.5v6M7.5 10.5h6"/></svg></div>
+        <h3>Audit &amp; cadrage</h3>
+        <p>Cartographie de vos processus réels — pas ceux du manuel. J'identifie ce qui vous coûte du temps, et ce qui mérite vraiment d'être automatisé.</p>
+      </article>
 
-            <!-- Experience 3 -->
-            <div class="experience-item" data-index="2">
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <h3 class="experience-title">Créateur de Contenu Digital</h3>
-                        <p class="experience-company">Travailleur indépendant - Avril 2021 → Juin 2024</p>
-                    </div>
-                    <div class="experience-content">
-                        <ul>
-                            <li>Création et animation d'une communauté engagée de 7000 personnes sur Twitter</li>
-                            <li>Production de contenu de vulgarisation sur la conscience numérique et les technologies web3</li>
-                            <li>Création de threads viraux atteignant régulièrement plus de 40K impressions</li>
-                            <li>Sensibilisation à la protection des données personnelles</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+      <article class="svc">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.4"/><circle cx="5" cy="18" r="2.4"/><circle cx="19" cy="12" r="2.4"/><path d="M7.4 6.8 16.7 11M7.4 17.2 16.7 13"/></svg></div>
+        <h3>Automatisations n8n sur-mesure</h3>
+        <p>Vos outils existants connectés en workflows fiables et documentés. Auto-hébergés, versionnés, lisibles par quelqu'un d'autre que moi.</p>
+      </article>
 
-            <!-- Experience 4 -->
-            <div class="experience-item" data-index="3">
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <h3 class="experience-title">Secouriste, Centre de Vaccination</h3>
-                        <p class="experience-company">Été 2021</p>
-                    </div>
-                    <div class="experience-content">
-                        <ul>
-                            <li>Participation à la campagne de vaccination contre la COVID-19</li>
-                            <li>Gestion de situations d'urgence et prise de décision sous pression</li>
-                            <li>Communication claire et rassurante avec des publics variés</li>
-                            <li>Développement d'une forte empathie et d'aptitudes d'écoute active</li>
-                        </ul>
-                    </div>
-                </div>
+      <article class="svc">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13.5A3.5 3.5 0 0 1 16.5 17H9l-5 3.5V6.5A3.5 3.5 0 0 1 7.5 3h9A3.5 3.5 0 0 1 20 6.5Z"/><path d="M8.5 10h7M8.5 13h4"/></svg></div>
+        <h3>Agents IA</h3>
+        <p>Bots de support sur WhatsApp et Telegram, agents vocaux pour la prise d'appel, assistants internes branchés sur vos propres données via RAG.</p>
+      </article>
+
+      <article class="svc">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/><path d="M8.5 13h7M8.5 16.5h4.5"/></svg></div>
+        <h3>Traitement documentaire</h3>
+        <p>Classement et renommage automatiques, extraction de données, contrôle de complétude, relances des contreparties quand une pièce manque.</p>
+      </article>
+
+      <article class="svc">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3.5" width="18" height="7" rx="2"/><rect x="3" y="13.5" width="18" height="7" rx="2"/><path d="M7 7h.01M7 17h.01"/></svg></div>
+        <h3>Infrastructure self-hosted</h3>
+        <p>Déploiement sur votre VPS : Docker, Coolify, Traefik, PostgreSQL/pgvector, n8n, Supabase. Vos données restent chez vous, et votre facture d'abonnements fond.</p>
+      </article>
+
+      <article class="svc">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5h18v10H3z"/><path d="M12 15.5v3M8.5 20.5h7"/><path d="M7.5 11.5 10 9l2 2 4-4"/></svg></div>
+        <h3>Formation</h3>
+        <p>Vos équipes font évoluer les scénarios sans passer par moi. Je pars de vos cas d'usage réels, pas d'exercices théoriques. En français ou en anglais.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<hr class="stitch">
+
+<!-- ══ Méthode ═════════════════════════════════════════════ -->
+<section class="section section-weave" id="methode">
+  <div class="wrap">
+    <div class="rv">
+      <p class="sec-label">Ma façon de travailler</p>
+      <h2 style="font-size:clamp(26px,4vw,35px);max-width:24ch;margin-bottom:38px;">Autodidacte et franc. Pragmatique par expérience.</h2>
+    </div>
+
+    <div class="method rv">
+      <div>
+        <h3>Le cadrage d'abord</h3>
+        <p>
+          Je ne fonce pas tête baissée. Je commence toujours par un temps de cadrage : ce que vous
+          attendez, comment ça se passe réellement sur le terrain, ce qui coince au quotidien.
+        </p>
+        <p>
+          Beaucoup de clients arrivent avec une intuition juste mais une vision encore floue.
+          Mon rôle est aussi de vous aider à la clarifier. Un périmètre net et des attendus concrets,
+          ce sont les fondations d'un projet qui dure.
+        </p>
+      </div>
+
+      <div>
+        <h3>Pragmatique avant d'être technophile</h3>
+        <p>
+          J'adore la technologie et je passe une grande partie de mon temps libre à expérimenter.
+          Mais je reste lucide : ce qui compte, c'est ce qui tient en production dans six mois,
+          pas ce qui impressionne une fois sur deux en démo.
+        </p>
+        <p>
+          Quand une solution ne me paraît pas opérationnellement pertinente, je vous le dis — même si
+          ça réduit la mission. Il m'arrive de conclure qu'un processus ne vaut pas la peine d'être
+          automatisé, ou qu'il doit l'être d'une façon moins séduisante que prévue, mais plus robuste.
+        </p>
+      </div>
+
+      <div>
+        <h3>Deux ans de support terrain</h3>
+        <p>
+          Chez DossierFacile (service public, BetaGouv), je suis au contact des utilisateurs et des
+          opérateurs d'un service à très fort volume. J'y vois tous les jours des outils se heurter
+          aux gens qui s'en servent.
+        </p>
+        <p>
+          C'est de là que vient ma façon de concevoir : je sais où les processus cassent vraiment,
+          et à quoi ressemble une automatisation dont personne ne se plaint.
+        </p>
+      </div>
+    </div>
+
+    <blockquote class="pull rv">
+      Un système qui escalade proprement vaut mieux qu'un système obscur qui bricole.
+    </blockquote>
+  </div>
+</section>
+
+<hr class="stitch">
+
+<!-- ══ Réalisations ════════════════════════════════════════ -->
+<section class="section" id="realisations">
+  <div class="wrap">
+    <div class="rv">
+      <p class="sec-label">Réalisations</p>
+      <h2 style="font-size:clamp(26px,4vw,35px);max-width:22ch;margin-bottom:14px;">Trois missions, trois résultats mesurés</h2>
+      <p class="lede" style="margin-bottom:34px;">
+        Les clients sont anonymisés à leur demande. Les chiffres, eux, sont ceux constatés à la fin
+        de la mission.
+      </p>
+    </div>
+
+    <div class="cases rv">
+
+      <article class="case">
+        <div class="card-top" style="background:var(--soga);"></div>
+        <div class="case-body">
+            <div class="case-aside">
+              <h3>Family office</h3>
+              <span class="badge b-neutral">Conseil &amp; audit</span>
+              <div class="chips">
+            <span class="badge b-soga">n8n</span>
+            <span class="badge b-soga">Traitement documentaire</span>
+            <span class="badge b-soga">REST APIs</span>
+          </div>
             </div>
+            <dl>
+            <div>
+              <dt>Contexte</dt>
+              <dd>Des dossiers d'audit allant jusqu'à 3 000 pages et 300 pièces justificatives distinctes, vérifiés manuellement pièce par pièce. Un travail de contrôle à faible valeur ajoutée qui saturait l'agenda.</dd>
+            </div>
+            <div>
+              <dt>Ce que j'ai mis en place</dt>
+              <dd>Renommage et classement automatiques de chaque pièce selon une nomenclature stable, détection des pièces manquantes, relances automatiques des contreparties en cas de dossier incomplet, dossiers partagés générés à la volée et suivi de l'avancement par client.</dd>
+            </div>
+            <div class="out">
+              <dt>Résultat</dt>
+              <dd>Le temps de traitement par dossier a été <strong>divisé par 7 à 8</strong>.</dd>
+            </div>
+          </dl>
         </div>
-    </section>
+      </article>
 
-    <!-- Formations Section -->
-    <section id="formations">
-        <h2 class="section-title">Formations</h2>
-        <div class="formations-grid">
-            <div class="formation-card">
-                <h4>BNSSA & PSE2</h4>
-                <p>2021</p>
-                <p>Secourisme et sauvetage aquatique</p>
+      <article class="case">
+        <div class="card-top" style="background:var(--nila);"></div>
+        <div class="case-body">
+            <div class="case-aside">
+              <h3>Conciergerie, Bali</h3>
+              <span class="badge b-neutral">Hôtellerie</span>
+              <div class="chips">
+            <span class="badge b-soga">WhatsApp Business API</span>
+            <span class="badge b-soga">Agents IA</span>
+            <span class="badge b-soga">n8n</span>
+          </div>
             </div>
-            <div class="formation-card">
-                <h4>Formation SEO et WordPress</h4>
-                <p>2020</p>
-                <p>Création et optimisation de sites web - 7 jours</p>
+            <dl>
+            <div>
+              <dt>Contexte</dt>
+              <dd>Une conciergerie en création : tout était à construire. Je suis intervenu dès le départ pour concevoir l'ossature opérationnelle et automatiser les deux flux qui coûtent le plus cher quand ils sont gérés à la main — la coordination des équipes terrain et les questions des voyageurs.</dd>
             </div>
-            <div class="formation-card">
-                <h4>Cycle préparatoire intégré (ingénieur)</h4>
-                <p>(2018-2020)</p>
-                <p>INSA Rennes</p>
+            <div>
+              <dt>Ce que j'ai mis en place</dt>
+              <dd>Coordination des agents d'entretien sur WhatsApp (mission, créneau, checklist, compte-rendu en retour), remontée d'incidents structurée en tickets avec photo et logement rattaché, et un bot voyageurs multi-logements qui répond avec les informations propres à chaque bien — en escaladant à un humain ce qu'il ne sait pas traiter.</dd>
             </div>
-            <div class="formation-card">
-                <h4>Baccalauréat Scientifique</h4>
-                <p>2018</p>
-                <p>Mention Très Bien</p>
+            <div class="out">
+              <dt>Résultat</dt>
+              <dd>Une équipe autonome, formée en anglais, <strong>qui fait évoluer les scénarios sans passer par moi</strong>.</dd>
             </div>
+          </dl>
         </div>
-    </section>
+      </article>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <h2 class="section-title">Contactez-moi</h2>
-        <p>N'hésitez pas à me contacter pour discuter de vos projets ou opportunités de collaboration.</p>
-        
-        <div class="contact-grid">
-            <a href="mailto:contact@julienhenry.io" class="contact-item">
-                <i class="fas fa-envelope"></i>
-                <span>contact@julienhenry.io</span>
-            </a>
-            <a href="https://linkedin.com/in/julien-henry-io/" target="_blank" class="contact-item">
-                <i class="fab fa-linkedin"></i>
-                <span>LinkedIn</span>
-            </a>
-            <a href="https://wa.me/33651920872" target="_blank" class="contact-item">
-                <i class="fab fa-whatsapp"></i>
-                <span>WhatsApp</span>
-            </a>
-            <a href="tel:+33651920872" class="contact-item">
-                <i class="fas fa-phone"></i>
-                <span>+33 6 51 92 08 72</span>
-            </a>
+      <article class="case">
+        <div class="card-top" style="background:var(--kunyit);"></div>
+        <div class="case-body">
+            <div class="case-aside">
+              <h3>DossierFacile — BetaGouv</h3>
+              <span class="badge b-neutral">Service public</span>
+              <div class="chips">
+            <span class="badge b-soga">RAG</span>
+            <span class="badge b-soga">Mistral</span>
+            <span class="badge b-soga">Supabase / pgvector</span>
+            <span class="badge b-soga">Mattermost</span>
+          </div>
+            </div>
+            <dl>
+            <div>
+              <dt>Contexte</dt>
+              <dd>Un service public à fort volume : des opérateurs vérifient quotidiennement des pièces justificatives de location, avec un enjeu permanent de détection de faux documents et un besoin de formation continue.</dd>
+            </div>
+            <div>
+              <dt>Ce que j'ai mis en place</dt>
+              <dd>Des ateliers spécialisés sur la détection de faux documents, puis un système RAG complet pour l'assistance aux opérateurs : pipeline d'ingestion documentaire, vectorisation et agent (Mistral), base vectorielle (Supabase/pgvector), intégration Mattermost par webhooks.</dd>
+            </div>
+            <div class="out">
+              <dt>Résultat</dt>
+              <dd><strong>+ 30 %</strong> sur les chiffres globaux de détection, et une assistance disponible <strong>24h/24</strong> qui allège la charge des tuteurs.</dd>
+            </div>
+          </dl>
         </div>
+      </article>
 
-        <div class="hero-buttons" style="margin-top: 40px;">
-            <a href="https://calendly.com/contact-julienhenry" target="_blank" class="btn btn-primary">
-                <i class="fas fa-calendar"></i> Prendre un rendez-vous
-            </a>
-            <a href="/cv-julien-henry.pdf" class="btn btn-secondary" download>
-                <i class="fas fa-download"></i> CV PDF
-            </a>
-        </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer style="text-align: center; padding: 40px 20px; color: var(--text-secondary);">
-        <p>&copy; 2025 Julien Henry - Tous droits réservés</p>
-    </footer>
+<hr class="stitch">
 
-    <script>
-        // Smooth scroll pour la navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+<!-- ══ Le labo ═════════════════════════════════════════════ -->
+<section class="section section-weave" id="labo">
+  <div class="wrap">
+    <div class="lab rv">
+      <div>
+        <p class="sec-label">Le labo</p>
+        <h2 style="font-size:clamp(25px,3.6vw,32px);margin-bottom:16px;">Je construis toute l'année, y compris pour moi</h2>
+        <p class="lede" style="font-size:15.5px;">
+          Une bonne partie de mon temps libre passe à fabriquer mes propres outils : agents dirigés
+          depuis Claude Code ou OpenCode, un agent Hermes auto-hébergé sur mon VPS, des interfaces
+          taillées pour un usage précis.
+        </p>
+        <p class="lede" style="font-size:15.5px;margin-top:13px;">
+          Ce ne sont pas des SaaS et ils ne prétendent pas l'être. Mais c'est là que je casse des
+          choses avant de les proposer à un client — et c'est ce qui fait que j'arrive en mission
+          avec des réponses plutôt que des hypothèses.
+        </p>
+        <a class="btn btn-outline" style="margin-top:24px;" href="/projets/">
+          Voir tous les projets
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
+        </a>
+      </div>
 
-        // Animation de la timeline et des expériences
-        const experienceItems = document.querySelectorAll('.experience-item');
+      <div class="lab-list">
+        <a class="lab-item" href="/projets/verification-cni/">
+          <span>
+            <span class="t">Vérification CNI</span>
+            <span class="d">Lecture de la bande MRZ d'une carte d'identité et contrôle de cohérence des clés.</span>
+          </span>
+          <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
+        </a>
+        <a class="lab-item" href="/projets/quiz-dossierfacile/quiz.html">
+          <span>
+            <span class="t">Quiz opérateurs DossierFacile</span>
+            <span class="d">Outil de formation continue, en design système de l'État. Utilisé en production.</span>
+          </span>
+          <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
+        </a>
+        <a class="lab-item" href="/projets/quiz-logement-jeunes/">
+          <span>
+            <span class="t">Quiz Logement Jeunes</span>
+            <span class="d">Sensibilisation aux arnaques à la location, diffusé par QR code en événement.</span>
+          </span>
+          <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
+        </a>
+        <a class="lab-item" href="/projets/poker/">
+          <span>
+            <span class="t">Poker sans jetons</span>
+            <span class="d">Une soirée, pas de jetons sous la main. Écrit dans la foulée.</span>
+          </span>
+          <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-        function checkExperiences() {
-            experienceItems.forEach((item) => {
-                const rect = item.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
-                
-                // Si l'élément est visible
-                if (rect.top < windowHeight * 0.7 && rect.bottom > 0) {
-                    item.classList.add('visible');
-                }
-            });
-        }
+<!-- ══ Contact ═════════════════════════════════════════════ -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="contact rv">
+      <p class="eyebrow">Parlons-en</p>
+      <h2>Décrivez-moi ce que vous faites encore à la main</h2>
+      <p class="lede" style="text-align:center;">
+        Trente minutes suffisent pour savoir si le sujet vaut une automatisation — et je vous le dirai
+        franchement si ce n'est pas le cas.
+      </p>
+      <div style="margin-top:28px;">
+        <a class="btn btn-primary btn-lg" href="https://calendar.proton.me/bookings#t5u1UMyKpn2-8ykPxkCgGYenajHa3SH2M1uS8z7Jzu0=" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2.5" y="3.5" width="11" height="10" rx="2"/><path d="M2.5 6.8H13.5M5.5 2v3M10.5 2v3"/></svg>
+          Réserver un créneau
+        </a>
+      </div>
+      <div class="contact-links">
+        <a class="lnk" href="mailto:contact@julienhenry.io">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="1.8" y="3.2" width="12.4" height="9.6" rx="2"/><path d="m2.4 4.4 5.6 4 5.6-4"/></svg>
+          contact@julienhenry.io
+        </a>
+        <a class="lnk" href="https://linkedin.com/in/julien-henry-io/" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M3.4 5.9H1.2V14h2.2V5.9ZM2.3 2a1.3 1.3 0 1 0 0 2.6A1.3 1.3 0 0 0 2.3 2ZM14.8 9.3c0-2.2-1.2-3.6-3-3.6a2.6 2.6 0 0 0-2.3 1.3V5.9H7.3V14h2.2V9.7c0-1.1.5-1.8 1.4-1.8s1.3.6 1.3 1.8V14h2.6V9.3Z"/></svg>
+          LinkedIn
+        </a>
+        <a class="lnk" href="https://www.malt.fr/profile/julienlhenry" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h7v7M13 3 3.5 12.5"/></svg>
+          Profil Malt
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Vérifier au chargement et au scroll
-        window.addEventListener('scroll', checkExperiences);
-        window.addEventListener('load', checkExperiences);
+</main>
 
-        // Animation au scroll pour les autres sections
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
+<!-- ══ Pied de page ════════════════════════════════════════ -->
+<footer class="site-foot">
+  <div class="wrap foot-inner">
+    <div class="foot-links">
+      <a href="/projets/">Projets</a>
+      <a href="/cv/">Parcours &amp; CV</a>
+      <a href="mailto:contact@julienhenry.io">Contact</a>
+      <a href="https://linkedin.com/in/julien-henry-io/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <p class="foot-note">© 2026 Julien Henry · Nantes</p>
+  </div>
+</footer>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                }
-            });
-        }, observerOptions);
-
-        // Observer les éléments avec animation
-        document.querySelectorAll('.section-title, .skill-card, .formation-card').forEach(el => {
-            el.style.animationPlayState = 'paused';
-            observer.observe(el);
-        });
-
-        // Navigation active
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-links a');
-
-        function setActiveNav() {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= sectionTop - 100) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.style.color = '';
-                if (link.getAttribute('href').slice(1) === current) {
-                    link.style.color = 'var(--primary-color)';
-                }
-            });
-        }
-
-        window.addEventListener('scroll', setActiveNav);
-
-        // Animation des mots-clés avec highlight
-        const keywords = document.querySelectorAll('.keyword');
-        let hasAnimated = false;
-
-        function animateKeywords() {
-            keywords.forEach((keyword, index) => {
-                setTimeout(() => {
-                    keyword.classList.add('highlight');
-                }, 500 + (index * 400)); // Délai progressif entre chaque mot
-            });
-        }
-
-        // Observer pour déclencher l'animation des mots-clés
-        const profileObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !hasAnimated) {
-                    hasAnimated = true;
-                    animateKeywords();
-                }
-            });
-        }, { threshold: 0.5 });
-
-        const profileSection = document.querySelector('.profile-section');
-        if (profileSection) {
-            profileObserver.observe(profileSection);
-        }
-    </script>
+<script src="/assets/js/theme.js"></script>
 </body>
 </html>

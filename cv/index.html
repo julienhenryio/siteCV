@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Parcours &amp; CV — Julien Henry</title>
+<meta name="description" content="Parcours de Julien Henry : freelance IA & automatisation depuis avril 2025, support utilisateur chez DossierFacile (BetaGouv), développement mobile, création de contenu.">
+<meta name="author" content="Julien Henry">
+<link rel="canonical" href="https://julienhenry.io/cv/">
+<meta name="robots" content="index,follow">
+
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://julienhenry.io/cv/">
+<meta property="og:title" content="Parcours &amp; CV — Julien Henry">
+<meta property="og:description" content="Freelance IA & automatisation. Support utilisateur chez DossierFacile (BetaGouv).">
+<meta property="og:locale" content="fr_FR">
+
+<link rel="icon" href="/assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+<script>try{var t=localStorage.getItem('batik-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
+<link rel="stylesheet" href="/assets/css/batik.css">
+<style>
+/* ── Spécifique au CV ──────────────────────────────────────── */
+.cv-head{display:flex;gap:26px;align-items:center;flex-wrap:wrap;}
+.cv-head img{width:96px;height:96px;border-radius:50%;object-fit:cover;border:3px solid var(--prada);box-shadow:var(--shadow);flex:none;}
+
+/* Frise */
+.tl{position:relative;padding-left:30px;}
+.tl::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1.5px;background:var(--pasir);}
+.xp{position:relative;padding-bottom:40px;}
+.xp:last-child{padding-bottom:0;}
+.xp::before{
+  content:"";position:absolute;left:-30px;top:7px;width:11px;height:11px;
+  background:var(--kain);border:2px solid var(--pasir-3);border-radius:50%;
+}
+.xp.now::before{background:var(--soga);border-color:var(--soga);}
+.xp h3{font-size:20px;}
+.xp .role{font-size:14.5px;color:var(--soga-ink);font-weight:600;margin-top:3px;}
+.xp .when{
+  font:450 12px 'IBM Plex Mono',monospace;color:var(--tinta-soft);
+  margin-top:7px;display:flex;flex-wrap:wrap;gap:5px 14px;
+}
+.xp .desc{font-size:14.5px;color:var(--tinta-soft);margin-top:14px;max-width:66ch;}
+.xp ul{margin:14px 0 0;padding-left:0;list-style:none;display:grid;gap:10px;max-width:66ch;}
+.xp li{position:relative;padding-left:19px;font-size:14.5px;color:var(--tinta-soft);}
+.xp li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--kunyit);transform:rotate(45deg);border-radius:1px;}
+.xp li strong{color:var(--tinta);font-weight:600;}
+
+/* Missions imbriquées */
+.missions{margin-top:18px;display:grid;gap:12px;max-width:66ch;}
+.mission{background:var(--prada);border:1px solid var(--pasir);border-left:3px solid var(--soga);border-radius:0 11px 11px 0;padding:15px 18px;}
+.mission .m-t{font-weight:600;font-size:14.5px;}
+.mission .m-w{font:450 11px 'IBM Plex Mono',monospace;color:var(--tinta-soft);margin-top:2px;}
+.mission .m-d{font-size:13.8px;color:var(--tinta-soft);margin-top:8px;}
+.mission .m-r{font-size:13.8px;margin-top:8px;}
+.mission .m-r strong{font-family:'IBM Plex Mono',monospace;color:var(--soga-ink);}
+
+/* Compétences */
+.sk{background:var(--prada);border:1px solid var(--pasir);border-radius:14px;padding:20px 22px;}
+.sk h3{font-size:15.5px;margin-bottom:12px;display:flex;align-items:center;gap:9px;}
+.sk h3::before{content:"";width:7px;height:7px;background:var(--soga);transform:rotate(45deg);border-radius:1px;flex:none;}
+.sk p{font-size:13.8px;color:var(--tinta-soft);}
+
+/* Formations */
+.edu{display:grid;gap:1px;background:var(--pasir);border:1px solid var(--pasir);border-radius:14px;overflow:hidden;}
+.edu-row{background:var(--prada);padding:16px 20px;display:flex;flex-wrap:wrap;gap:6px 20px;align-items:baseline;}
+.edu-row .y{font:450 12px 'IBM Plex Mono',monospace;color:var(--tinta-soft);min-width:78px;}
+.edu-row .t{font-weight:600;font-size:14.5px;}
+.edu-row .s{font-size:13.5px;color:var(--tinta-soft);}
+.edu-row .s::before{content:"— ";}
+
+.store{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border:1px solid var(--pasir-2);border-radius:9px;font:600 12.5px 'Inter',sans-serif;color:var(--tinta-soft);text-decoration:none;transition:.18s;}
+.store:hover{border-color:var(--soga);color:var(--soga-ink);}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<div class="selvedge"></div>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="/">
+      <span class="mark"></span>
+      <span class="nm">Julien Henry</span>
+      <span class="tg">systèmes &amp; IA</span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-a" href="/">Accueil</a>
+      <a class="nav-a" href="/projets/">Projets</a>
+      <a class="nav-a" href="#experiences">Expériences</a>
+      <a class="nav-a" href="#competences">Compétences</a>
+    </div>
+    <div class="nav-end">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Changer de thème">
+        <svg class="i-moon" width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 9.6A5.9 5.9 0 0 1 6.4 2.5a5.9 5.9 0 1 0 7.1 7.1Z"/></svg>
+        <svg class="i-sun" width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1v1.6M8 13.4V15M15 8h-1.6M2.6 8H1M12.9 3.1l-1.1 1.1M4.2 11.8l-1.1 1.1M12.9 12.9l-1.1-1.1M4.2 4.2 3.1 3.1"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm" href="https://calendar.proton.me/bookings#t5u1UMyKpn2-8ykPxkCgGYenajHa3SH2M1uS8z7Jzu0=" target="_blank" rel="noopener"><span class="cta-full">Prendre rendez-vous</span><span class="cta-short">Rendez-vous</span></a>
+    </div>
+  </div>
+</nav>
+
+<main id="contenu">
+
+<header class="page-head">
+  <div class="wrap">
+    <div class="cv-head">
+      <img src="/assets/images/photo.png" alt="Portrait de Julien Henry" width="96" height="96">
+      <div>
+        <p class="eyebrow">Parcours</p>
+        <h1 style="margin:8px 0 10px;">Julien Henry</h1>
+        <p class="lede" style="font-size:16px;">
+          Freelance IA &amp; automatisation · Support utilisateur chez DossierFacile (BetaGouv) · Nantes
+        </p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══ Profil ══════════════════════════════════════════════ -->
+<section class="section-tight">
+  <div class="wrap">
+    <div class="rv" style="max-width:70ch;">
+      <p class="sec-label">Profil</p>
+      <p style="font-size:15.5px;color:var(--tinta-soft);">
+        J'ai quitté le cycle préparatoire ingénieur de l'INSA Rennes après deux ans pour me lancer à
+        mon compte. Ce n'était pas un abandon, c'était un raccourci : j'apprends nettement plus vite
+        en construisant qu'en suivant un programme.
+      </p>
+      <p style="font-size:15.5px;color:var(--tinta-soft);margin-top:14px;">
+        Depuis, j'ai publié une application mobile, tenu le support d'un service public à très fort
+        volume, et ouvert une activité de freelance en IA et automatisation. Le fil conducteur ne
+        change pas : je comprends assez la technique pour parler aux développeurs, et assez le métier
+        pour voir où ça coince réellement. C'est cette position intermédiaire qui fait mon travail.
+      </p>
+      <p style="font-size:15.5px;color:var(--tinta-soft);margin-top:14px;">
+        Je ne pratique pas la langue de bois. Quand je repère un problème, je le dis — et j'arrive
+        avec quelque chose à proposer.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ Expériences ═════════════════════════════════════════ -->
+<section class="section-tight" id="experiences">
+  <div class="wrap">
+    <p class="sec-label rv">Expériences</p>
+    <div class="tl">
+
+      <!-- Freelance -->
+      <article class="xp now rv">
+        <h3>Freelance / Indépendant</h3>
+        <p class="role">Intégrateur IA &amp; automatisation — missions clients</p>
+        <p class="when"><span>avril 2025 → aujourd'hui</span><span>Nantes, France</span></p>
+        <p class="desc">
+          J'ai accompagné une quinzaine de TPE, PME et indépendants qui perdent du temps sur des
+          tâches répétitives et manuelles. Je conçois des systèmes d'automatisation sur-mesure
+          (n8n, agents IA, intégrations d'API) et je les déploie sur des infrastructures que le
+          client garde sous son contrôle.
+        </p>
+
+        <div class="missions">
+          <div class="mission">
+            <p class="m-t">Family office — traitement de dossiers d'acquisition</p>
+            <p class="m-w">Conseil &amp; audit</p>
+            <p class="m-d">
+              Des dossiers d'audit allant jusqu'à 3 000 pages et 300 pièces justificatives distinctes,
+              vérifiés manuellement pièce par pièce. J'ai mis en place le renommage et le classement
+              automatiques selon une nomenclature stable, la détection des pièces manquantes, les
+              relances automatiques des contreparties et le suivi de l'avancement par client.
+            </p>
+            <p class="m-r">Résultat : le temps de traitement par dossier a été <strong>divisé par 7 à 8</strong>.</p>
+          </div>
+
+          <div class="mission">
+            <p class="m-t">Conciergerie / location courte durée — automatisation complète</p>
+            <p class="m-w">Hôtellerie · décembre 2025 → mars 2026 · Denpasar, Indonésie</p>
+            <p class="m-d">
+              Conciergerie en création, tout était à construire. Coordination des agents d'entretien
+              sur WhatsApp (mission, créneau, checklist, compte-rendu en retour), remontée d'incidents
+              structurée en tickets avec photo et logement rattaché, bot voyageurs multi-logements sur
+              WhatsApp et Telegram, structuration de la base logements et outils self-hosted.
+            </p>
+            <p class="m-r">Résultat : une équipe formée en anglais, <strong>autonome sur ses scénarios</strong>.</p>
+          </div>
+
+          <div class="mission">
+            <p class="m-t">Formation n8n en entreprise</p>
+            <p class="m-w">Français et anglais</p>
+            <p class="m-d">
+              Sessions de montée en compétence pour des équipes qui veulent maintenir et faire évoluer
+              leurs propres automatisations. Je pars de leurs cas d'usage réels, pas d'exercices
+              théoriques : à la sortie, l'équipe modifie ses workflows sans passer par moi.
+            </p>
+          </div>
+
+          <div class="mission">
+            <p class="m-t">Agents IA vocaux</p>
+            <p class="m-d">
+              Conception d'agents conversationnels audio pour la prise d'appel et la qualification
+              de demandes entrantes.
+            </p>
+          </div>
+
+          <div class="mission">
+            <p class="m-t">Infrastructure self-hosted</p>
+            <p class="m-d">
+              Déploiement et administration de stacks complètes sur VPS : Coolify, Docker, Traefik,
+              PostgreSQL/pgvector, n8n, Supabase, NocoDB, Mattermost. L'intérêt pour le client : ses
+              données restent chez lui, et sa facture d'abonnements SaaS fond.
+            </p>
+          </div>
+        </div>
+
+        <div class="chips" style="margin-top:18px;">
+          <span class="badge b-soga">n8n</span>
+          <span class="badge b-soga">Docker</span>
+          <span class="badge b-soga">REST APIs</span>
+          <span class="badge b-soga">Automatisation IA</span>
+          <span class="badge b-soga">Formation IA</span>
+        </div>
+      </article>
+
+      <!-- DossierFacile -->
+      <article class="xp now rv">
+        <h3>DossierFacile — BetaGouv</h3>
+        <p class="role">Support utilisateur, automatisation et détection de fraude</p>
+        <p class="when"><span>juin 2024 → aujourd'hui</span><span>Service public</span></p>
+        <ul>
+          <li>Support client via Crisp sur un service à très fort volume, avec résolution directe des problèmes utilisateurs.</li>
+          <li>Animation d'ateliers spécialisés sur la détection de faux documents, ayant permis d'augmenter de <strong>30 %</strong> les chiffres globaux de détection.</li>
+          <li>
+            Conception et déploiement d'un <strong>système RAG</strong> sur n8n pour l'assistance aux opérateurs :
+            pipeline d'ingestion documentaire automatisé, vectorisation et agent (Mistral), base
+            vectorielle (Supabase/pgvector), intégration Mattermost par webhooks.
+          </li>
+          <li>Impact : assistance disponible <strong>24 h/24</strong>, réduction de la charge des tuteurs, identification des manques dans la documentation.</li>
+        </ul>
+        <div class="chips" style="margin-top:18px;">
+          <span class="badge b-soga">RAG</span>
+          <span class="badge b-soga">Mistral</span>
+          <span class="badge b-soga">Supabase</span>
+          <span class="badge b-soga">Mattermost</span>
+          <span class="badge b-soga">Crisp</span>
+        </div>
+      </article>
+
+      <!-- Deeply -->
+      <article class="xp rv">
+        <h3>Développement d'application mobile</h3>
+        <p class="role">Travailleur indépendant — application Deeply</p>
+        <p class="when"><span>mars 2024 → juillet 2024</span></p>
+        <ul>
+          <li>Conception et développement d'une application Flutter de conversations profondes favorisant l'introspection.</li>
+          <li>Création de l'interface sur Figma, de la maquette à la mise en production.</li>
+          <li>Publication sur les stores iOS et Android, cycle de développement complet piloté sur Notion.</li>
+          <li>Utilisation de l'IA générative pour accélérer la production de code — mon premier vrai travail assisté par agents.</li>
+        </ul>
+        <div class="row" style="margin-top:16px;gap:9px;">
+          <a class="store" href="https://apps.apple.com/id/app/deeply-app/id6504491197" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M11.2 8.5c0-1.5 1.2-2.2 1.3-2.3-.7-1-1.8-1.2-2.2-1.2-.9-.1-1.8.6-2.3.6s-1.2-.6-2-.5c-1 0-2 .6-2.5 1.5-1.1 1.9-.3 4.6.8 6.1.5.7 1.1 1.5 1.9 1.5s1-.5 2-.5 1.2.5 2 .5 1.4-.7 1.9-1.4c.6-.8.8-1.6.8-1.6s-1.6-.6-1.7-2.7ZM9.8 3.9c.4-.5.7-1.2.6-1.9-.6 0-1.4.4-1.8.9-.4.5-.7 1.2-.6 1.9.7 0 1.4-.4 1.8-.9Z"/></svg>
+            App Store
+          </a>
+          <a class="store" href="https://play.google.com/store/apps/details?id=com.deeply.app" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M2.3 1.5a.8.8 0 0 0-.4.7v11.6a.8.8 0 0 0 .4.7l6.2-6.5-6.2-6.5Zm7.1 5.6 1.9-2-6.6-3.7 4.7 5.7Zm0 1.8-4.7 5.7 6.6-3.7-1.9-2Zm2.9-.9 1.9-1.1c.6-.3.6-1.1 0-1.4l-1.9-1.1-2 2.2 2 1.4Z"/></svg>
+            Google Play
+          </a>
+        </div>
+      </article>
+
+      <!-- Contenu -->
+      <article class="xp rv">
+        <h3>Créateur de contenu digital</h3>
+        <p class="role">Travailleur indépendant</p>
+        <p class="when"><span>avril 2021 → juin 2024</span></p>
+        <ul>
+          <li>Création et animation d'une communauté engagée de 7 000 personnes.</li>
+          <li>Vulgarisation sur la conscience numérique, la protection des données personnelles et les technologies web3.</li>
+          <li>Production de fils de discussion atteignant régulièrement plus de 40 000 impressions.</li>
+        </ul>
+      </article>
+
+      <!-- Secourisme -->
+      <article class="xp rv">
+        <h3>Secouriste, centre de vaccination</h3>
+        <p class="when"><span>été 2021</span></p>
+        <ul>
+          <li>Campagne de vaccination contre la COVID-19 : gestion de situations d'urgence et décision sous pression.</li>
+          <li>Communication claire et rassurante avec des publics très variés — la première école du support.</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<hr class="stitch">
+
+<!-- ══ Compétences ═════════════════════════════════════════ -->
+<section class="section-tight" id="competences">
+  <div class="wrap">
+    <p class="sec-label rv">Compétences</p>
+    <div class="grid-cards rv">
+      <div class="sk">
+        <h3>Automatisation &amp; IA</h3>
+        <p>
+          n8n (avancé, auto-hébergé), Make, systèmes RAG, agents conversationnels
+          (WhatsApp, Telegram, vocaux), serveurs MCP, APIs Anthropic / OpenAI / Mistral, Ollama.
+        </p>
+      </div>
+      <div class="sk">
+        <h3>Infrastructure</h3>
+        <p>
+          Docker, Coolify, Traefik, administration de VPS, PostgreSQL et pgvector,
+          Supabase, NocoDB, Mattermost.
+        </p>
+      </div>
+      <div class="sk">
+        <h3>Développement</h3>
+        <p>
+          JavaScript, HTML/CSS, Dart (Flutter). Travail largement assisté par agents
+          (Claude Code, OpenCode, agent Hermes auto-hébergé).
+        </p>
+      </div>
+      <div class="sk">
+        <h3>Support &amp; relation</h3>
+        <p>
+          Crisp, gestion de tickets, détection de fraude documentaire, animation d'ateliers
+          et de formations, communication orale structurée.
+        </p>
+      </div>
+      <div class="sk">
+        <h3>Outils</h3>
+        <p>
+          Notion (gestion de projet), Figma, Google Workspace. Adaptation rapide
+          à tout nouvel outil.
+        </p>
+      </div>
+      <div class="sk">
+        <h3>Langues</h3>
+        <p>
+          Français — langue maternelle.<br>
+          Anglais — C1, IELTS 7,5.<br>
+          Indonésien — B1.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ Formations ══════════════════════════════════════════ -->
+<section class="section-tight" style="padding-bottom:76px;">
+  <div class="wrap">
+    <p class="sec-label rv">Formations</p>
+    <div class="edu rv">
+      <div class="edu-row"><span class="y">2021</span><span class="t">BNSSA &amp; PSE2</span><span class="s">secourisme et sauvetage aquatique</span></div>
+      <div class="edu-row"><span class="y">2020</span><span class="t">Formation SEO et WordPress</span><span class="s">création et optimisation de sites web, 7 jours</span></div>
+      <div class="edu-row"><span class="y">2018 – 2020</span><span class="t">Cycle préparatoire intégré ingénieur</span><span class="s">INSA Rennes, interrompu volontairement</span></div>
+      <div class="edu-row"><span class="y">2018</span><span class="t">Baccalauréat scientifique</span><span class="s">mention Très Bien</span></div>
+    </div>
+
+    <div class="rv" style="margin-top:34px;display:flex;flex-wrap:wrap;gap:12px;">
+      <a class="btn btn-primary" href="https://calendar.proton.me/bookings#t5u1UMyKpn2-8ykPxkCgGYenajHa3SH2M1uS8z7Jzu0=" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2.5" y="3.5" width="11" height="10" rx="2"/><path d="M2.5 6.8H13.5M5.5 2v3M10.5 2v3"/></svg>
+        Prendre rendez-vous
+      </a>
+      <a class="btn btn-outline" href="https://www.malt.fr/profile/julienlhenry" target="_blank" rel="noopener">
+        Mon profil Malt
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h7v7M13 3 3.5 12.5"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="mailto:contact@julienhenry.io">contact@julienhenry.io</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-inner">
+    <div class="foot-links">
+      <a href="/">Accueil</a>
+      <a href="/projets/">Projets</a>
+      <a href="mailto:contact@julienhenry.io">Contact</a>
+      <a href="https://linkedin.com/in/julien-henry-io/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <p class="foot-note">© 2026 Julien Henry · Nantes</p>
+  </div>
+</footer>
+
+<script src="/assets/js/theme.js"></script>
+</body>
+</html>
