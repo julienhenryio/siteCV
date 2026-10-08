@@ -83,15 +83,11 @@
 .case .out strong{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--soga-ink);}
 
 /* Labo */
-.lab{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:44px;align-items:start;}
-@media (max-width:880px){.lab{grid-template-columns:1fr;gap:28px;}}
-.lab-list{display:grid;gap:11px;}
-.lab-item{display:flex;gap:16px;align-items:center;padding:14px 17px;background:var(--prada);border:1px solid var(--pasir);border-radius:11px;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s;}
-.lab-item:hover{border-color:var(--soga);transform:translateX(2px);}
-.lab-item:focus-visible{outline:none;box-shadow:var(--ring);}
-.lab-item .t{display:block;font-weight:600;font-size:14.5px;}
-.lab-item .d{display:block;font-size:13px;color:var(--tinta-soft);margin-top:3px;line-height:1.45;}
-.lab-item .arrow{margin-left:auto;color:var(--soga-ink);flex:none;}
+.lab{max-width:760px;margin:0 auto;text-align:center;}
+.lab .sec-label{justify-content:center;}
+.lab h2{font-size:clamp(25px,3.6vw,32px);margin-bottom:18px;}
+.lab .lede{max-width:60ch;margin:0 auto;}
+.lab .lede + .lede{margin-top:15px;}
 
 /* Contact */
 .contact{background:var(--prada);border:1px solid var(--pasir);border-radius:18px;padding:44px 38px;text-align:center;box-shadow:var(--shadow);}
@@ -412,55 +408,18 @@
 <section class="section section-weave" id="labo">
   <div class="wrap">
     <div class="lab rv">
-      <div>
-        <p class="sec-label">Le labo</p>
-        <h2 style="font-size:clamp(25px,3.6vw,32px);margin-bottom:16px;">Je construis toute l'année, y compris pour moi</h2>
-        <p class="lede" style="font-size:15.5px;">
-          Une bonne partie de mon temps libre passe à fabriquer mes propres outils : agents dirigés
-          depuis Claude Code ou OpenCode, un agent Hermes auto-hébergé sur mon VPS, des interfaces
-          taillées pour un usage précis.
-        </p>
-        <p class="lede" style="font-size:15.5px;margin-top:13px;">
-          Ce ne sont pas des SaaS et ils ne prétendent pas l'être. Mais c'est là que je casse des
-          choses avant de les proposer à un client — et c'est ce qui fait que j'arrive en mission
-          avec des réponses plutôt que des hypothèses.
-        </p>
-        <a class="btn btn-outline" style="margin-top:24px;" href="/projets/">
-          Voir tous les projets
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
-        </a>
-      </div>
-
-      <div class="lab-list">
-        <a class="lab-item" href="/projets/verification-cni/">
-          <span>
-            <span class="t">Vérification CNI</span>
-            <span class="d">Lecture de la bande MRZ d'une carte d'identité et contrôle de cohérence des clés.</span>
-          </span>
-          <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
-        </a>
-        <a class="lab-item" href="/projets/quiz-dossierfacile/quiz.html">
-          <span>
-            <span class="t">Quiz opérateurs DossierFacile</span>
-            <span class="d">Outil de formation continue, en design système de l'État. Utilisé en production.</span>
-          </span>
-          <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
-        </a>
-        <a class="lab-item" href="/projets/quiz-logement-jeunes/">
-          <span>
-            <span class="t">Quiz Logement Jeunes</span>
-            <span class="d">Sensibilisation aux arnaques à la location, diffusé par QR code en événement.</span>
-          </span>
-          <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
-        </a>
-        <a class="lab-item" href="/projets/poker/">
-          <span>
-            <span class="t">Poker sans jetons</span>
-            <span class="d">Une soirée, pas de jetons sous la main. Écrit dans la foulée.</span>
-          </span>
-          <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
-        </a>
-      </div>
+      <p class="sec-label">Le labo</p>
+      <h2>Je construis toute l'année, y compris pour moi</h2>
+      <p class="lede">
+        Une bonne partie de mon temps libre passe à fabriquer mes propres outils : agents dirigés
+        depuis Claude Code ou OpenCode, un agent Hermes auto-hébergé sur mon VPS, des interfaces
+        taillées pour un usage précis.
+      </p>
+      <p class="lede">
+        Ce ne sont pas des SaaS et ils ne prétendent pas l'être. Mais c'est là que je casse des
+        choses avant de les proposer à un client — et c'est ce qui fait que j'arrive en mission
+        avec des réponses plutôt que des hypothèses.
+      </p>
     </div>
   </div>
 </section>
@@ -505,7 +464,6 @@
 <footer class="site-foot">
   <div class="wrap foot-inner">
     <div class="foot-links">
-      <a href="/projets/">Projets</a>
       <a href="/cv/">Parcours &amp; CV</a>
       <a href="mailto:contact@julienhenry.io">Contact</a>
       <a href="https://linkedin.com/in/julien-henry-io/" target="_blank" rel="noopener">LinkedIn</a>
