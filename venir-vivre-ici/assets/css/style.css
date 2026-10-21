@@ -1,0 +1,264 @@
+/* ==========================================================================
+   Surcouche légère du prototype — s'appuie uniquement sur les jetons DSFR.
+   Aucune couleur hors palette DSFR, typographie Marianne héritée.
+   ========================================================================== */
+
+:root {
+  /* Couleurs des graphiques (validées daltonisme, palette DSFR) */
+  --serie-ville: #6a6af4;   /* blue-france-main-525 */
+  --serie-village: #009081; /* green-archipel */
+}
+:root[data-fr-theme="dark"] {
+  --serie-ville: #8585f6;
+  --serie-village: #21ab8e;
+}
+
+/* ---------- Accueil : bandeau visuel ---------- */
+.hero {
+  position: relative;
+  min-height: 34rem;
+  display: flex;
+  align-items: center;
+  background: #1e1e1e url("../img/accueil-hero.jpg") center 55% / cover no-repeat;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 40, .72) 0%, rgba(0, 0, 40, .45) 45%, rgba(0, 0, 40, 0) 75%);
+}
+.hero > .fr-container { position: relative; width: 100%; }
+.hero__titre { color: #fff; font-size: 3rem; line-height: 3.5rem; max-width: 36rem; }
+.hero__texte { color: #fff; font-size: 1.25rem; line-height: 2rem; max-width: 34rem; }
+.hero__recherche {
+  background: var(--background-default-grey);
+  padding: 1.5rem;
+  box-shadow: 0 6px 18px 0 rgba(0, 0, 18, .16);
+}
+
+.credit-photo {
+  position: absolute;
+  right: .5rem;
+  bottom: .25rem;
+  margin: 0;
+  font-size: .6875rem;
+  color: rgba(255, 255, 255, .85);
+}
+
+/* ---------- Chiffres clés ---------- */
+.chiffre { border-left: 4px solid var(--border-active-blue-france); padding-left: 1rem; }
+.chiffre__valeur { display: block; font-size: 2.5rem; line-height: 3rem; font-weight: 700; color: var(--text-title-blue-france); }
+.chiffre__libelle { display: block; color: var(--text-mention-grey); }
+
+/* ---------- Étapes "comment ça marche" ---------- */
+.etape__numero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--background-action-high-blue-france);
+  color: var(--text-inverted-blue-france);
+  font-weight: 700;
+}
+
+/* ---------- Bandeau de page avec photo ---------- */
+.bandeau-photo {
+  position: relative;
+  height: 22rem;
+  background: #1e1e1e center / cover no-repeat;
+}
+.bandeau-photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0, 0, 30, .75) 0%, rgba(0, 0, 30, .1) 60%);
+}
+.bandeau-photo .fr-container { position: relative; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 2rem; }
+.bandeau-photo h1, .bandeau-photo p { color: #fff; }
+
+/* ---------- Résultats : carte + liste ---------- */
+.resultats { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.5rem; }
+.carte-communes { height: 38rem; border: 1px solid var(--border-default-grey); position: sticky; top: 1rem; }
+.liste-communes { display: flex; flex-direction: column; gap: 1rem; }
+@media (max-width: 62em) {
+  .resultats { grid-template-columns: 1fr; }
+  .carte-communes { height: 24rem; position: static; }
+}
+
+.score {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .25rem;
+  font-weight: 700;
+  color: var(--text-default-success);
+}
+.score__valeur { font-size: 1.5rem; }
+
+.carte-commune--active { box-shadow: inset 0 0 0 2px var(--border-active-blue-france); }
+
+.marqueur {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--background-action-high-blue-france);
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
+}
+.marqueur span { transform: rotate(45deg); color: #fff; font-weight: 700; font-size: .75rem; }
+.marqueur--actif { background: var(--background-action-high-green-archipel, #009081); width: 2.75rem; height: 2.75rem; }
+.marqueur--ville { background: var(--background-contrast-grey); border-radius: 4px; transform: none; width: auto; height: auto; padding: .125rem .5rem; }
+.marqueur--ville span { transform: none; color: var(--text-title-grey); font-size: .875rem; white-space: nowrap; }
+.leaflet-container { font-family: Marianne, arial, sans-serif; }
+
+/* ---------- Fiche commune ---------- */
+.galerie { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 13rem 13rem; gap: .5rem; }
+.galerie img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.galerie img:first-child { grid-row: span 2; }
+@media (max-width: 48em) {
+  .galerie { grid-template-columns: 1fr 1fr; grid-template-rows: 14rem 8rem 8rem; }
+  .galerie img:first-child { grid-column: span 2; grid-row: auto; }
+}
+
+.indicateur {
+  height: 100%;
+  padding: 1.25rem;
+  background: var(--background-default-grey);
+  border: 1px solid var(--border-default-grey);
+}
+.indicateur__tete { display: flex; align-items: center; gap: .5rem; margin-bottom: .5rem; color: var(--text-title-blue-france); font-weight: 700; }
+.indicateur__valeur { font-size: 1.5rem; line-height: 2rem; font-weight: 700; margin: 0; }
+.indicateur__source { font-size: .75rem; color: var(--text-mention-grey); margin: .5rem 0 0; }
+
+.mot-maire { display: flex; gap: 1.5rem; align-items: flex-start; }
+.portrait {
+  flex: none;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-contrast-blue-france);
+  color: var(--text-title-blue-france);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.portrait--sm { width: 3rem; height: 3rem; font-size: 1rem; }
+
+.encart-action {
+  position: sticky;
+  top: 1rem;
+  padding: 1.5rem;
+  background: var(--background-alt-blue-france);
+}
+
+/* ---------- Simulateur ---------- */
+.comparatif { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.total {
+  padding: 1.5rem;
+  border-top: 4px solid;
+  background: var(--background-default-grey);
+  border-left: 1px solid var(--border-default-grey);
+  border-right: 1px solid var(--border-default-grey);
+  border-bottom: 1px solid var(--border-default-grey);
+}
+.total--ville { border-top-color: var(--serie-ville); }
+.total--village { border-top-color: var(--serie-village); }
+.total__valeur { font-size: 2.5rem; line-height: 3rem; font-weight: 700; margin: 0; }
+
+.economie {
+  padding: 1.5rem;
+  background: var(--background-alt-green-emeraude);
+  border-top: 4px solid var(--serie-village);
+  text-align: center;
+}
+.economie__valeur { font-size: 3rem; line-height: 3.5rem; font-weight: 700; color: var(--text-title-grey); margin: 0; }
+
+.graph { margin: 0; }
+.graph__legende { display: flex; gap: 1.5rem; margin-bottom: 1rem; font-size: .875rem; }
+.graph__legende > span::before { content: ""; display: inline-block; width: .75rem; height: .75rem; border-radius: 2px; margin-right: .5rem; vertical-align: -1px; }
+.graph__legende .l-ville::before { background: var(--serie-ville); }
+.graph__legende .l-village::before { background: var(--serie-village); }
+.graph__ligne { display: grid; grid-template-columns: 11rem 1fr; gap: .75rem; align-items: center; padding: .375rem 0; }
+.graph__ligne + .graph__ligne { border-top: 1px solid var(--border-default-grey); }
+.graph__libelle { font-size: .875rem; color: var(--text-default-grey); }
+.graph__barres { display: flex; flex-direction: column; gap: 2px; }
+.graph__barre { position: relative; height: .875rem; display: flex; align-items: center; }
+.graph__barre i { display: block; height: 100%; border-radius: 0 4px 4px 0; min-width: 2px; transition: width .3s ease; }
+.graph__barre--ville i { background: var(--serie-ville); }
+.graph__barre--village i { background: var(--serie-village); }
+.graph__barre b { font-size: .75rem; font-weight: 500; margin-left: .5rem; color: var(--text-mention-grey); white-space: nowrap; }
+.graph__barre:hover b { color: var(--text-default-grey); font-weight: 700; }
+
+.champ-montant { display: grid; grid-template-columns: 1fr 7rem 7rem; gap: .75rem; align-items: center; padding: .5rem 0; border-bottom: 1px solid var(--border-default-grey); }
+.champ-montant .fr-input { margin-top: 0; text-align: right; }
+.champ-montant--tete { font-size: .875rem; font-weight: 700; border-bottom-width: 2px; }
+.champ-montant--tete span:not(:first-child) { text-align: right; }
+.champ-montant--total { font-weight: 700; border-bottom: none; }
+.champ-montant--total span { text-align: right; font-size: 1.125rem; }
+.champ-montant label { font-size: .9375rem; }
+
+/* ---------- Tableau de bord mairie ---------- */
+.kpi {
+  padding: 1.25rem 1.5rem;
+  height: 100%;
+  background: var(--background-default-grey);
+  border: 1px solid var(--border-default-grey);
+}
+.kpi__valeur { font-size: 2.25rem; line-height: 2.75rem; font-weight: 700; margin: 0; color: var(--text-title-grey); }
+.kpi__libelle { margin: 0; color: var(--text-mention-grey); }
+.kpi__evolution { margin: .25rem 0 0; font-size: .875rem; color: var(--text-default-success); }
+
+.alerte-demande {
+  border: 2px solid var(--border-active-blue-france);
+  background: var(--background-alt-blue-france);
+  padding: 1.5rem;
+}
+
+.barre-h { display: grid; grid-template-columns: 9rem 1fr 3rem; gap: .75rem; align-items: center; padding: .25rem 0; font-size: .875rem; }
+.barre-h__piste { height: .875rem; }
+.barre-h__piste i { display: block; height: 100%; background: var(--serie-ville); border-radius: 0 4px 4px 0; }
+.barre-h__valeur { text-align: right; font-weight: 700; }
+
+.ligne-surlignee td { background: var(--background-alt-blue-france) !important; }
+
+.jauge { height: .5rem; background: var(--background-contrast-grey); border-radius: 4px; overflow: hidden; }
+.jauge i { display: block; height: 100%; background: var(--background-action-high-blue-france); }
+
+.agenda { display: grid; grid-template-columns: 8rem repeat(8, 1fr); gap: 2px; font-size: .75rem; }
+.agenda__entete { color: var(--text-mention-grey); text-align: center; padding-bottom: .25rem; }
+.agenda__nom { font-weight: 500; padding-right: .5rem; align-self: center; }
+.agenda__case { height: 2rem; background: var(--background-contrast-grey); }
+.agenda__case--occupe { background: var(--serie-ville); }
+.agenda__case--demande {
+  background: repeating-linear-gradient(45deg, var(--serie-village) 0 6px, transparent 6px 10px);
+  outline: 2px solid var(--serie-village);
+  outline-offset: -2px;
+}
+
+/* ---------- Parcours / sommaire ---------- */
+.vignette-ecran { border: 1px solid var(--border-default-grey); }
+
+/* ---------- Divers ---------- */
+.texte-mention { color: var(--text-mention-grey); }
+.fond-alt { background: var(--background-alt-grey); }
+.fond-bleu { background: var(--background-alt-blue-france); }
+.liste-sans-puce { list-style: none; padding-left: 0; }
+.liste-sans-puce li { padding: .25rem 0; }
+.liste-icones li { display: flex; gap: .5rem; align-items: flex-start; padding: .375rem 0; }
+.liste-icones li::before { flex: none; }
+.img-carte { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
+
+@media (max-width: 48em) {
+  .hero { min-height: auto; padding: 3rem 0; }
+  .hero__titre { font-size: 2rem; line-height: 2.5rem; }
+  .comparatif { grid-template-columns: 1fr; }
+  .graph__ligne { grid-template-columns: 1fr; }
+  .champ-montant { grid-template-columns: 1fr 5rem 5rem; }
+}

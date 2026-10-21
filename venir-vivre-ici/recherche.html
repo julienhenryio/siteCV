@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="fr" data-fr-scheme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="stylesheet" href="dsfr/dsfr.min.css">
+  <link rel="stylesheet" href="dsfr/utility/icons/icons.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="apple-touch-icon" href="dsfr/favicon/apple-touch-icon.png">
+  <link rel="icon" href="dsfr/favicon/favicon.svg" type="image/svg+xml">
+  <title>Mes critères</title>
+</head>
+<body data-titre="Mes critères" data-nav="recherche">
+  <div class="fr-skiplinks">
+    <nav class="fr-container" role="navigation" aria-label="Accès rapide">
+      <ul class="fr-skiplinks__list">
+        <li><a class="fr-link" href="#contenu">Contenu</a></li>
+        <li><a class="fr-link" href="#footer">Pied de page</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div id="en-tete"></div>
+
+  <main id="contenu" role="main" class="fond-alt">
+    <div class="fr-container fr-pb-8w">
+      <nav role="navigation" class="fr-breadcrumb fr-mt-0 fr-pt-3w fr-mb-3w" aria-label="vous êtes ici :">
+        <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="fil">Voir le fil d’Ariane</button>
+        <div class="fr-collapse" id="fil">
+          <ol class="fr-breadcrumb__list">
+            <li><a class="fr-breadcrumb__link" href="index.html">Accueil</a></li>
+            <li><a class="fr-breadcrumb__link" aria-current="page">Mes critères</a></li>
+          </ol>
+        </div>
+      </nav>
+
+      <div class="fr-grid-row fr-grid-row--gutters">
+        <div class="fr-col-12 fr-col-lg-8">
+          <h1 class="fr-mb-1w">Qu'est-ce qui compte pour vous&nbsp;?</h1>
+          <p class="fr-text--lg fr-mb-4w">Indiquez vos besoins. Nous les comparons aux données publiques de chaque commune rurale.</p>
+
+          <form id="criteres" action="resultats.html">
+
+            <!-- 1. Trajets -->
+            <section class="fr-p-4w fr-mb-3w" style="background:var(--background-default-grey)">
+              <h2 class="fr-h4"><span class="fr-icon-road-map-line fr-mr-1w" aria-hidden="true"></span>Trajets</h2>
+              <div class="fr-grid-row fr-grid-row--gutters">
+                <div class="fr-col-12 fr-col-md-6">
+                  <div class="fr-input-group">
+                    <label class="fr-label" for="ville">Grande ville où vous devez vous rendre
+                      <span class="fr-hint-text">Pour le travail, la famille, les loisirs…</span>
+                    </label>
+                    <input class="fr-input" id="ville" type="text" value="Lyon (gare de la Part-Dieu)">
+                  </div>
+                </div>
+                <div class="fr-col-12 fr-col-md-6">
+                  <fieldset class="fr-segmented fr-mt-1w">
+                    <legend class="fr-segmented__legend">Vous y allez plutôt</legend>
+                    <div class="fr-segmented__elements">
+                      <div class="fr-segmented__element">
+                        <input value="train" checked type="radio" id="mode-train" name="mode">
+                        <label class="fr-label fr-icon-train-line" for="mode-train">En train</label>
+                      </div>
+                      <div class="fr-segmented__element">
+                        <input value="voiture" type="radio" id="mode-voiture" name="mode">
+                        <label class="fr-label fr-icon-car-line" for="mode-voiture">En voiture</label>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+                <div class="fr-col-12 fr-col-md-6">
+                  <div class="fr-range-group">
+                    <label class="fr-label" for="r-trajet">Temps de trajet maximal
+                      <span class="fr-hint-text">Porte à porte, vers la Part-Dieu</span>
+                    </label>
+                    <div class="fr-range" data-fr-suffix=" min">
+                      <span class="fr-range__output" aria-hidden="true">60 min</span>
+                      <input id="r-trajet" type="range" min="15" max="120" step="5" value="60">
+                      <span class="fr-range__min" aria-hidden="true">15 min</span>
+                      <span class="fr-range__max" aria-hidden="true">2 h</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="fr-col-12 fr-col-md-6">
+                  <div class="fr-range-group">
+                    <label class="fr-label" for="r-gare">Distance maximale à une gare
+                      <span class="fr-hint-text">Gare TER ou TGV</span>
+                    </label>
+                    <div class="fr-range" data-fr-suffix=" km">
+                      <span class="fr-range__output" aria-hidden="true">15 km</span>
+                      <input id="r-gare" type="range" min="0" max="50" step="5" value="15">
+                      <span class="fr-range__min" aria-hidden="true">0 km</span>
+                      <span class="fr-range__max" aria-hidden="true">50 km</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- 2. Connexion -->
+            <section class="fr-p-4w fr-mb-3w" style="background:var(--background-default-grey)">
+              <h2 class="fr-h4"><span class="fr-icon-wifi-line fr-mr-1w" aria-hidden="true"></span>Connexion internet</h2>
+              <fieldset class="fr-segmented">
+                <legend class="fr-segmented__legend">Débit minimum
+                  <span class="fr-hint-text">Indispensable si vous télétravaillez. Source&nbsp;: Arcep.</span>
+                </legend>
+                <div class="fr-segmented__elements">
+                  <div class="fr-segmented__element">
+                    <input type="radio" id="debit-30" name="debit"><label class="fr-label" for="debit-30">30 Mbit/s</label>
+                  </div>
+                  <div class="fr-segmented__element">
+                    <input type="radio" id="debit-100" name="debit"><label class="fr-label" for="debit-100">100 Mbit/s</label>
+                  </div>
+                  <div class="fr-segmented__element">
+                    <input type="radio" id="debit-fibre" name="debit" checked><label class="fr-label" for="debit-fibre">Fibre (jusqu'à 1 Gbit/s)</label>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="fr-toggle fr-mt-2w">
+                <input type="checkbox" class="fr-toggle__input" id="t-4g" checked>
+                <label class="fr-toggle__label" for="t-4g">Bonne couverture 4G au centre du village</label>
+              </div>
+            </section>
+
+            <!-- 3. Services -->
+            <section class="fr-p-4w fr-mb-3w" style="background:var(--background-default-grey)">
+              <h2 class="fr-h4"><span class="fr-icon-store-line fr-mr-1w" aria-hidden="true"></span>Services du quotidien</h2>
+              <div class="fr-grid-row fr-grid-row--gutters">
+                <div class="fr-col-12 fr-col-md-6">
+                  <fieldset class="fr-fieldset" aria-labelledby="leg-enfants">
+                    <legend class="fr-fieldset__legend--regular fr-fieldset__legend" id="leg-enfants">Enfants</legend>
+                    <div class="fr-fieldset__element"><div class="fr-checkbox-group">
+                      <input type="checkbox" id="s-ecole" checked><label class="fr-label" for="s-ecole">École maternelle et élémentaire dans la commune</label>
+                    </div></div>
+                    <div class="fr-fieldset__element"><div class="fr-checkbox-group">
+                      <input type="checkbox" id="s-periscolaire" checked><label class="fr-label" for="s-periscolaire">Garderie périscolaire et cantine</label>
+                    </div></div>
+                    <div class="fr-fieldset__element"><div class="fr-checkbox-group">
+                      <input type="checkbox" id="s-college"><label class="fr-label" for="s-college">Collège à moins de 20 minutes</label>
+                    </div></div>
+                  </fieldset>
+                </div>
+                <div class="fr-col-12 fr-col-md-6">
+                  <fieldset class="fr-fieldset" aria-labelledby="leg-sante">
+                    <legend class="fr-fieldset__legend--regular fr-fieldset__legend" id="leg-sante">Santé et commerces</legend>
+                    <div class="fr-fieldset__element"><div class="fr-checkbox-group">
+                      <input type="checkbox" id="s-medecin" checked><label class="fr-label" for="s-medecin">Médecin généraliste à moins de 10 km</label>
+                    </div></div>
+                    <div class="fr-fieldset__element"><div class="fr-checkbox-group">
+                      <input type="checkbox" id="s-pharma"><label class="fr-label" for="s-pharma">Pharmacie à moins de 10 km</label>
+                    </div></div>
+                    <div class="fr-fieldset__element"><div class="fr-checkbox-group">
+                      <input type="checkbox" id="s-commerces" checked><label class="fr-label" for="s-commerces">Boulangerie ou épicerie dans le village</label>
+                    </div></div>
+                  </fieldset>
+                </div>
+              </div>
+            </section>
+
+            <!-- 4. Logement -->
+            <section class="fr-p-4w fr-mb-3w" style="background:var(--background-default-grey)">
+              <h2 class="fr-h4"><span class="fr-icon-home-4-line fr-mr-1w" aria-hidden="true"></span>Logement</h2>
+              <div class="fr-grid-row fr-grid-row--gutters">
+                <div class="fr-col-12 fr-col-md-6">
+                  <fieldset class="fr-segmented">
+                    <legend class="fr-segmented__legend">Vous souhaitez</legend>
+                    <div class="fr-segmented__elements">
+                      <div class="fr-segmented__element">
+                        <input type="radio" id="l-louer" name="projet" checked><label class="fr-label" for="l-louer">Louer</label>
+                      </div>
+                      <div class="fr-segmented__element">
+                        <input type="radio" id="l-acheter" name="projet"><label class="fr-label" for="l-acheter">Acheter</label>
+                      </div>
+                      <div class="fr-segmented__element">
+                        <input type="radio" id="l-indecis" name="projet"><label class="fr-label" for="l-indecis">Je ne sais pas encore</label>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+                <div class="fr-col-12 fr-col-md-6">
+                  <div class="fr-range-group">
+                    <label class="fr-label" for="r-budget">Loyer maximal, charges comprises</label>
+                    <div class="fr-range" data-fr-suffix=" €">
+                      <span class="fr-range__output" aria-hidden="true">900 €</span>
+                      <input id="r-budget" type="range" min="300" max="2000" step="50" value="900">
+                      <span class="fr-range__min" aria-hidden="true">300 €</span>
+                      <span class="fr-range__max" aria-hidden="true">2 000 €</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="fr-col-12 fr-col-md-6">
+                  <div class="fr-select-group">
+                    <label class="fr-label" for="pieces">Nombre de pièces minimum</label>
+                    <select class="fr-select" id="pieces">
+                      <option>2 pièces</option>
+                      <option>3 pièces</option>
+                      <option selected>4 pièces</option>
+                      <option>5 pièces et plus</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="fr-col-12 fr-col-md-6">
+                  <div class="fr-checkbox-group fr-mt-5w">
+                    <input type="checkbox" id="l-jardin" checked><label class="fr-label" for="l-jardin">Avec un jardin</label>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- 5. Projet -->
+            <section class="fr-p-4w fr-mb-3w" style="background:var(--background-default-grey)">
+              <h2 class="fr-h4"><span class="fr-icon-team-line fr-mr-1w" aria-hidden="true"></span>Votre foyer et votre activité</h2>
+              <div class="fr-grid-row fr-grid-row--gutters">
+                <div class="fr-col-6 fr-col-md-3">
+                  <div class="fr-input-group">
+                    <label class="fr-label" for="adultes">Adultes</label>
+                    <input class="fr-input" id="adultes" type="number" value="2" min="1">
+                  </div>
+                </div>
+                <div class="fr-col-6 fr-col-md-3">
+                  <div class="fr-input-group">
+                    <label class="fr-label" for="enfants">Enfants</label>
+                    <input class="fr-input" id="enfants" type="number" value="2" min="0">
+                  </div>
+                </div>
+                <div class="fr-col-12 fr-col-md-6">
+                  <fieldset class="fr-fieldset" aria-labelledby="leg-activite">
+                    <legend class="fr-fieldset__legend--regular fr-fieldset__legend" id="leg-activite">Activité professionnelle</legend>
+                    <div class="fr-fieldset__element"><div class="fr-checkbox-group">
+                      <input type="checkbox" id="a-teletravail" checked><label class="fr-label" for="a-teletravail">Une personne télétravaille</label>
+                    </div></div>
+                    <div class="fr-fieldset__element"><div class="fr-checkbox-group">
+                      <input type="checkbox" id="a-emploi" checked><label class="fr-label" for="a-emploi">Une personne cherche un emploi sur place
+                        <span class="fr-hint-text">Métier&nbsp;: infirmier ou infirmière</span></label>
+                    </div></div>
+                    <div class="fr-fieldset__element"><div class="fr-checkbox-group">
+                      <input type="checkbox" id="a-reprise"><label class="fr-label" for="a-reprise">Reprendre un commerce, un atelier ou une ferme</label>
+                    </div></div>
+                  </fieldset>
+                </div>
+              </div>
+            </section>
+          </form>
+        </div>
+
+        <!-- Récapitulatif -->
+        <div class="fr-col-12 fr-col-lg-4">
+          <aside class="encart-action fr-mt-lg-15w">
+            <p class="fr-text--sm fr-mb-1w texte-mention">Avec vos critères</p>
+            <p class="chiffre__valeur fr-mb-0">23 communes</p>
+            <p class="fr-mb-3w">correspondent à votre recherche, dont <strong>6 à plus de 90&nbsp;%</strong>.</p>
+            <ul class="fr-tags-group fr-mb-2w">
+              <li><p class="fr-tag fr-tag--sm">Lyon en 1 h max</p></li>
+              <li><p class="fr-tag fr-tag--sm">Gare à 15 km max</p></li>
+              <li><p class="fr-tag fr-tag--sm">Fibre</p></li>
+              <li><p class="fr-tag fr-tag--sm">École</p></li>
+              <li><p class="fr-tag fr-tag--sm">Médecin</p></li>
+              <li><p class="fr-tag fr-tag--sm">Commerces</p></li>
+              <li><p class="fr-tag fr-tag--sm">Maison 4 p. ≤ 900 €</p></li>
+              <li><p class="fr-tag fr-tag--sm">Poste d'infirmier</p></li>
+            </ul>
+            <button class="fr-btn fr-btn--lg fr-btn--icon-right fr-icon-arrow-right-line" type="submit" form="criteres" style="width:100%;justify-content:center">Voir les 23 communes</button>
+            <p class="fr-text--xs texte-mention fr-mt-2w fr-mb-0"><span class="fr-icon-lock-line fr-icon--sm" aria-hidden="true"></span> Vos critères ne sont transmis aux mairies que si vous prenez contact avec elles.</p>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="pied"></div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script type="module" src="dsfr/dsfr.module.min.js"></script>
+  <script nomodule src="dsfr/dsfr.nomodule.min.js"></script>
+</body>
+</html>

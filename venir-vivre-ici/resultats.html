@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="fr" data-fr-scheme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="stylesheet" href="dsfr/dsfr.min.css">
+  <link rel="stylesheet" href="dsfr/utility/icons/icons.min.css">
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="apple-touch-icon" href="dsfr/favicon/apple-touch-icon.png">
+  <link rel="icon" href="dsfr/favicon/favicon.svg" type="image/svg+xml">
+  <title>Communes correspondantes</title>
+</head>
+<body data-titre="Communes correspondantes" data-nav="recherche">
+  <div class="fr-skiplinks">
+    <nav class="fr-container" role="navigation" aria-label="Accès rapide">
+      <ul class="fr-skiplinks__list">
+        <li><a class="fr-link" href="#contenu">Contenu</a></li>
+        <li><a class="fr-link" href="#liste">Liste des communes</a></li>
+        <li><a class="fr-link" href="#footer">Pied de page</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div id="en-tete"></div>
+
+  <main id="contenu" role="main">
+    <div class="fr-container fr-pb-8w">
+      <nav role="navigation" class="fr-breadcrumb fr-mt-0 fr-pt-3w fr-mb-2w" aria-label="vous êtes ici :">
+        <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="fil">Voir le fil d’Ariane</button>
+        <div class="fr-collapse" id="fil">
+          <ol class="fr-breadcrumb__list">
+            <li><a class="fr-breadcrumb__link" href="index.html">Accueil</a></li>
+            <li><a class="fr-breadcrumb__link" href="recherche.html">Mes critères</a></li>
+            <li><a class="fr-breadcrumb__link" aria-current="page">Communes correspondantes</a></li>
+          </ol>
+        </div>
+      </nav>
+
+      <div class="fr-grid-row fr-grid-row--gutters fr-grid-row--bottom fr-mb-2w">
+        <div class="fr-col-12 fr-col-md-8">
+          <h1 class="fr-h2 fr-mb-1w">23 communes correspondent à vos critères</h1>
+          <ul class="fr-tags-group fr-mb-0">
+            <li><button type="button" class="fr-tag fr-tag--sm fr-tag--dismiss" aria-label="Retirer Lyon en 1 h maximum">Lyon en 1 h max</button></li>
+            <li><button type="button" class="fr-tag fr-tag--sm fr-tag--dismiss" aria-label="Retirer Gare à 15 km maximum">Gare ≤ 15 km</button></li>
+            <li><button type="button" class="fr-tag fr-tag--sm fr-tag--dismiss" aria-label="Retirer Fibre">Fibre</button></li>
+            <li><button type="button" class="fr-tag fr-tag--sm fr-tag--dismiss" aria-label="Retirer École">École</button></li>
+            <li><button type="button" class="fr-tag fr-tag--sm fr-tag--dismiss" aria-label="Retirer Médecin">Médecin ≤ 10 km</button></li>
+            <li><button type="button" class="fr-tag fr-tag--sm fr-tag--dismiss" aria-label="Retirer Commerces">Commerces</button></li>
+            <li><button type="button" class="fr-tag fr-tag--sm fr-tag--dismiss" aria-label="Retirer Maison 4 pièces">Maison 4 p. ≤ 900 €</button></li>
+            <li><a class="fr-tag fr-tag--sm fr-icon-equalizer-line fr-tag--icon-left" href="recherche.html">Modifier</a></li>
+          </ul>
+        </div>
+        <div class="fr-col-12 fr-col-md-4">
+          <div class="fr-select-group fr-mb-0">
+            <label class="fr-label" for="tri">Trier par</label>
+            <select class="fr-select" id="tri">
+              <option selected>Les plus compatibles</option>
+              <option>Trajet le plus court</option>
+              <option>Loyer le plus bas</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="resultats">
+        <div>
+          <div id="carte" class="carte-communes" role="img" aria-label="Carte des 23 communes correspondantes, situées entre 35 et 60 minutes à l'ouest de Lyon."></div>
+        </div>
+        <div>
+          <h2 id="liste" class="fr-sr-only">Liste des communes</h2>
+          <div class="liste-communes" id="liste-communes"></div>
+          <nav role="navigation" class="fr-pagination fr-mt-4w" aria-label="Pagination">
+            <ul class="fr-pagination__list">
+              <li><a class="fr-pagination__link fr-pagination__link--prev fr-pagination__link--lg-label" aria-disabled="true" role="link">Page précédente</a></li>
+              <li><a class="fr-pagination__link" aria-current="page" title="Page 1">1</a></li>
+              <li><a class="fr-pagination__link" href="#" title="Page 2">2</a></li>
+              <li><a class="fr-pagination__link" href="#" title="Page 3">3</a></li>
+              <li><a class="fr-pagination__link" href="#" title="Page 4">4</a></li>
+              <li><a class="fr-pagination__link fr-pagination__link--next fr-pagination__link--lg-label" href="#">Page suivante</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="pied"></div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script>
+    /* Communes fictives — Saint-Aurèle est la commune fil rouge (voir config.js) */
+    const COMMUNES = [
+      { nom: DEMO.commune.nom, dep: "Loire (42)", hab: 642, score: 96, lat: 45.640, lng: 4.405, img: "saint-aurele-vue.jpg",
+        train: "55 min", gare: "Gare TER à 6 km", medecin: "Maison de santé à 5 km", loyer: "8,10 €/m²",
+        atouts: ["3 logements", "Séjour d'essai", "Poste d'infirmier"], lien: "commune.html" },
+      { nom: "Montchaury", dep: "Rhône (69)", hab: 1180, score: 93, lat: 45.712, lng: 4.358, img: "montchaury.jpg",
+        train: "48 min", gare: "Gare TER sur place", medecin: "2 médecins sur place", loyer: "9,40 €/m²",
+        atouts: ["1 logement", "Séjour d'essai"] },
+      { nom: "Les Granges-Vallon", dep: "Loire (42)", hab: 455, score: 92, lat: 45.575, lng: 4.520, img: "granges-vallon.jpg",
+        train: "58 min", gare: "Gare TER à 9 km", medecin: "Médecin à 7 km", loyer: "7,60 €/m²",
+        atouts: ["2 logements", "Boulangerie à reprendre"] },
+      { nom: "Bellecombe-en-Forez", dep: "Loire (42)", hab: 870, score: 91, lat: 45.745, lng: 4.290, img: "bellecombe.jpg",
+        train: "1 h", gare: "Gare TER à 4 km", medecin: "Médecin sur place", loyer: "7,90 €/m²",
+        atouts: ["Tiers-lieu de télétravail"] },
+      { nom: "Saint-Ferréol-des-Monts", dep: "Loire (42)", hab: 1320, score: 90, lat: 45.548, lng: 4.380, img: "saint-ferreol.jpg",
+        train: "59 min", gare: "Gare TER à 12 km", medecin: "Maison de santé sur place", loyer: "8,30 €/m²",
+        atouts: ["4 logements"] },
+      { nom: "Larbois", dep: "Rhône (69)", hab: 590, score: 90, lat: 45.835, lng: 4.420, img: "larbois.jpg",
+        train: "52 min", gare: "Gare TER à 8 km", medecin: "Médecin à 6 km", loyer: "9,10 €/m²",
+        atouts: ["Séjour d'essai"] }
+    ];
+
+    /* Autres communes correspondantes (score 70–89), affichées en petit sur la carte */
+    const AUTRES = [
+      [45.68, 4.47], [45.62, 4.31], [45.79, 4.36], [45.70, 4.25], [45.53, 4.46], [45.60, 4.58],
+      [45.86, 4.50], [45.66, 4.53], [45.75, 4.45], [45.58, 4.27], [45.81, 4.30], [45.51, 4.33],
+      [45.64, 4.62], [45.72, 4.54], [45.88, 4.38], [45.55, 4.60], [45.69, 4.19]
+    ];
+
+    const fmt = n => n.toLocaleString("fr-FR");
+
+    /* ----- Liste ----- */
+    document.getElementById("liste-communes").innerHTML = COMMUNES.map((c, i) => `
+      <div class="fr-card fr-card--horizontal fr-card--horizontal-tier fr-enlarge-link${i === 0 ? " carte-commune--active" : ""}" id="commune-${i}">
+        <div class="fr-card__body">
+          <div class="fr-card__content">
+            <h3 class="fr-card__title"><a href="${c.lien || "commune.html"}">${i + 1}. ${c.nom}</a></h3>
+            <p class="fr-card__desc">
+              <span class="fr-icon-train-line fr-icon--sm" aria-hidden="true"></span> Lyon en ${c.train} · ${c.gare}<br>
+              <span class="fr-icon-wifi-line fr-icon--sm" aria-hidden="true"></span> Fibre · <span class="fr-icon-school-line fr-icon--sm" aria-hidden="true"></span> École · <span class="fr-icon-stethoscope-line fr-icon--sm" aria-hidden="true"></span> ${c.medecin}
+            </p>
+            <div class="fr-card__start">
+              <p class="fr-card__detail">${c.dep} · ${fmt(c.hab)} habitants · loyer moyen ${c.loyer}</p>
+            </div>
+            <div class="fr-card__end">
+              <ul class="fr-badges-group">
+                <li><p class="fr-badge fr-badge--success fr-badge--sm">${c.score} % compatible</p></li>
+                ${c.atouts.map(a => `<li><p class="fr-badge fr-badge--info fr-badge--no-icon fr-badge--sm">${a}</p></li>`).join("")}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="fr-card__header">
+          <div class="fr-card__img"><img class="fr-responsive-img" src="assets/img/${c.img}" alt=""></div>
+        </div>
+      </div>`).join("");
+
+    /* ----- Carte ----- */
+    const carte = L.map("carte", { zoomControl: true, zoomSnap: 0.25, scrollWheelZoom: false, attributionControl: true });
+
+    carte.fitBounds(L.latLngBounds(COMMUNES.map(c => [c.lat, c.lng]).concat(AUTRES, [[45.7606, 4.8593]])), { paddingTopLeft: [20, 20], paddingBottomRight: [110, 20] });
+
+    /* Fonds sans libellés : on évite d'afficher de vraies communes à côté des communes fictives */
+    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}", {
+      maxZoom: 13,
+      attribution: "Relief &copy; Esri"
+    }).addTo(carte);
+    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}", {
+      maxZoom: 16,
+      opacity: 0.55,
+      attribution: "Fond &copy; Esri, HERE, OpenStreetMap"
+    }).addTo(carte);
+
+    /* Zone accessible en 1 h de Lyon (illustrative) */
+    L.polygon([
+      [45.93, 4.80], [45.92, 4.42], [45.84, 4.22], [45.70, 4.12], [45.55, 4.18],
+      [45.46, 4.38], [45.50, 4.66], [45.62, 4.80], [45.76, 4.86]
+    ], { color: "#000091", weight: 1.5, dashArray: "6 6", fillColor: "#000091", fillOpacity: 0.04 }).addTo(carte);
+
+    L.marker([45.7606, 4.8593], {
+      icon: L.divIcon({ className: "", html: '<div class="marqueur marqueur--ville"><span>Lyon Part-Dieu</span></div>', iconSize: null, iconAnchor: [0, 12] })
+    }).addTo(carte);
+
+    AUTRES.forEach(p => L.circleMarker(p, { radius: 6, color: "#fff", weight: 2, fillColor: "#6a6af4", fillOpacity: 0.85 }).addTo(carte));
+
+    COMMUNES.forEach((c, i) => {
+      const actif = i === 0;
+      const taille = actif ? 44 : 36;
+      L.marker([c.lat, c.lng], {
+        zIndexOffset: actif ? 1000 : 0,
+        title: c.nom,
+        icon: L.divIcon({
+          className: "",
+          html: `<div class="marqueur${actif ? " marqueur--actif" : ""}"><span>${i + 1}</span></div>`,
+          iconSize: [taille, taille],
+          iconAnchor: [taille / 2, taille]
+        })
+      }).addTo(carte).bindTooltip(`<strong>${c.nom}</strong> · ${c.score} %`, { direction: "right", offset: [taille / 2, -taille / 2], permanent: actif });
+    });
+
+  </script>
+  <script type="module" src="dsfr/dsfr.module.min.js"></script>
+  <script nomodule src="dsfr/dsfr.nomodule.min.js"></script>
+</body>
+</html>

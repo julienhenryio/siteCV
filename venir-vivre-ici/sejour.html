@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="fr" data-fr-scheme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="stylesheet" href="dsfr/dsfr.min.css">
+  <link rel="stylesheet" href="dsfr/utility/icons/icons.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="apple-touch-icon" href="dsfr/favicon/apple-touch-icon.png">
+  <link rel="icon" href="dsfr/favicon/favicon.svg" type="image/svg+xml">
+  <title>Séjour d'essai</title>
+</head>
+<body data-titre="Demande de séjour d'essai" data-nav="sejour">
+  <div class="fr-skiplinks">
+    <nav class="fr-container" role="navigation" aria-label="Accès rapide">
+      <ul class="fr-skiplinks__list">
+        <li><a class="fr-link" href="#contenu">Contenu</a></li>
+        <li><a class="fr-link" href="#footer">Pied de page</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div id="en-tete"></div>
+
+  <main id="contenu" role="main">
+    <div class="bandeau-photo" style="background-image:url('assets/img/sejour-vallee.jpg'); background-position: center 60%;">
+      <div class="fr-container">
+        <p class="fr-mb-1w fr-text--lg">Séjour d'essai</p>
+        <h1 class="fr-mb-0">Vivre deux semaines à <span data-demo="commune.nom">Saint-Aurèle</span> avant de vous décider</h1>
+      </div>
+      <p class="credit-photo">Photo&nbsp;: Michel, CC BY-SA 3.0</p>
+    </div>
+
+    <div class="fr-container fr-py-5w">
+
+      <!-- État : demande envoyée -->
+      <div id="confirmation" hidden>
+        <div class="fr-alert fr-alert--success fr-mb-4w">
+          <h2 class="fr-alert__title">Votre demande a bien été envoyée à la mairie de <span data-demo="commune.nom">Saint-Aurèle</span></h2>
+          <p>Séjour <span data-demo="sejour.court">du 16 au 29 novembre 2026</span> · 2 adultes et 2 enfants · logement de l'ancienne poste et bureau en mairie.</p>
+        </div>
+        <h2 class="fr-h3">Et maintenant&nbsp;?</h2>
+        <div class="fr-grid-row fr-grid-row--gutters fr-mb-4w">
+          <div class="fr-col-12 fr-col-md-4">
+            <p class="etape__numero fr-mb-1w" aria-hidden="true">1</p>
+            <h3 class="fr-h5 fr-mb-1w">La mairie vous répond</h3>
+            <p>Sous 5 jours ouvrés, par la messagerie du service et par courriel.</p>
+          </div>
+          <div class="fr-col-12 fr-col-md-4">
+            <p class="etape__numero fr-mb-1w" aria-hidden="true">2</p>
+            <h3 class="fr-h5 fr-mb-1w">Un habitant vous appelle</h3>
+            <p><span data-demo="commune.referent">Karim Benali</span>, votre habitant référent, prépare les visites avec vous.</p>
+          </div>
+          <div class="fr-col-12 fr-col-md-4">
+            <p class="etape__numero fr-mb-1w" aria-hidden="true">3</p>
+            <h3 class="fr-h5 fr-mb-1w">Vous vivez sur place</h3>
+            <p>École, cabinet infirmier, maison de bourg&nbsp;: tout est organisé pour votre arrivée.</p>
+          </div>
+        </div>
+        <ul class="fr-btns-group fr-btns-group--inline-md fr-btns-group--icon-left">
+          <li><a class="fr-btn fr-icon-chat-3-line" href="mairie.html">Suivre ma demande</a></li>
+          <li><a class="fr-btn fr-btn--secondary fr-icon-arrow-left-line" href="commune.html">Revenir à la fiche commune</a></li>
+        </ul>
+      </div>
+
+      <!-- Formulaire -->
+      <div id="demande" class="fr-grid-row fr-grid-row--gutters">
+        <div class="fr-col-12 fr-col-lg-8">
+          <form id="form-sejour">
+            <fieldset class="fr-fieldset" aria-labelledby="leg-dates">
+              <legend class="fr-fieldset__legend" id="leg-dates"><h2 class="fr-h4 fr-mb-0">Vos dates</h2></legend>
+              <div class="fr-fieldset__element fr-fieldset__element--inline">
+                <div class="fr-input-group">
+                  <label class="fr-label" for="arrivee">Arrivée</label>
+                  <input class="fr-input" type="date" id="arrivee" value="2026-11-16">
+                </div>
+              </div>
+              <div class="fr-fieldset__element fr-fieldset__element--inline">
+                <div class="fr-input-group">
+                  <label class="fr-label" for="depart">Départ</label>
+                  <input class="fr-input" type="date" id="depart" value="2026-11-29">
+                </div>
+              </div>
+              <div class="fr-fieldset__element fr-fieldset__element--inline">
+                <div class="fr-input-group">
+                  <label class="fr-label" for="adultes">Adultes</label>
+                  <input class="fr-input" type="number" id="adultes" value="2" min="1" style="max-width:6rem">
+                </div>
+              </div>
+              <div class="fr-fieldset__element fr-fieldset__element--inline">
+                <div class="fr-input-group">
+                  <label class="fr-label" for="enfants">Enfants</label>
+                  <input class="fr-input" type="number" id="enfants" value="2" min="0" style="max-width:6rem">
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="fr-fieldset fr-mt-2w" aria-labelledby="leg-logement">
+              <legend class="fr-fieldset__legend" id="leg-logement"><h2 class="fr-h4 fr-mb-0">Hébergement et travail</h2></legend>
+              <div class="fr-fieldset__element">
+                <div class="fr-radio-group fr-radio-rich">
+                  <input type="radio" id="heb-poste" name="hebergement" checked>
+                  <label class="fr-label" for="heb-poste">Logement de l'ancienne poste
+                    <span class="fr-hint-text">3 pièces meublé, 2 chambres, au centre du bourg · 190 € la semaine, charges comprises</span>
+                  </label>
+                  <div class="fr-radio-rich__pictogram">
+                    <svg aria-hidden="true" class="fr-artwork" viewBox="0 0 80 80" width="80" height="80">
+                      <use class="fr-artwork-decorative" href="dsfr/artwork/pictograms/buildings/house.svg#artwork-decorative"></use>
+                      <use class="fr-artwork-minor" href="dsfr/artwork/pictograms/buildings/house.svg#artwork-minor"></use>
+                      <use class="fr-artwork-major" href="dsfr/artwork/pictograms/buildings/house.svg#artwork-major"></use>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="fr-fieldset__element">
+                <div class="fr-radio-group fr-radio-rich">
+                  <input type="radio" id="heb-autre" name="hebergement">
+                  <label class="fr-label" for="heb-autre">Je m'organise moi-même
+                    <span class="fr-hint-text">La mairie peut vous transmettre la liste des gîtes de la commune</span>
+                  </label>
+                  <div class="fr-radio-rich__pictogram">
+                    <svg aria-hidden="true" class="fr-artwork" viewBox="0 0 80 80" width="80" height="80">
+                      <use class="fr-artwork-decorative" href="dsfr/artwork/pictograms/map/luggage.svg#artwork-decorative"></use>
+                      <use class="fr-artwork-minor" href="dsfr/artwork/pictograms/map/luggage.svg#artwork-minor"></use>
+                      <use class="fr-artwork-major" href="dsfr/artwork/pictograms/map/luggage.svg#artwork-major"></use>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="fr-fieldset__element fr-mt-1w">
+                <div class="fr-toggle">
+                  <input type="checkbox" class="fr-toggle__input" id="bureau" checked>
+                  <label class="fr-toggle__label" for="bureau">Réserver le bureau de télétravail en mairie (gratuit, fibre)</label>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="fr-fieldset fr-mt-2w" aria-labelledby="leg-envies">
+              <legend class="fr-fieldset__legend" id="leg-envies"><h2 class="fr-h4 fr-mb-0">Pendant le séjour, vous aimeriez</h2></legend>
+              <div class="fr-fieldset__element"><div class="fr-checkbox-group">
+                <input type="checkbox" id="e-ecole" checked><label class="fr-label" for="e-ecole">Visiter l'école et faire découvrir une matinée de classe aux enfants</label>
+              </div></div>
+              <div class="fr-fieldset__element"><div class="fr-checkbox-group">
+                <input type="checkbox" id="e-infirmier" checked><label class="fr-label" for="e-infirmier">Rencontrer le cabinet infirmier</label>
+              </div></div>
+              <div class="fr-fieldset__element"><div class="fr-checkbox-group">
+                <input type="checkbox" id="e-maison" checked><label class="fr-label" for="e-maison">Visiter la maison de bourg à louer (5 pièces, 820 €)</label>
+              </div></div>
+              <div class="fr-fieldset__element"><div class="fr-checkbox-group">
+                <input type="checkbox" id="e-referent" checked><label class="fr-label" for="e-referent">Rencontrer l'habitant référent</label>
+              </div></div>
+              <div class="fr-fieldset__element"><div class="fr-checkbox-group">
+                <input type="checkbox" id="e-asso"><label class="fr-label" for="e-asso">Participer à une activité associative</label>
+              </div></div>
+            </fieldset>
+
+            <div class="fr-input-group fr-mt-2w">
+              <label class="fr-label" for="message"><span class="fr-h4">Votre message à la mairie</span></label>
+              <textarea class="fr-input" id="message" rows="7">Bonjour Madame la Maire,
+
+Nous sommes Camille et Thomas, parents de Léo (7 ans) et Jeanne (4 ans). Nous vivons à Lyon et cherchons un village avec une école et une gare. Camille télétravaille, Thomas est infirmier : l'annonce du cabinet infirmier nous intéresse beaucoup.
+
+Deux semaines chez vous nous aideraient à nous décider. À très bientôt, nous l'espérons !</textarea>
+            </div>
+
+            <div class="fr-checkbox-group fr-mb-4w">
+              <input type="checkbox" id="partage" checked>
+              <label class="fr-label" for="partage"><span>J'accepte que la mairie de <span data-demo="commune.nom">Saint-Aurèle</span> consulte mes critères de recherche</span>
+                <span class="fr-hint-text">Ils l'aident à préparer votre venue. Vous pouvez retirer cet accord à tout moment.</span>
+              </label>
+            </div>
+
+            <ul class="fr-btns-group fr-btns-group--inline-md fr-btns-group--icon-left">
+              <li><button class="fr-btn fr-btn--lg fr-icon-send-plane-line" type="submit">Envoyer ma demande</button></li>
+              <li><a class="fr-btn fr-btn--lg fr-btn--tertiary-no-outline" href="commune.html">Annuler</a></li>
+            </ul>
+          </form>
+        </div>
+
+        <!-- Récapitulatif -->
+        <div class="fr-col-12 fr-col-lg-4">
+          <aside class="encart-action" aria-labelledby="t-recap">
+            <img class="img-carte fr-mb-2w" src="assets/img/saint-aurele-place-tilleuls.jpg" alt="">
+            <h2 id="t-recap" class="fr-h5 fr-mb-2w">Récapitulatif</h2>
+            <dl class="fr-text--sm fr-mb-2w">
+              <dt class="fr-text--bold">Commune</dt>
+              <dd class="fr-mb-1w"><span data-demo="commune.nom">Saint-Aurèle</span>, <span data-demo="commune.departement">Loire (42)</span></dd>
+              <dt class="fr-text--bold">Dates</dt>
+              <dd class="fr-mb-1w">Du <span data-demo="sejour.debut">lundi 16 novembre 2026</span> au <span data-demo="sejour.fin">dimanche 29 novembre 2026</span></dd>
+              <dt class="fr-text--bold">Hébergement</dt>
+              <dd class="fr-mb-1w">Logement de l'ancienne poste + bureau en mairie</dd>
+              <dt class="fr-text--bold">Coût estimé</dt>
+              <dd class="fr-mb-0">380 € pour deux semaines</dd>
+            </dl>
+            <p class="fr-text--sm fr-mb-0"><span class="fr-icon-time-line fr-icon--sm fr-mr-1v" aria-hidden="true"></span>La mairie répond en général sous 5 jours ouvrés.</p>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="pied"></div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    /* Bascule vers l'état "demande envoyée" (aussi accessible via ?etat=envoye pour les captures) */
+    function afficherConfirmation() {
+      document.getElementById("demande").style.display = "none";
+      document.getElementById("confirmation").hidden = false;
+      window.scrollTo(0, 0);
+    }
+    document.getElementById("form-sejour").addEventListener("submit", function (e) {
+      e.preventDefault();
+      afficherConfirmation();
+    });
+    if (new URLSearchParams(window.location.search).get("etat") === "envoye") afficherConfirmation();
+  </script>
+  <script type="module" src="dsfr/dsfr.module.min.js"></script>
+  <script nomodule src="dsfr/dsfr.nomodule.min.js"></script>
+</body>
+</html>

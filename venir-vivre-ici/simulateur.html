@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="fr" data-fr-scheme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="stylesheet" href="dsfr/dsfr.min.css">
+  <link rel="stylesheet" href="dsfr/utility/icons/icons.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="apple-touch-icon" href="dsfr/favicon/apple-touch-icon.png">
+  <link rel="icon" href="dsfr/favicon/favicon.svg" type="image/svg+xml">
+  <title>Simulateur de coût de vie</title>
+</head>
+<body data-titre="Simulateur de coût de vie" data-nav="simulateur">
+  <div class="fr-skiplinks">
+    <nav class="fr-container" role="navigation" aria-label="Accès rapide">
+      <ul class="fr-skiplinks__list">
+        <li><a class="fr-link" href="#contenu">Contenu</a></li>
+        <li><a class="fr-link" href="#resultat">Résultat de la simulation</a></li>
+        <li><a class="fr-link" href="#footer">Pied de page</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div id="en-tete"></div>
+
+  <main id="contenu" role="main">
+    <div class="fr-container fr-pb-8w">
+      <nav role="navigation" class="fr-breadcrumb fr-mt-0 fr-pt-3w fr-mb-2w" aria-label="vous êtes ici :">
+        <button class="fr-breadcrumb__button" aria-expanded="false" aria-controls="fil">Voir le fil d’Ariane</button>
+        <div class="fr-collapse" id="fil">
+          <ol class="fr-breadcrumb__list">
+            <li><a class="fr-breadcrumb__link" href="index.html">Accueil</a></li>
+            <li><a class="fr-breadcrumb__link" href="commune.html" data-demo="commune.nom">Saint-Aurèle</a></li>
+            <li><a class="fr-breadcrumb__link" aria-current="page">Simuler mon budget</a></li>
+          </ol>
+        </div>
+      </nav>
+
+      <h1 class="fr-mb-1w">Votre budget à <span data-demo="commune.nom">Saint-Aurèle</span></h1>
+      <p class="fr-text--lg fr-mb-4w">Votre vie actuelle à <span data-demo="famille.villeActuelle">Lyon 7e</span>, comparée à la vie au village. Voiture comprise, sans enjoliver.</p>
+
+      <div class="fr-grid-row fr-grid-row--gutters">
+
+        <!-- Saisie -->
+        <div class="fr-col-12 fr-col-lg-6">
+          <div class="fr-p-3w" style="border:1px solid var(--border-default-grey)">
+            <p class="fr-text--sm texte-mention fr-mb-2w"><span class="fr-icon-user-line fr-icon--sm fr-mr-1v" aria-hidden="true"></span>Foyer&nbsp;: <span data-demo="famille.adultes">Camille et Thomas</span>, 2 enfants (7 et 4 ans). Montants mensuels, modifiables.</p>
+            <form id="simulation">
+              <div class="champ-montant champ-montant--tete" aria-hidden="true">
+                <span>Poste de dépense</span><span>À <span data-demo="famille.villeActuelle">Lyon 7e</span></span><span>Au village</span>
+              </div>
+              <!-- Les lignes sont générées par le script plus bas -->
+              <div id="lignes"></div>
+              <div class="champ-montant champ-montant--total">
+                <span>Total par mois</span><span id="total-ville-ligne"></span><span id="total-village-ligne"></span>
+              </div>
+            </form>
+          </div>
+
+          <section class="fr-accordions-group fr-mt-3w">
+            <div class="fr-accordion">
+              <h3 class="fr-accordion__title">
+                <button type="button" class="fr-accordion__btn" aria-expanded="false" aria-controls="acc-voiture">Comment est calculé le coût des voitures&nbsp;?</button>
+              </h3>
+              <div class="fr-collapse" id="acc-voiture">
+                <p>Au village, nous comptons <strong>deux véhicules</strong>&nbsp;: votre voiture actuelle, qui roulera davantage (15&nbsp;000 km par an au lieu de 4&nbsp;000), et une petite voiture d'occasion. Le montant inclut l'assurance, le carburant, l'entretien et l'usure du véhicule.</p>
+                <p class="fr-mb-0">À <span data-demo="famille.villeActuelle">Lyon 7e</span>, le montant comprend la place de parking louée (95 €).</p>
+              </div>
+            </div>
+            <div class="fr-accordion">
+              <h3 class="fr-accordion__title">
+                <button type="button" class="fr-accordion__btn" aria-expanded="false" aria-controls="acc-sources">D'où viennent les estimations&nbsp;?</button>
+              </h3>
+              <div class="fr-collapse" id="acc-sources">
+                <p class="fr-mb-0">Loyers&nbsp;: annonces de la commune et données DVF. Énergie&nbsp;: surface du logement et climat local. Transports&nbsp;: tarifs TER régionaux, prise en charge de 50&nbsp;% par l'employeur. Périscolaire&nbsp;: tarifs votés par la commune. Les autres postes reprennent vos réponses.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Résultat -->
+        <div class="fr-col-12 fr-col-lg-6">
+          <section id="resultat" aria-labelledby="t-resultat" aria-live="polite">
+            <h2 id="t-resultat" class="fr-sr-only">Résultat</h2>
+            <div class="economie fr-mb-2w">
+              <p class="fr-mb-0">Chaque mois, vous dépenseriez</p>
+              <p class="economie__valeur"><span id="economie-mois">490 €</span> de moins</p>
+              <p class="fr-text--lg fr-mb-0">soit <strong id="economie-an">5 880 €</strong> par an</p>
+            </div>
+
+            <div class="comparatif fr-mb-3w">
+              <div class="total total--ville">
+                <p class="fr-mb-1v texte-mention">Aujourd'hui à <span data-demo="famille.villeActuelle">Lyon 7e</span></p>
+                <p class="total__valeur" id="total-ville">3 360 €</p>
+                <p class="fr-text--sm fr-mb-0">T3 de 64 m², sans jardin</p>
+              </div>
+              <div class="total total--village">
+                <p class="fr-mb-1v texte-mention">Demain à <span data-demo="commune.nom">Saint-Aurèle</span></p>
+                <p class="total__valeur" id="total-village">2 870 €</p>
+                <p class="fr-text--sm fr-mb-0">Maison de 110 m², jardin de 400 m²</p>
+              </div>
+            </div>
+
+            <figure class="graph fr-mb-4w" role="group" aria-labelledby="t-graph">
+              <figcaption id="t-graph" class="fr-text--bold fr-mb-1w">Dépenses mensuelles par poste</figcaption>
+              <div class="graph__legende" aria-hidden="true">
+                <span class="l-ville">À <span data-demo="famille.villeActuelle">Lyon 7e</span></span>
+                <span class="l-village">À <span data-demo="commune.nom">Saint-Aurèle</span></span>
+              </div>
+              <div id="graph"></div>
+            </figure>
+
+            <div class="fr-grid-row fr-grid-row--gutters fr-mb-3w">
+              <div class="fr-col-12 fr-col-md-6">
+                <h3 class="fr-h6 fr-mb-1w">Ce qui change aussi</h3>
+                <ul class="liste-sans-puce fr-text--sm fr-mb-0">
+                  <li><span class="fr-icon-home-4-line fr-icon--sm fr-mr-1w" aria-hidden="true"></span>46 m² de plus, et un jardin</li>
+                  <li><span class="fr-icon-time-line fr-icon--sm fr-mr-1w" aria-hidden="true"></span>Thomas&nbsp;: 5 min de trajet au lieu de 35</li>
+                  <li><span class="fr-icon-train-line fr-icon--sm fr-mr-1w" aria-hidden="true"></span>Camille&nbsp;: un aller-retour en TER par semaine</li>
+                  <li><span class="fr-icon-school-line fr-icon--sm fr-mr-1w" aria-hidden="true"></span>L'école à 200 m, à pied</li>
+                </ul>
+              </div>
+              <div class="fr-col-12 fr-col-md-6">
+                <h3 class="fr-h6 fr-mb-1w">Points de vigilance</h3>
+                <ul class="liste-sans-puce fr-text--sm fr-mb-0">
+                  <li><span class="fr-icon-car-line fr-icon--sm fr-mr-1w" aria-hidden="true"></span>Une deuxième voiture devient nécessaire</li>
+                  <li><span class="fr-icon-temp-cold-line fr-icon--sm fr-mr-1w" aria-hidden="true"></span>Chauffage plus élevé dans une maison ancienne</li>
+                  <li><span class="fr-icon-briefcase-line fr-icon--sm fr-mr-1w" aria-hidden="true"></span>Revenus de Thomas à confirmer en libéral</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="fr-callout fr-icon-information-line fr-mb-3w">
+              <p class="fr-callout__text fr-text--md">La prime d'accueil de la commune (1&nbsp;500&nbsp;€) et le bureau offert en mairie ne sont pas inclus dans ce calcul.</p>
+            </div>
+
+            <ul class="fr-btns-group fr-btns-group--inline-md fr-btns-group--icon-left">
+              <li><a class="fr-btn fr-icon-calendar-event-line" href="sejour.html">Demander un séjour d'essai</a></li>
+              <li><button class="fr-btn fr-btn--secondary fr-icon-download-line" type="button">Télécharger la simulation</button></li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="pied"></div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    /* Postes du budget mensuel du foyer fil rouge (montants en euros) */
+    const POSTES = [
+      { id: "logement", libelle: "Loyer et charges", ville: 1500, village: 820 },
+      { id: "energie", libelle: "Énergie", ville: 110, village: 190 },
+      { id: "voiture", libelle: "Voitures", ville: 210, village: 540 },
+      { id: "transport", libelle: "Transports en commun", ville: 70, village: 60 },
+      { id: "enfants", libelle: "Garde et périscolaire", ville: 260, village: 150 },
+      { id: "courses", libelle: "Courses alimentaires", ville: 850, village: 830 },
+      { id: "loisirs", libelle: "Loisirs et sorties", ville: 300, village: 220 },
+      { id: "telecom", libelle: "Internet et téléphone", ville: 60, village: 60 }
+    ];
+
+    const euros = n => n.toLocaleString("fr-FR") + " €";
+    const ville = DEMO.famille.villeActuelle;
+    const village = DEMO.commune.nom;
+
+    document.getElementById("lignes").innerHTML = POSTES.map(p => `
+      <div class="champ-montant">
+        <label id="lib-${p.id}">${p.libelle}</label>
+        <input class="fr-input" type="number" min="0" step="10" id="ville-${p.id}" value="${p.ville}" aria-label="${p.libelle} à ${ville}" title="${p.libelle} à ${ville}">
+        <input class="fr-input" type="number" min="0" step="10" id="village-${p.id}" value="${p.village}" aria-label="${p.libelle} à ${village}" title="${p.libelle} à ${village}">
+      </div>`).join("");
+
+    function calculer() {
+      let totalVille = 0, totalVillage = 0;
+      POSTES.forEach(p => {
+        p.ville = +document.getElementById("ville-" + p.id).value || 0;
+        p.village = +document.getElementById("village-" + p.id).value || 0;
+        totalVille += p.ville;
+        totalVillage += p.village;
+      });
+      const ecart = totalVille - totalVillage;
+      const max = Math.max(...POSTES.map(p => Math.max(p.ville, p.village)), 1);
+
+      document.getElementById("total-ville").textContent = euros(totalVille);
+      document.getElementById("total-village").textContent = euros(totalVillage);
+      document.getElementById("total-ville-ligne").textContent = euros(totalVille);
+      document.getElementById("total-village-ligne").textContent = euros(totalVillage);
+      document.getElementById("economie-mois").textContent = euros(Math.abs(ecart));
+      document.getElementById("economie-mois").nextSibling.textContent = ecart >= 0 ? " de moins" : " de plus";
+      document.getElementById("economie-an").textContent = euros(Math.abs(ecart) * 12);
+
+      document.getElementById("graph").innerHTML = POSTES.map(p => `
+        <div class="graph__ligne">
+          <span class="graph__libelle">${p.libelle}</span>
+          <div class="graph__barres">
+            <div class="graph__barre graph__barre--ville" title="${p.libelle} à ${ville} : ${euros(p.ville)}">
+              <i style="width:${p.ville / max * 85}%"></i><b>${euros(p.ville)}</b>
+            </div>
+            <div class="graph__barre graph__barre--village" title="${p.libelle} à ${village} : ${euros(p.village)}">
+              <i style="width:${p.village / max * 85}%"></i><b>${euros(p.village)}</b>
+            </div>
+          </div>
+        </div>`).join("");
+    }
+
+    document.getElementById("simulation").addEventListener("input", calculer);
+    calculer();
+  </script>
+  <script type="module" src="dsfr/dsfr.module.min.js"></script>
+  <script nomodule src="dsfr/dsfr.nomodule.min.js"></script>
+</body>
+</html>
