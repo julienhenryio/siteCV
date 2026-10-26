@@ -15,6 +15,7 @@ Statique, déployé sur Netlify depuis la racine du repo. Chaque sous-dossier es
 | `projets/verification-cni/` | POC validation MRZ de CNI françaises | POC — partageable | [/projets/verification-cni/](https://julienhenry.io/projets/verification-cni/) |
 | `projets/poker/` | App poker sans jetons (build Vite compilé, base patchée vers `/projets/poker/`) | Perso | [/projets/poker/](https://julienhenry.io/projets/poker/) |
 | `venir-vivre-ici/` | Maquette « Venir vivre ici » (idée de startup d'État, DSFR) + vidéo de présentation sous `video/`. **Projet personnel non officiel** : fenêtre d'avertissement à l'ouverture, pages en `noindex`. Source et pipeline vidéo hors dépôt | Perso — partageable | [/venir-vivre-ici/](https://julienhenry.io/venir-vivre-ici/) |
+| `video-demo-papa-df/` | Tuto vidéo DossierFacile « Créer son compte et s'y connecter » (5 min 15, MP4 H.264 de 20 Mo, CRF 30). Page batik, `noindex`. Source Remotion et pipeline hors dépôt | Démo — partageable | [/video-demo-papa-df/](https://julienhenry.io/video-demo-papa-df/) |
 | `links/` | Page de liens type Linktree (URL courte volontairement à la racine) | En prod — **pas encore restylée batik** | [/links/](https://julienhenry.io/links/) |
 | `assets/css/batik.css` | **Source unique** des jetons et composants batik v3 (thèmes terang + malam) | — | — |
 | `assets/js/theme.js` | Bascule jour/nuit (mémorisée) + révélations au défilement | — | — |
