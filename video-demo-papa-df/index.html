@@ -24,10 +24,9 @@
 
 <link rel="stylesheet" href="/assets/css/batik.css">
 <style>
-/* La vidéo n'est pas rognée par les coins arrondis : sur certains iPhone, une vidéo découpée par un masque fait planter l'affichage */
-.player{background:var(--prada);border:1px solid var(--pasir);border-radius:14px;box-shadow:var(--shadow-lg);padding:10px 10px 0;}
+.player{background:var(--prada);border:1px solid var(--pasir);border-radius:14px;box-shadow:var(--shadow-lg);overflow:hidden;}
 .player video{display:block;width:100%;aspect-ratio:16/9;background:var(--tinta);}
-.meta-row{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;justify-content:space-between;padding:14px 10px 16px;}
+.meta-row{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;justify-content:space-between;padding:16px 20px;border-top:1px solid var(--pasir);}
 .meta-row p{font-size:14px;color:var(--tinta-soft);margin:0;}
 .chapters{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;}
 .chapters button{width:100%;text-align:left;font:inherit;font-size:14.5px;color:var(--tinta);background:var(--prada);border:1px solid var(--pasir);border-radius:10px;padding:12px 14px;cursor:pointer;display:flex;gap:12px;align-items:baseline;transition:border-color .2s,transform .2s;}
@@ -87,13 +86,13 @@
   <div class="wrap">
     <div class="player">
       <video id="tuto" controls playsinline preload="metadata" poster="/video-demo-papa-df/affiche.jpg">
-        <source src="/video-demo-papa-df/tuto-dossierfacile-compte.mp4?v=3" type="video/mp4">
+        <source src="/video-demo-papa-df/tuto-dossierfacile-compte.mp4?v=4" type="video/mp4">
         Votre navigateur ne peut pas lire cette vidéo.
-        <a href="/video-demo-papa-df/tuto-dossierfacile-compte.mp4?v=3" download>Télécharger la vidéo (MP4)</a>.
+        <a href="/video-demo-papa-df/tuto-dossierfacile-compte.mp4?v=4" download>Télécharger la vidéo (MP4)</a>.
       </video>
       <div class="meta-row">
         <p>5 min 15 · sous-titres incrustés · voix de synthèse</p>
-        <a class="btn btn-ghost btn-sm" href="/video-demo-papa-df/tuto-dossierfacile-compte.mp4?v=3" download>Télécharger la vidéo (MP4, 22 Mo)</a>
+        <a class="btn btn-ghost btn-sm" href="/video-demo-papa-df/tuto-dossierfacile-compte.mp4?v=4" download>Télécharger la vidéo (MP4, 22 Mo)</a>
       </div>
     </div>
 
