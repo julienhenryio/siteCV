@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Welcome — Julien</title>
+<!-- Page perso (favori navigateur) : jamais indexée, liée nulle part. -->
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="icon" href="/assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
+
+<script>try{var t=localStorage.getItem('batik-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+
+<link rel="stylesheet" href="/assets/css/batik.css">
+<style>
+/* `hidden` doit gagner sur les display:flex de batik.css (badge, légende…). */
+[hidden]{display:none!important;}
+
+/* ── En-tête ── */
+.w-head{
+  background-color:var(--kain);background-image:var(--kawung);
+  border-bottom:1px solid var(--pasir);padding:36px 0 30px;
+}
+.w-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;}
+.w-head h1{font-size:clamp(28px,5vw,40px);margin:8px 0 6px;}
+.w-date{color:var(--tinta-soft);font-size:15px;}
+.w-side{display:flex;align-items:flex-start;gap:22px;}
+.clocks{display:flex;gap:22px;}
+.clock .k{font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta-soft);}
+.clock .v{font:600 22px/1.2 'IBM Plex Mono',monospace;color:var(--soga-ink);font-variant-numeric:tabular-nums;}
+.clock .d{font-size:12px;color:var(--tinta-soft);}
+@media (max-width:560px){ .w-side{width:100%;justify-content:space-between;} }
+
+/* ── Recherche Google ── */
+.gsearch{margin-top:26px;max-width:760px;}
+.gs-bar{display:flex;gap:10px;}
+.gs-field{position:relative;flex:1;min-width:0;}
+.gs-field svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--tinta-soft);pointer-events:none;}
+.gs-field .inp{padding-left:40px;padding-right:44px;font-size:15px;}
+.gs-field kbd,.filter kbd{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  font:600 11px 'IBM Plex Mono',monospace;color:var(--tinta-soft);
+  border:1px solid var(--pasir-2);border-radius:5px;padding:1px 7px;background:var(--kain);
+}
+@media (max-width:480px){ .gs-bar .btn-label{display:none;} .gs-field kbd{display:none;} }
+
+.gs-adv{margin-top:10px;}
+.gs-adv summary{
+  cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:8px;
+  font:600 13px 'Inter',sans-serif;color:var(--tinta-soft);padding:4px 2px;border-radius:6px;
+}
+.gs-adv summary::-webkit-details-marker{display:none;}
+.gs-adv summary::before{content:"";width:6px;height:6px;border-right:1.7px solid currentColor;border-bottom:1.7px solid currentColor;transform:rotate(-45deg);transition:transform .2s;}
+.gs-adv[open] summary::before{transform:rotate(45deg);}
+.gs-adv summary:hover{color:var(--tinta);}
+.gs-adv summary:focus-visible{outline:none;box-shadow:var(--ring);}
+.gs-panel{
+  margin-top:10px;background:var(--prada);border:1px solid var(--pasir);border-radius:14px;
+  padding:18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(210px,100%),1fr));gap:14px 16px;
+}
+.gs-panel .lab{font-size:12px;margin-bottom:5px;}
+.gs-panel .inp{padding:9px 11px;font-size:13.5px;}
+.gs-wide{grid-column:1/-1;}
+select.inp{appearance:none;-webkit-appearance:none;background-image:var(--chevron);background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;cursor:pointer;}
+.gs-panel .chips{margin-top:8px;}
+.chip{
+  font:600 11.5px 'Inter',sans-serif;padding:4px 10px;border-radius:20px;cursor:pointer;
+  border:1px solid var(--pasir-2);background:transparent;color:var(--tinta-soft);
+}
+.chip:hover{border-color:var(--soga);color:var(--soga-ink);}
+.chip[aria-pressed="true"]{background:var(--soga-soft);border-color:var(--soga);color:var(--soga-ink);}
+.chip:focus-visible{outline:none;box-shadow:var(--ring);}
+.gs-foot{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:12px;border-top:1.5px dashed var(--pasir);}
+.gs-preview{font:450 12.5px 'IBM Plex Mono',monospace;color:var(--tinta-soft);word-break:break-word;}
+.gs-preview b{color:var(--soga-ink);font-weight:600;}
+
+/* ── Favoris ── */
+.pins{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:14px;padding-top:28px;}
+.pin{
+  display:flex;align-items:center;gap:14px;padding:16px 18px;position:relative;
+  background:var(--prada);border:1px solid var(--pasir);border-top:3px solid var(--soga);border-radius:14px;
+  box-shadow:var(--shadow);text-decoration:none;color:var(--tinta);
+  transition:transform .2s,box-shadow .2s,border-color .2s;
+}
+.pin:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);border-color:var(--pasir-3);border-top-color:var(--soga);}
+.pin:focus-visible{outline:none;box-shadow:var(--ring);}
+.pin .ic{width:44px;height:44px;border-radius:11px;}
+.pin .ic img{width:28px;height:28px;}
+.pin .nm{font:600 18px/1.2 'Fraunces',Georgia,serif;}
+.pin kbd{
+  margin-left:auto;align-self:flex-start;flex:none;
+  font:600 11px 'IBM Plex Mono',monospace;color:var(--tinta-soft);
+  border:1px solid var(--pasir-2);border-radius:5px;padding:1px 7px;background:var(--kain);
+}
+
+/* ── Liens ── */
+.list-head{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:26px;}
+.filter{position:relative;width:min(320px,100%);}
+.filter .inp{padding:9px 40px 9px 12px;font-size:13.5px;}
+.legend{font-size:12.5px;color:var(--tinta-soft);display:flex;align-items:center;gap:8px;}
+
+.groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:16px;padding:18px 0 120px;}
+.group{background:var(--prada);border:1px solid var(--pasir);border-radius:14px;box-shadow:var(--shadow);padding:18px 12px 12px;}
+.group[hidden]{display:none;}
+.group .sec-label{margin:0 8px 10px;}
+.links{list-style:none;margin:0;padding:0;}
+.links li{display:flex;align-items:center;gap:6px;border-radius:9px;}
+.links li[hidden]{display:none;}
+.ln{
+  display:flex;align-items:center;gap:12px;padding:9px 8px;border-radius:9px;flex:1;min-width:0;
+  text-decoration:none;color:var(--tinta);transition:background .15s,opacity .2s;
+}
+.ln:hover{background:var(--table-hover);}
+.ln:focus-visible{outline:none;box-shadow:var(--ring);}
+.ln.first{background:var(--soga-soft);}
+/* Pastille claire dans les deux thèmes : les favicons sombres restent lisibles la nuit. */
+.ic{
+  width:30px;height:30px;flex:none;border-radius:8px;overflow:hidden;
+  display:grid;place-items:center;background:var(--on-nila);border:1px solid var(--pasir);
+  font:700 12px 'Inter',sans-serif;color:var(--nila);
+}
+.ic img{width:20px;height:20px;}
+.tx{min-width:0;flex:1;}
+.nm{font:600 14px/1.3 'Inter',sans-serif;display:flex;align-items:center;gap:7px;}
+.ds{display:block;font-size:12.5px;color:var(--tinta-soft);line-height:1.4;}
+.reco{width:6px;height:6px;background:var(--kunyit);transform:rotate(45deg);border-radius:1px;flex:none;}
+.empty{padding:20px 0 120px;color:var(--tinta-soft);}
+
+/* ── Tri des suggestions (brouillon) ── */
+.vote{display:flex;gap:4px;flex:none;padding-right:4px;}
+.vote button{
+  width:30px;height:30px;border-radius:8px;border:1px solid var(--pasir-2);background:var(--prada);
+  color:var(--tinta-soft);cursor:pointer;display:grid;place-items:center;padding:0;
+  transition:background .15s,color .15s,border-color .15s;
+}
+.vote button:hover{border-color:var(--pasir-3);color:var(--tinta);}
+.vote button:focus-visible{outline:none;box-shadow:var(--ring);}
+.vote .yes[aria-pressed="true"]{background:var(--daun-soft);border-color:var(--daun-ink);color:var(--daun-ink);}
+.vote .no[aria-pressed="true"]{background:var(--mengkudu-soft);border-color:var(--mengkudu-ink);color:var(--mengkudu-ink);}
+li.is-no .ln{opacity:.42;}
+li.is-no .nm{text-decoration:line-through;text-decoration-color:var(--tinta-soft);}
+
+.draft-bar{
+  position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:30;
+  width:min(720px,calc(100% - 32px));
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  background:var(--nila);color:var(--on-nila);border-radius:14px;padding:12px 14px 12px 18px;box-shadow:var(--shadow-lg);
+}
+.draft-bar[hidden]{display:none;}
+.draft-bar .t{font:600 13.5px 'Inter',sans-serif;}
+.draft-bar .s{font:450 12px 'IBM Plex Mono',monospace;opacity:.85;}
+.draft-bar .row{gap:8px;}
+.draft-bar .btn-ghost{color:var(--on-nila);}
+.draft-bar .btn-ghost:hover{background:rgba(255,255,255,.12);color:var(--on-nila);}
+.copy-out{
+  position:fixed;left:50%;bottom:96px;transform:translateX(-50%);z-index:31;
+  width:min(720px,calc(100% - 32px));
+}
+.copy-out textarea{width:100%;min-height:150px;font:450 12.5px 'IBM Plex Mono',monospace;resize:vertical;box-shadow:var(--shadow-lg);}
+</style>
+</head>
+<body>
+<div class="selvedge"></div>
+
+<header class="w-head">
+  <div class="wrap">
+    <div class="w-top">
+      <div>
+        <p class="eyebrow" id="hello-id">Selamat datang</p>
+        <h1 id="hello">Salut Julien</h1>
+        <p class="w-date" id="date"></p>
+      </div>
+      <div class="w-side">
+        <div class="clocks">
+          <div class="clock"><div class="k">Nantes</div><div class="v" data-tz="Europe/Paris">--:--</div></div>
+          <div class="clock"><div class="k">Bali</div><div class="v" data-tz="Asia/Makassar">--:--</div><div class="d" id="bali-diff"></div></div>
+        </div>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Changer de thème">
+          <svg class="i-moon" width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 9.6A5.9 5.9 0 0 1 6.4 2.5a5.9 5.9 0 1 0 7.1 7.1Z"/></svg>
+          <svg class="i-sun" width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="8" r="3.2"/><path d="M8 1v1.6M8 13.4V15M15 8h-1.6M2.6 8H1M12.9 3.1l-1.1 1.1M4.2 11.8l-1.1 1.1M12.9 12.9l-1.1-1.1M4.2 4.2 3.1 3.1"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Recherche Google -->
+    <form class="gsearch" id="gs" role="search" autocomplete="off">
+      <div class="gs-bar">
+        <div class="gs-field">
+          <svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="7" cy="7" r="4.8"/><path d="m10.6 10.6 3.6 3.6"/></svg>
+          <label for="gq" style="position:absolute;left:-9999px;">Rechercher sur Google</label>
+          <input class="inp" id="gq" type="search" placeholder="Rechercher sur Google" spellcheck="false">
+          <kbd>/</kbd>
+        </div>
+        <button class="btn btn-primary" type="submit" aria-label="Rechercher sur Google">
+          <span class="btn-label">Rechercher</span>
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9.5 4.5 13 8l-3.5 3.5"/></svg>
+        </button>
+      </div>
+
+      <details class="gs-adv" id="gs-adv">
+        <summary>Options avancées <span class="badge b-soga" id="gs-count" hidden></span></summary>
+        <div class="gs-panel">
+          <div class="gs-wide">
+            <label class="lab" for="o-site">Uniquement sur ce site</label>
+            <input class="inp" id="o-site" placeholder="ex. reddit.com, service-public.fr">
+            <div class="chips" id="site-chips"></div>
+          </div>
+          <div>
+            <label class="lab" for="o-type">Type de fichier</label>
+            <select class="inp" id="o-type">
+              <option value="">Tous</option>
+              <option value="pdf">PDF</option>
+              <option value="docx">Word (.docx)</option>
+              <option value="xlsx">Excel (.xlsx)</option>
+              <option value="pptx">PowerPoint (.pptx)</option>
+              <option value="csv">CSV</option>
+              <option value="md">Markdown</option>
+            </select>
+          </div>
+          <div>
+            <label class="lab" for="o-when">Période</label>
+            <select class="inp" id="o-when">
+              <option value="">Toutes les dates</option>
+              <option value="h">Dernière heure</option>
+              <option value="d">Dernières 24 h</option>
+              <option value="w">Dernière semaine</option>
+              <option value="m">Dernier mois</option>
+              <option value="y">Dernière année</option>
+            </select>
+          </div>
+          <div>
+            <label class="lab" for="o-lang">Langue des pages</label>
+            <select class="inp" id="o-lang">
+              <option value="">Toutes</option>
+              <option value="fr">Français</option>
+              <option value="en">Anglais</option>
+              <option value="id">Indonésien</option>
+            </select>
+          </div>
+          <div>
+            <label class="lab" for="o-exact">Expression exacte</label>
+            <input class="inp" id="o-exact" placeholder="ex. franchise en base de TVA">
+          </div>
+          <div>
+            <label class="lab" for="o-not">Exclure ces mots</label>
+            <input class="inp" id="o-not" placeholder="ex. formation prix">
+          </div>
+          <div>
+            <label class="lab" for="o-title">Dans le titre</label>
+            <input class="inp" id="o-title" placeholder="ex. tutoriel">
+          </div>
+          <div class="gs-foot">
+            <p class="gs-preview" id="gs-preview">—</p>
+            <button type="button" class="btn btn-ghost btn-sm" id="gs-reset">Réinitialiser</button>
+          </div>
+        </div>
+      </details>
+    </form>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="pins" id="pins" aria-label="Favoris"></nav>
+  <div class="list-head">
+    <p class="legend" id="legend"><span class="reco"></span> suggestion à trier : ✓ je garde, ✕ je jette</p>
+    <div class="filter">
+      <label for="q" style="position:absolute;left:-9999px;">Filtrer les liens</label>
+      <input class="inp" id="q" type="search" placeholder="Filtrer les liens…" autocomplete="off" spellcheck="false">
+      <kbd>f</kbd>
+    </div>
+  </div>
+  <div class="groups" id="groups"></div>
+  <p class="empty" id="empty" hidden>Rien ne correspond — tape ta recherche dans la barre du haut pour chercher sur Google.</p>
+</main>
+
+<div class="copy-out" id="copy-out" hidden>
+  <label class="lab" for="copy-txt" style="position:absolute;left:-9999px;">Mes choix</label>
+  <textarea class="inp" id="copy-txt" readonly></textarea>
+</div>
+<div class="draft-bar" id="draft-bar" hidden>
+  <div>
+    <div class="t">Brouillon : tri des suggestions</div>
+    <div class="s" id="draft-stat"></div>
+  </div>
+  <div class="row">
+    <button type="button" class="btn btn-ghost btn-sm" id="draft-reset">Tout effacer</button>
+    <button type="button" class="btn btn-primary btn-sm" id="draft-copy">Copier mes choix</button>
+  </div>
+</div>
+
+<script>
+/* ═══ Réglages ════════════════════════════════════════════════
+   DRAFT : true = boutons ✓ / ✕ sur les suggestions + barre de copie.
+   Passer à false une fois la page finale validée.
+   ═══════════════════════════════════════════════════════════ */
+var DRAFT = false;
+
+/* ═══ Les liens — c'est ici qu'on édite ═══════════════════════
+   { n: nom, u: url, d: description courte, pin: true = favori en tête de page (touches 1, 2, 3…),
+     reco: true = suggestion à trier }
+   ═══════════════════════════════════════════════════════════ */
+var GROUPS = [
+  { t: 'Outils du quotidien', l: [
+    { n: 'tmpfiles', u: 'https://tmpfiles.org/api', d: 'Hébergement de fichiers temporaire, avec API' },
+    { n: 'Adobe Enhance Speech', u: 'https://podcast.adobe.com/en/enhance', d: 'Nettoie une piste voix en un clic' },
+    { n: 'IT Tools', u: 'https://it-tools.tech', d: 'Couteau suisse : base64, UUID, JWT, hash…' },
+    { n: 'Squoosh', u: 'https://squoosh.app', d: 'Compresser / convertir une image, en local' },
+    { n: 'Coolors', u: 'https://coolors.co', d: 'Générer et explorer des palettes' },
+    { n: 'Excalidraw', u: 'https://excalidraw.com', d: 'Schéma à main levée, parfait pour expliquer un workflow', pin: true },
+    { n: 'DeepL', u: 'https://www.deepl.com/translator', d: 'Traduction FR / EN / indonésien, bien meilleure que Google', pin: true },
+    { n: 'iLovePDF', u: 'https://www.ilovepdf.com/fr', d: 'Fusionner, découper, compresser un PDF' }
+  ]},
+  { t: 'IA & automatisation', l: [
+    { n: 'OpenRouter', u: 'https://openrouter.ai/', d: 'Tous les LLM derrière une seule API', pin: true },
+    { n: 'Regolo', u: 'https://regolo.ai', d: 'Inférence LLM hébergée en Europe' },
+    { n: 'Artificial Analysis', u: 'https://artificialanalysis.ai', d: 'Comparatif modèles : qualité, prix, vitesse' },
+    { n: 'Webhook.site', u: 'https://webhook.site', d: 'Inspecter ce qu\'un webhook envoie vraiment' },
+    { n: 'crontab.guru', u: 'https://crontab.guru', d: 'Écrire une expression cron sans se tromper' },
+    { n: 'Hugging Face Spaces', u: 'https://huggingface.co/spaces', d: 'Tester un modèle open source sans rien installer' },
+    { n: 'Tokenizer OpenAI', u: 'https://platform.openai.com/tokenizer', d: 'Compter les tokens d\'un texte' }
+  ]},
+  { t: 'Domaines & web', l: [
+    { n: 'Namecheap', u: 'https://www.namecheap.com', d: 'Noms de domaine' },
+    { n: 'whatsmydns', u: 'https://www.whatsmydns.net', d: 'Propagation DNS dans le monde' },
+    { n: 'Security Headers', u: 'https://securityheaders.com', d: 'Audit des en-têtes HTTP d\'un site' },
+    { n: 'PageSpeed', u: 'https://pagespeed.web.dev', d: 'Performance et accessibilité d\'une page' }
+  ]},
+  { t: 'Micro-entreprise', l: [
+    { n: 'Urssaf auto-entrepreneur', u: 'https://www.autoentrepreneur.urssaf.fr', d: 'Déclaration de chiffre d\'affaires' },
+    { n: 'Annuaire des entreprises', u: 'https://annuaire-entreprises.data.gouv.fr', d: 'Vérifier un client avant de signer (SIREN, dirigeants)' },
+    { n: 'Pappers', u: 'https://www.pappers.fr', d: 'Comptes, bénéficiaires, actes d\'une entreprise' },
+    { n: 'Malt', u: 'https://www.malt.fr', d: 'Plateforme freelance n°1 en France' }
+  ]},
+  { t: 'Jeux', l: [
+    { n: 'Magnitudle', u: 'https://magnitudle.com', d: 'Deviner des ordres de grandeur' },
+    { n: 'Worldle', u: 'https://worldle.teuteuf.fr', d: 'Trouver le pays à sa silhouette' },
+    { n: 'Travle', u: 'https://travle.earth', d: 'Relier deux pays par leurs frontières' },
+    { n: 'neal.fun', u: 'https://neal.fun', d: 'Petits jeux et curiosités, tous excellents' },
+    { n: 'Tradle', u: 'https://oec.world/en/games/tradle', d: 'Trouver le pays d\'après ce qu\'il exporte' }
+  ]},
+  { t: 'Flâner', l: [
+    { n: 'Radio Garden', u: 'https://radio.garden', d: 'Les radios du monde sur un globe — Bali compris' },
+    { n: 'WindowSwap', u: 'https://www.window-swap.com', d: 'La vue depuis la fenêtre de quelqu\'un, ailleurs' },
+    { n: 'myNoise', u: 'https://mynoise.net', d: 'Ambiances sonores pour se concentrer' },
+    { n: 'Hacker News', u: 'https://news.ycombinator.com', d: 'L\'actu tech, commentaires compris' },
+    { n: 'Wikipédia au hasard', u: 'https://fr.wikipedia.org/wiki/Sp%C3%A9cial:Page_au_hasard', d: 'Un article tiré au sort' },
+    { n: 'The Useless Web', u: 'https://theuselessweb.com', d: 'Un site parfaitement inutile au hasard' }
+  ]}
+];
+
+/* Sites proposés en raccourci dans « Uniquement sur ce site ». */
+var SITE_CHIPS = ['reddit.com', 'github.com', 'stackoverflow.com', 'community.n8n.io', 'service-public.fr', 'gouv.fr', 'wikipedia.org'];
+
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt) e.textContent = txt; return e; }
+  function host(u) { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return ''; } }
+  function openNew(url) { window.open(url, '_blank', 'noopener'); }
+  function load(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } }
+  function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* navigation privée */ } }
+
+  /* ── Salutation & horloges ── */
+  function hourIn(tz) { return +new Intl.DateTimeFormat('en-GB', { hour: 'numeric', hourCycle: 'h23', timeZone: tz }).format(new Date()); }
+  function tick() {
+    var h = new Date().getHours();
+    $('hello-id').textContent = h < 5 ? 'Selamat malam' : h < 11 ? 'Selamat pagi' : h < 15 ? 'Selamat siang' : h < 18 ? 'Selamat sore' : 'Selamat malam';
+    $('hello').textContent = h < 5 ? 'Encore debout, Julien ?' : h < 18 ? 'Salut Julien' : 'Bonsoir Julien';
+    var date = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(new Date());
+    $('date').textContent = date.charAt(0).toUpperCase() + date.slice(1);
+    document.querySelectorAll('[data-tz]').forEach(function (n) {
+      n.textContent = new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: n.dataset.tz }).format(new Date());
+    });
+    $('bali-diff').textContent = '+' + ((hourIn('Asia/Makassar') - hourIn('Europe/Paris') + 24) % 24) + ' h';
+  }
+  tick(); setInterval(tick, 20000);
+
+  /* ── Recherche Google ── */
+  var gq = $('gq');
+  var o = { site: $('o-site'), type: $('o-type'), when: $('o-when'), lang: $('o-lang'), exact: $('o-exact'), not: $('o-not'), title: $('o-title') };
+  function cleanSite(s) { return s.trim().replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/.*$/, ''); }
+  function buildQuery() {
+    var parts = [gq.value.trim()];
+    var ex = o.exact.value.trim(); if (ex) parts.push('"' + ex.replace(/"/g, '') + '"');
+    var ti = o.title.value.trim(); if (ti) parts.push(/\s/.test(ti) ? 'intitle:"' + ti.replace(/"/g, '') + '"' : 'intitle:' + ti);
+    o.not.value.trim().split(/\s+/).filter(Boolean).forEach(function (w) { parts.push('-' + w.replace(/^-+/, '')); });
+    var si = cleanSite(o.site.value); if (si) parts.push('site:' + si);
+    if (o.type.value) parts.push('filetype:' + o.type.value);
+    return parts.filter(Boolean).join(' ');
+  }
+  function buildUrl() {
+    var p = new URLSearchParams({ q: buildQuery() });
+    if (o.when.value) p.set('tbs', 'qdr:' + o.when.value);
+    if (o.lang.value) p.set('lr', 'lang_' + o.lang.value);
+    return 'https://www.google.com/search?' + p.toString();
+  }
+  function refresh() {
+    var q = buildQuery(), pv = $('gs-preview');
+    var n = Object.keys(o).filter(function (k) { return o[k].value.trim(); }).length;
+    pv.textContent = '';
+    if (!q) pv.textContent = 'La requête envoyée à Google s\'affichera ici.';
+    else {
+      pv.appendChild(document.createTextNode('Requête : '));
+      pv.appendChild(el('b', '', q));
+      var extra = [];
+      if (o.when.value) extra.push(o.when.options[o.when.selectedIndex].text.toLowerCase());
+      if (o.lang.value) extra.push('pages en ' + o.lang.options[o.lang.selectedIndex].text.toLowerCase());
+      if (extra.length) pv.appendChild(document.createTextNode(' · ' + extra.join(' · ')));
+    }
+    $('gs-count').hidden = !n; $('gs-count').textContent = n;
+    var cur = cleanSite(o.site.value);
+    document.querySelectorAll('#site-chips .chip').forEach(function (c) { c.setAttribute('aria-pressed', c.dataset.site === cur ? 'true' : 'false'); });
+  }
+  SITE_CHIPS.forEach(function (s) {
+    var c = el('button', 'chip', s); c.type = 'button'; c.dataset.site = s;
+    c.addEventListener('click', function () { o.site.value = cleanSite(o.site.value) === s ? '' : s; refresh(); });
+    $('site-chips').appendChild(c);
+  });
+  gq.addEventListener('input', refresh);
+  Object.keys(o).forEach(function (k) { o[k].addEventListener('input', refresh); o[k].addEventListener('change', refresh); });
+  $('gs').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!buildQuery()) { gq.focus(); return; }
+    openNew(buildUrl());
+  });
+  $('gs-reset').addEventListener('click', function () {
+    Object.keys(o).forEach(function (k) { o[k].value = ''; }); refresh(); gq.focus();
+  });
+  /* Le panneau garde son état ouvert / fermé d'une visite à l'autre. */
+  if (load('welcome-adv-open')) $('gs-adv').open = true;
+  $('gs-adv').addEventListener('toggle', function () { save('welcome-adv-open', $('gs-adv').open); });
+  refresh();
+
+  /* ── Rendu des liens ── */
+  var box = $('groups');
+  var votes = load('welcome-votes') || {};
+  var recos = [];
+
+  function paintVote(li) {
+    var v = votes[li.dataset.url];
+    li.classList.toggle('is-no', v === 'non');
+    li.querySelector('.yes').setAttribute('aria-pressed', v === 'oui' ? 'true' : 'false');
+    li.querySelector('.no').setAttribute('aria-pressed', v === 'non' ? 'true' : 'false');
+  }
+  function voteBtn(cls, label, path) {
+    var b = el('button', cls); b.type = 'button'; b.setAttribute('aria-label', label); b.title = label;
+    b.innerHTML = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="' + path + '"/></svg>';
+    return b;
+  }
+
+  function icon(it) {
+    var ic = el('span', 'ic', it.n.charAt(0).toUpperCase());
+    var img = new Image(); img.alt = '';
+    img.onload = function () { ic.textContent = ''; ic.appendChild(img); };
+    /* Favicons hébergés ici (welcome/icons/<domaine>.png) : aucune requête tierce. */
+    img.src = '/welcome/icons/' + host(it.u) + '.png';
+    return ic;
+  }
+
+  /* Favoris : en tête de page, retirés de leur catégorie. */
+  var pins = [];
+  GROUPS.forEach(function (g) { g.l.forEach(function (it) { if (it.pin) pins.push(it); }); });
+  pins.forEach(function (it, i) {
+    var a = el('a', 'pin'), tx = el('span', 'tx');
+    a.href = it.u; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    tx.appendChild(el('span', 'nm', it.n));
+    if (it.d) tx.appendChild(el('span', 'ds', it.d));
+    a.appendChild(icon(it)); a.appendChild(tx);
+    if (i < 9) { var k = el('kbd', '', String(i + 1)); k.title = 'Touche ' + (i + 1); a.appendChild(k); }
+    $('pins').appendChild(a);
+  });
+  if (!pins.length) $('pins').hidden = true;
+
+  GROUPS.forEach(function (g) {
+    var sec = el('section', 'group');
+    sec.appendChild(el('h2', 'sec-label', g.t));
+    var ul = el('ul', 'links');
+    g.l.forEach(function (it) {
+      if (it.pin) return;
+      var li = el('li'), a = el('a', 'ln'), ic = icon(it), tx = el('span', 'tx'), nm = el('span', 'nm', it.n);
+      a.href = it.u; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      li.dataset.url = it.u;
+      li.dataset.search = (it.n + ' ' + (it.d || '') + ' ' + host(it.u) + ' ' + g.t).toLowerCase();
+      if (it.reco) { var r = el('span', 'reco'); r.title = 'Suggestion'; nm.appendChild(r); }
+      tx.appendChild(nm);
+      if (it.d) tx.appendChild(el('span', 'ds', it.d));
+      a.appendChild(ic); a.appendChild(tx); li.appendChild(a);
+
+      if (DRAFT && it.reco) {
+        recos.push(it);
+        var v = el('div', 'vote');
+        var yes = voteBtn('yes', 'Je garde ' + it.n, 'M3.5 8.5 6.5 11.5 12.5 4.5');
+        var no = voteBtn('no', 'Je ne garde pas ' + it.n, 'M4 4l8 8M12 4l-8 8');
+        [[yes, 'oui'], [no, 'non']].forEach(function (p) {
+          p[0].addEventListener('click', function () {
+            if (votes[it.u] === p[1]) delete votes[it.u]; else votes[it.u] = p[1];
+            save('welcome-votes', votes); paintVote(li); stats();
+          });
+        });
+        v.appendChild(yes); v.appendChild(no); li.appendChild(v);
+        paintVote(li);
+      }
+      ul.appendChild(li);
+    });
+    sec.appendChild(ul);
+    box.appendChild(sec);
+  });
+
+  /* ── Barre de tri (brouillon) ── */
+  function choices() {
+    var r = { oui: [], non: [], rien: [] };
+    recos.forEach(function (x) { (votes[x.u] === 'oui' ? r.oui : votes[x.u] === 'non' ? r.non : r.rien).push(x.n); });
+    return r;
+  }
+  function stats() {
+    var c = choices();
+    $('draft-stat').textContent = (c.oui.length + c.non.length) + ' / ' + recos.length + ' triées · ' + c.oui.length + ' oui · ' + c.non.length + ' non';
+  }
+  if (DRAFT && recos.length) {
+    $('draft-bar').hidden = false; stats();
+    $('draft-copy').addEventListener('click', function () {
+      var c = choices();
+      var txt = 'Tri des suggestions /welcome\n\n' +
+        'OUI (' + c.oui.length + ') : ' + (c.oui.join(', ') || '—') + '\n' +
+        'NON (' + c.non.length + ') : ' + (c.non.join(', ') || '—') + '\n' +
+        'SANS AVIS (' + c.rien.length + ') : ' + (c.rien.join(', ') || '—');
+      var btn = $('draft-copy'), ta = $('copy-txt');
+      ta.value = txt;
+      function done(ok) {
+        btn.textContent = ok ? 'Copié ✓' : 'Copie manuelle ↑';
+        if (!ok) { $('copy-out').hidden = false; ta.focus(); ta.select(); }
+        setTimeout(function () { btn.textContent = 'Copier mes choix'; }, 2200);
+      }
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(function () { done(true); }, function () { done(false); });
+      else done(false);
+    });
+    $('draft-reset').addEventListener('click', function () {
+      if (!confirm('Effacer tous tes choix ?')) return;
+      votes = {}; save('welcome-votes', votes);
+      box.querySelectorAll('li').forEach(function (li) { if (li.querySelector('.vote')) paintVote(li); });
+      stats(); $('copy-out').hidden = true;
+    });
+  } else {
+    $('legend').hidden = true;
+  }
+
+  /* ── Filtre ── */
+  var q = $('q'), empty = $('empty');
+  function norm(s) { return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+  function first() { return box.querySelector('li:not([hidden]) .ln'); }
+  function filter() {
+    var v = norm(q.value.trim()), any = false;
+    box.querySelectorAll('.ln.first').forEach(function (a) { a.classList.remove('first'); });
+    box.querySelectorAll('.group').forEach(function (sec) {
+      var shown = 0;
+      sec.querySelectorAll('li').forEach(function (li) {
+        var ok = !v || norm(li.dataset.search).indexOf(v) !== -1;
+        li.hidden = !ok; if (ok) shown++;
+      });
+      sec.hidden = !shown; if (shown) any = true;
+    });
+    empty.hidden = any;
+    if (v && first()) first().classList.add('first');
+  }
+  q.addEventListener('input', filter);
+  q.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && first()) { e.preventDefault(); openNew(first().href); }
+    if (e.key === 'Escape') { q.value = ''; filter(); q.blur(); }
+  });
+
+  /* ── Raccourcis : / = Google, f = filtre, 1-9 = favoris ── */
+  document.addEventListener('keydown', function (e) {
+    var t = e.target, typing = t.matches && t.matches('input, textarea, select');
+    if (typing || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === '/') { e.preventDefault(); gq.focus(); }
+    if (e.key === 'f') { e.preventDefault(); q.focus(); }
+    if (/^[1-9]$/.test(e.key) && pins[+e.key - 1]) { e.preventDefault(); openNew(pins[+e.key - 1].u); }
+  });
+})();
+</script>
+<script src="/assets/js/theme.js"></script>
+</body>
+</html>

@@ -17,3 +17,10 @@
 /favicon.ico
   Content-Type: image/vnd.microsoft.icon
   Cache-Control: public, max-age=604800
+
+# Page d'accueil perso (favori navigateur) : jamais indexée.
+/welcome
+  X-Robots-Tag: noindex, nofollow
+
+/welcome/*
+  X-Robots-Tag: noindex, nofollow
