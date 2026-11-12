@@ -24,3 +24,10 @@
 
 /welcome/*
   X-Robots-Tag: noindex, nofollow
+
+# Jeu « Glossy Days » (projet perso) : jamais indexé.
+/rima-game-1
+  X-Robots-Tag: noindex, nofollow
+
+/rima-game-1/*
+  X-Robots-Tag: noindex, nofollow

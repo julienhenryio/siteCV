@@ -1,0 +1,61 @@
+/* THEME: every color, font and shape of the interface is a variable here.
+   To restyle the whole game, change this file only. */
+
+@font-face { font-family: 'Fredoka'; src: url('../assets/fonts/Fredoka.ttf') format('truetype'); font-weight: 300 700; font-display: swap; }
+@font-face { font-family: 'Pacifico'; src: url('../assets/fonts/Pacifico.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+
+:root {
+  /* fonts */
+  --font-ui: 'Fredoka', 'Arial Rounded MT Bold', 'Comic Sans MS', system-ui, sans-serif;
+  --font-display: 'Pacifico', 'Snell Roundhand', 'Brush Script MT', cursive;
+
+  /* brand colors */
+  --pink: #ff4fa8;
+  --pink-light: #ff8fd0;
+  --pink-pale: #ffd6ee;
+  --pink-deep: #c2187a;
+  --purple: #a55cff;
+  --purple-deep: #6a2fc0;
+  --gold: #ffd84a;
+  --gold-deep: #c98a00;
+  --sky: #7fd4ff;
+  --ink: #6b1d54;          /* main text */
+  --ink-soft: #a34b85;     /* secondary text */
+  --paper: #fff7fc;        /* panels */
+  --white: #ffffff;
+
+  /* page background */
+  --bg-top: #ff7cc6;
+  --bg-bottom: #ffc4e8;
+  --bg-pattern-color: rgba(255, 255, 255, 0.28);
+
+  /* stage (where the girl, room or pet is shown) */
+  --stage-top: #ffe9f6;
+  --stage-bottom: #ffc2e6;
+
+  /* glossy buttons */
+  --btn-top: #ff9ad6;
+  --btn-bottom: #ff3d9c;
+  --btn-edge: #c2187a;
+  --btn-text: #ffffff;
+  --btn2-top: #c9a2ff;
+  --btn2-bottom: #8f4dff;
+  --btn2-edge: #5a26b0;
+  --btn3-top: #fff0a0;
+  --btn3-bottom: #ffc62e;
+  --btn3-edge: #c98a00;
+  --btn3-text: #7a4a00;
+  --gloss: linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.25) 100%);
+
+  /* shapes */
+  --radius: 22px;
+  --radius-sm: 14px;
+  --border: 3px;
+  --shadow: 0 8px 22px rgba(194, 24, 122, 0.28);
+  --shadow-soft: 0 3px 10px rgba(194, 24, 122, 0.2);
+
+  /* sizes */
+  --hud-h: 58px;
+  --tile: 78px;
+  --tap: 46px;
+}

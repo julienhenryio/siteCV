@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#ff7cc6">
+<title>Glossy Days</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 86C8 58 22 18 50 40 78 18 92 58 50 86z' fill='%23ff4fa8' stroke='white' stroke-width='6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+  <header id="hud" class="hidden"></header>
+  <main id="scene"></main>
+</div>
+<div id="overlay"></div>
+<div id="fx" aria-hidden="true"></div>
+<noscript>This game needs JavaScript.</noscript>
+
+<!-- Override files found in assets/custom/ (written by tools/build-assets.mjs) -->
+<script src="assets/custom/manifest.js"></script>
+<!-- The list of game scripts, then a tiny loader that runs them in order -->
+<script src="js/scripts.js"></script>
+<script>
+(function () {
+  var list = window.GAME_SCRIPT_LIST, i = 0;
+  (function next() {
+    if (i >= list.length) { window.Game.boot(); return; }
+    var s = document.createElement('script');
+    s.src = list[i++];
+    s.onload = next;
+    s.onerror = function () { console.error('Could not load ' + s.src); next(); };
+    document.body.appendChild(s);
+  })();
+})();
+</script>
+</body>
+</html>
